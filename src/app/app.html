@@ -3,6 +3,14 @@
 
     <div class="col-12 lg:col-9">
 
+      <app-card title="Cores" subtitle="Tokens de cores para serem usados em todo o projeto" id="tokens-cores">
+
+        <p>As cores são definidas em tokens variando de 50 a 950. Cada um terá seu uso definido nos componentes mais
+            abaixo nesta documentação.</p>
+
+      </app-card>
+
+      <!--
       <section id="tokens-cores" class="desmonte-card">
         <div class="desmonte-card__header">
           <h2 class="desmonte-card__title">Cores</h2>
@@ -13,7 +21,7 @@
           <p>As cores são definidas em tokens variando de 50 a 950. Cada um terá seu uso definido nos componentes mais
             abaixo nesta documentação.</p>
         </div>
-      </section>
+      </section>-->
 
       <section id="tokens-tipografia" class="desmonte-card">
         <div class="desmonte-card__header">
@@ -619,46 +627,46 @@
               <h6>Exemplo completo</h6>
               <!-- Adicionamos a referência #uploadRef -->
               <p-fileUpload #fileUpload mode="advanced" multiple="true" customUpload="true"
-            (onSelect)="simularCarregamento($event, fileUpload)" accept="image/*,video/*">
+                (onSelect)="simularCarregamento($event, fileUpload)" accept="image/*,video/*">
 
-            <div *ngIf="estaCarregando" class="desmonte-upload-zone desmonte-upload-zone--loading">
-              <p-progressSpinner class="desmonte-upload-zone__spinner"></p-progressSpinner>
-              <p class="desmonte-upload-zone__title">Processando imagens...</p>
-            </div>
-
-            <ng-container *ngIf="!estaCarregando">
-              <ng-template pTemplate="content" let-files>
-
-                <!-- ESTADO VAZIO: ZONA DE UPLOAD GIGANTE -->
-                <div *ngIf="files.length === 0" class="desmonte-upload-zone" (click)="fileUpload.choose()">
-                  <i class="desmonte-upload-zone__icon pi pi-upload"></i>
-                  <h3 class="desmonte-upload-zone__title">Arraste seus arquivos para cá</h3>
-                  <p class="desmonte-upload-zone__subtitle">ou clique para procurar no computador</p>
+                <div *ngIf="estaCarregando" class="desmonte-upload-zone desmonte-upload-zone--loading">
+                  <p-progressSpinner class="desmonte-upload-zone__spinner"></p-progressSpinner>
+                  <p class="desmonte-upload-zone__title">Processando imagens...</p>
                 </div>
 
-                <!-- ESTADO PREENCHIDO: GALERIA DE IMAGENS -->
-                <div *ngIf="files.length > 0" class="image-gallery">
+                <ng-container *ngIf="!estaCarregando">
+                  <ng-template pTemplate="content" let-files>
 
-                  <div *ngFor="let file of files; let i = index" class="image-gallery__item">
-                    <i class="image-gallery__action pi pi-trash" (click)="fileUpload.remove($event, i)"></i>
-                    <div class="image-gallery__placeholder">
-                      <img [src]="file.objectURL" alt="Preview da mídia">
+                    <!-- ESTADO VAZIO: ZONA DE UPLOAD GIGANTE -->
+                    <div *ngIf="files.length === 0" class="desmonte-upload-zone" (click)="fileUpload.choose()">
+                      <i class="desmonte-upload-zone__icon pi pi-upload"></i>
+                      <h3 class="desmonte-upload-zone__title">Arraste seus arquivos para cá</h3>
+                      <p class="desmonte-upload-zone__subtitle">ou clique para procurar no computador</p>
                     </div>
-                    <span *ngIf="i === 0" class="image-gallery__badge">Capa</span>
-                  </div>
 
-                  <!-- BOTÃO TRACEJADO DA GALERIA -->
-                  <div *ngIf="files.length < limiteArquivos" class="image-gallery__upload"
-                    (click)="fileUpload.choose()">
-                    <i class="pi pi-image" style="font-size: 2rem; color: var(--fundo-600);"></i>
-                    <span class="image-gallery__upload-text">Arraste aqui ou selecione<br>um arquivo</span>
-                  </div>
+                    <!-- ESTADO PREENCHIDO: GALERIA DE IMAGENS -->
+                    <div *ngIf="files.length > 0" class="image-gallery">
 
-                </div>
+                      <div *ngFor="let file of files; let i = index" class="image-gallery__item">
+                        <i class="image-gallery__action pi pi-trash" (click)="fileUpload.remove($event, i)"></i>
+                        <div class="image-gallery__placeholder">
+                          <img [src]="file.objectURL" alt="Preview da mídia">
+                        </div>
+                        <span *ngIf="i === 0" class="image-gallery__badge">Capa</span>
+                      </div>
 
-              </ng-template>
-            </ng-container>
-          </p-fileUpload>
+                      <!-- BOTÃO TRACEJADO DA GALERIA -->
+                      <div *ngIf="files.length < limiteArquivos" class="image-gallery__upload"
+                        (click)="fileUpload.choose()">
+                        <i class="pi pi-image" style="font-size: 2rem; color: var(--fundo-600);"></i>
+                        <span class="image-gallery__upload-text">Arraste aqui ou selecione<br>um arquivo</span>
+                      </div>
+
+                    </div>
+
+                  </ng-template>
+                </ng-container>
+              </p-fileUpload>
             </div>
             <div class="col-6">
               <h6>Exemplo: Estado vazio</h6>

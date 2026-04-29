@@ -1,0 +1,10 @@
+<section id="{{id}}" class="desmonte-card" style="margin-bottom: var(--spacing-l);">
+    <div class="desmonte-card__header" *ngIf="title">
+        <h2 class="desmonte-card__title">{{ title }}</h2>
+        <h5 class="desmonte-card__subtitle">{{ subtitle }}</h5>
+    </div>
+    <hr class="desmonte-card__divider" />
+    <div class="desmonte-card__content">
+        <ng-content></ng-content>
+    </div>
+</section>
