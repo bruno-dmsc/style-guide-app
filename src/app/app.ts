@@ -5,12 +5,13 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule],
+  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule, FileUploadModule],
   templateUrl: './app.html'
 })
 export class AppComponent implements AfterViewInit, OnDestroy {

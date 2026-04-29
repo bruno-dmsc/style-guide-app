@@ -580,6 +580,57 @@
         </div>
       </section>
 
+      <section id="componente-upload" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Upload de arquivos</h2>
+          <h5 class="desmonte-card__subtitle">Drag-and-drop ou seleção de arquivos para upload</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+
+        <div class="desmonte-card__content">
+
+          <!-- 
+      O componente nativo do PrimeNG. 
+      Em um cenário real, você configuraria os (onSelect), accept, maxFileSize, etc. 
+    -->
+          <p-fileUpload mode="advanced" [multiple]="true" accept="image/*,video/mp4">
+
+            <!-- Template quando não há arquivos selecionados -->
+            <ng-template pTemplate="empty">
+
+              <!-- Nossa zona customizada -->
+              <div class="desmonte-upload-zone">
+                <i class="pi pi-image desmonte-upload-zone__icon"></i>
+
+                <p class="desmonte-upload-zone__title">Arraste e solte as imagens da peça aqui</p>
+
+                <div class="desmonte-upload-zone__actions">
+                  <!-- Botão Terciário (Ghost) usando [text]="true" -->
+                  <button pButton label="Ou clique para procurar" severity="secondary" [text]="true"></button>
+                </div>
+
+                <p class="desmonte-upload-zone__subtitle">Formatos: JPG, PNG, MP4. Máximo de 50MB por arquivo</p>
+              </div>
+
+            </ng-template>
+
+          </p-fileUpload>
+
+          <!-- Exemplo de Estado de Erro (Apenas para documentação no Style Guide) -->
+          <div style="margin-top: var(--spacing-l);">
+            <h3>Exemplo: Estado de Erro</h3>
+            <div class="desmonte-upload-zone desmonte-upload-zone--error">
+              <i class="pi pi-times-circle desmonte-upload-zone__icon"></i>
+              <p class="desmonte-upload-zone__title">Arquivo excede o tamanho máximo permitido (50MB)</p>
+              <div class="desmonte-upload-zone__actions">
+                <button pButton label="Tentar novamente" severity="danger" [text]="true"></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
 
     <div class="col-12 lg:col-3">
