@@ -148,3 +148,13 @@
 .p-fileupload .p-fileupload-buttonbar {
   display: none !important;
 }
+
+/* Oculta a lista padrão de arquivos do PrimeNG para usarmos apenas a nossa Galeria */
+.p-fileupload .p-fileupload-files,
+.p-fileupload .p-fileupload-row,
+.p-fileupload-content .p-progressbar,
+.p-fileupload .p-messages {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}

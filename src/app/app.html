@@ -602,10 +602,66 @@
             <li>Texto secundário: tipografia H5, color peso-600</li>
           </ul>
 
+          <ul>
+            <li>TODO: Reordenação via drag-and-drop</li>
+            <li>TODO: Tooltips</li>
+            <li>TODO: Contador de arquivos</li>
+            <li>TODO: Navegação lateral em tela cheia</li>
+            <li>TODO: Zoom e rotação</li>
+            <li>TODO: menu de contexto</li>
+            <li>TODO: fullscreen</li>
+            <li>TODO: Feedback Toast</li>
+            <li>TODO: suporte a vídeo</li>
+          </ul>
+
           <div class="grid" style="padding-bottom: var(--spacing-m);">
-            <div class="col-6">
-              <h6>Exemplo: Estado de Erro</h6>
+            <div class="col-12">
+              <h6>Exemplo completo</h6>
               <!-- Adicionamos a referência #uploadRef -->
+              <p-fileUpload #fileUpload mode="advanced" multiple="true" customUpload="true"
+            (onSelect)="simularCarregamento($event, fileUpload)" accept="image/*,video/*">
+
+            <div *ngIf="estaCarregando" class="desmonte-upload-zone desmonte-upload-zone--loading">
+              <p-progressSpinner class="desmonte-upload-zone__spinner"></p-progressSpinner>
+              <p class="desmonte-upload-zone__title">Processando imagens...</p>
+            </div>
+
+            <ng-container *ngIf="!estaCarregando">
+              <ng-template pTemplate="content" let-files>
+
+                <!-- ESTADO VAZIO: ZONA DE UPLOAD GIGANTE -->
+                <div *ngIf="files.length === 0" class="desmonte-upload-zone" (click)="fileUpload.choose()">
+                  <i class="desmonte-upload-zone__icon pi pi-upload"></i>
+                  <h3 class="desmonte-upload-zone__title">Arraste seus arquivos para cá</h3>
+                  <p class="desmonte-upload-zone__subtitle">ou clique para procurar no computador</p>
+                </div>
+
+                <!-- ESTADO PREENCHIDO: GALERIA DE IMAGENS -->
+                <div *ngIf="files.length > 0" class="image-gallery">
+
+                  <div *ngFor="let file of files; let i = index" class="image-gallery__item">
+                    <i class="image-gallery__action pi pi-trash" (click)="fileUpload.remove($event, i)"></i>
+                    <div class="image-gallery__placeholder">
+                      <img [src]="file.objectURL" alt="Preview da mídia">
+                    </div>
+                    <span *ngIf="i === 0" class="image-gallery__badge">Capa</span>
+                  </div>
+
+                  <!-- BOTÃO TRACEJADO DA GALERIA -->
+                  <div *ngIf="files.length < limiteArquivos" class="image-gallery__upload"
+                    (click)="fileUpload.choose()">
+                    <i class="pi pi-image" style="font-size: 2rem; color: var(--fundo-600);"></i>
+                    <span class="image-gallery__upload-text">Arraste aqui ou selecione<br>um arquivo</span>
+                  </div>
+
+                </div>
+
+              </ng-template>
+            </ng-container>
+          </p-fileUpload>
+            </div>
+            <div class="col-6">
+              <h6>Exemplo: Estado vazio</h6>
               <p-fileUpload #uploadRef mode="advanced" [multiple]="true" accept="image/*,video/mp4">
                 <ng-template pTemplate="empty">
                   <!-- Adicionamos os eventos nativos de drag e a classe dinâmica -->
@@ -639,7 +695,7 @@
             </div>
             <!-- SELEÇÃO SIMPLES -->
             <div class="col-12 lg:col-4">
-              <h6>Exemplo: Seleção Simples (Apenas 1 arquivo)</h6>
+              <h6>CORRIGIR: Seleção Simples (Apenas 1 arquivo)</h6>
               <!-- A mudança aqui é [multiple]="false" -->
               <p-fileUpload #uploadRefSingle mode="advanced" [multiple]="false" accept="application/pdf,image/*">
                 <ng-template pTemplate="empty">
@@ -689,7 +745,7 @@
           </div>
 
           <h3>Upload Compacto</h3>
-          <p>Ideal para formulários densos ou anexos secundários.</p>
+          <p>Ideal para formulários densos ou anexos secundários. Ajustar a exclusão do arquivo.</p>
 
           <div class="flex gap-3">
             <!-- Botão Primário -->
@@ -721,17 +777,14 @@
             </li>
           </ul>
           <h3>Exemplos</h3>
-
           <!-- Erro / Crítico -->
-          <span class="badge badge-danger" style="margin-right: var(--spacing-m);">A categoria do Mercado Livre não foi informada.</span>
-
+          <span class="badge badge-danger" style="margin-right: var(--spacing-m);">A categoria do Mercado Livre não foi
+            informada.</span>
           <!-- Alerta / Atenção -->
-          <span class="badge badge-warning" style="margin-right: var(--spacing-m);">Alguns campos da ficha técnica estão em branco.</span>
-
+          <span class="badge badge-warning" style="margin-right: var(--spacing-m);">Alguns campos da ficha técnica estão
+            em branco.</span>
           <!-- Sucesso -->
           <span class="badge badge-success">Todos os dados estão preenchidos corretamente!</span>
-
-
         </div>
       </section>
 

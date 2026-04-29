@@ -90,4 +90,33 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.isDragging = false;
   }
 
+
+  // Configurações de limite para o componente
+  limiteArquivos: number = 4;
+  estaCarregando: boolean = false;
+
+  
+  /**
+   * Disparado no exato momento em que o usuário confirma a seleção dos arquivos
+   */
+  simularCarregamento(event: any, uploader: any) {
+    // 1. Interceptação Inteligente
+    // Verifica se a quantidade total de arquivos na fila ultrapassou o limite
+    if (uploader.files.length > this.limiteArquivos) {
+      
+      // O splice "corta" o array a partir do índice limite.
+      // Ex: se o limite é 4 e vieram 6, ele mantém de 0 a 3, e exclui o resto.
+      uploader.files.splice(this.limiteArquivos);
+      
+      console.warn(`Você tentou enviar mais imagens do que o permitido. Apenas as ${this.limiteArquivos} primeiras foram mantidas.`);
+    }
+
+    // 2. Fluxo normal de simulação
+    this.estaCarregando = true;
+
+    setTimeout(() => {
+      this.estaCarregando = false;
+    }, 1500); 
+  }
+
 }
