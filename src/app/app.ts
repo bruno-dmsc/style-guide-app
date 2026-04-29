@@ -6,25 +6,26 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule, FileUploadModule],
+  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule, FileUploadModule, ProgressSpinnerModule],
   templateUrl: './app.html'
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-  secaoAtiva: string = 'tokens-cores'; 
-  
+  secaoAtiva: string = 'tokens-cores';
+
   private observer: IntersectionObserver | null = null;
-  private secoesVisiveis = new Set<string>(); 
+  private secoesVisiveis = new Set<string>();
   private ordemDasSecoes: string[] = [];
 
   constructor(
-    private el: ElementRef, 
+    private el: ElementRef,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngAfterViewInit(): void {
     const secoes = this.el.nativeElement.querySelectorAll('section[id]');
@@ -33,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     const opcoes = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.1 
+      threshold: 0.1
     };
 
     this.observer = new IntersectionObserver((entradas) => {
@@ -49,9 +50,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
       if (primeiraSecaoNaTela && this.secaoAtiva !== primeiraSecaoNaTela) {
         this.secaoAtiva = primeiraSecaoNaTela;
-        this.cdr.detectChanges(); 
+        this.cdr.detectChanges();
       }
-      
+
     }, opcoes);
 
     secoes.forEach((secao: Element) => {
@@ -87,5 +88,5 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     // Não usamos preventDefault() aqui para não quebrar o upload nativo do PrimeNG
     this.isDragging = false;
   }
-  
+
 }

@@ -602,7 +602,7 @@
             <li>Texto secundário: tipografia H5, color peso-600</li>
           </ul>
 
-          <div class="grid">
+          <div class="grid" style="padding-bottom: var(--spacing-m);">
             <div class="col-6">
               <h6>Exemplo: Estado de Erro</h6>
               <!-- Adicionamos a referência #uploadRef -->
@@ -637,8 +637,72 @@
                 </div>
               </div>
             </div>
+            <!-- SELEÇÃO SIMPLES -->
+            <div class="col-12 lg:col-4">
+              <h6>Exemplo: Seleção Simples (Apenas 1 arquivo)</h6>
+              <!-- A mudança aqui é [multiple]="false" -->
+              <p-fileUpload #uploadRefSingle mode="advanced" [multiple]="false" accept="application/pdf,image/*">
+                <ng-template pTemplate="empty">
+                  <div class="desmonte-upload-zone" [class.desmonte-upload-zone--dragover]="isDragging"
+                    (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+                    <i class="pi pi-file desmonte-upload-zone__icon"></i>
+                    <p class="desmonte-upload-zone__title">Anexar Laudo Técnico</p>
+                    <div class="desmonte-upload-zone__actions">
+                      <button pButton label="Procurar arquivo" severity="secondary" [text]="true"
+                        (click)="uploadRefSingle.choose()"></button>
+                    </div>
+                    <p class="desmonte-upload-zone__subtitle">Apenas PDF ou JPG.</p>
+                  </div>
+                </ng-template>
+              </p-fileUpload>
+            </div>
+
+            <!-- ESTADO DESABILITADO -->
+            <div class="col-12 lg:col-4">
+              <h6>Exemplo: Desabilitado (Sem permissão)</h6>
+              <div class="desmonte-upload-zone desmonte-upload-zone--disabled">
+                <i class="pi pi-lock desmonte-upload-zone__icon"></i>
+                <p class="desmonte-upload-zone__title">Upload bloqueado</p>
+                <div class="desmonte-upload-zone__actions">
+                  <!-- Botão desabilitado nativamente -->
+                  <button pButton label="Procurar arquivo" severity="help" [text]="true" disabled></button>
+                </div>
+                <p class="desmonte-upload-zone__subtitle">Você não tem permissão para alterar as fotos.</p>
+              </div>
+            </div>
+            <!-- ESTADO CARREGANDO (LOADING) -->
+            <div class="col-12 lg:col-4">
+              <h6>Exemplo: Carregando (Enviando ao servidor)</h6>
+              <div class="desmonte-upload-zone desmonte-upload-zone--loading">
+                <!-- Ícone de spinner rodando -->
+                <p-progressSpinner styleClass="desmonte-upload-zone__spinner" strokeWidth="4" animationDuration="1s">
+                </p-progressSpinner>
+                <p class="desmonte-upload-zone__title">Enviando arquivos...</p>
+                <div class="desmonte-upload-zone__actions">
+                  <!-- Usamos um texto fixo sem botão real para evitar duplo clique -->
+                  <span style="color: var(--fundo-600); font-weight: var(--font-weight-medium);">Aguarde a
+                    conclusão</span>
+                </div>
+                <p class="desmonte-upload-zone__subtitle">Processando imagens (2 de 5)</p>
+              </div>
+            </div>
           </div>
+
+          <h3>Upload Compacto</h3>
+          <p>Ideal para formulários densos ou anexos secundários.</p>
+
+          <div class="flex gap-3">
+            <!-- Botão Primário -->
+            <p-fileUpload mode="basic" chooseLabel="Anexar NFe" chooseIcon="pi pi-paperclip"
+              accept=".xml,.pdf"></p-fileUpload>
+
+            <!-- Botão Secundário (Outline) usando a classe do PrimeNG -->
+            <p-fileUpload mode="basic" chooseLabel="Foto do Documento" chooseIcon="pi pi-camera"
+              styleClass="p-button-secondary" accept="image/*"></p-fileUpload>
+          </div>
+
         </div>
+
       </section>
 
     </div>
@@ -686,6 +750,11 @@
             <li class="desmonte-scrollspy__item"
               [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-tabelas'">
               <a href="#componente-tabelas">Tabelas</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-upload'">
+              <a href="#componente-upload">Upload de arquivos</a>
             </li>
 
           </ul>

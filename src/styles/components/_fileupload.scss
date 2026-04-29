@@ -64,10 +64,22 @@
     pointer-events: none;
   }
 
+  &__spinner {
+    width: 4rem;
+    height: 4rem;
+    margin-top: var(--spacing-l);
+
+    /* Força o spinner a usar o azul da marca */
+    .p-progress-spinner-circle {
+      stroke: var(--azul-500) !important;
+    }
+  }
+
   /* --- Estados (TODOs da Especificação) --- */
 
   /* Drag Hover: Quando o usuário está arrastando um arquivo por cima (Fallback) */
-  &.desmonte-upload-zone--dragover, &:hover {
+  &.desmonte-upload-zone--dragover,
+  &:hover {
     background-color: var(--azul-100);
     border-color: var(--azul-500);
   }
@@ -84,7 +96,39 @@
       color: var(--vermelho-600);
     }
   }
-} /* <--- FIM DO BLOCO .desmonte-upload-zone */
+
+  /* --- ESTADO: DESABILITADO --- */
+  &.desmonte-upload-zone--disabled {
+    background-color: var(--fundo-50);
+    border-color: var(--fundo-200);
+    cursor: not-allowed;
+
+    .desmonte-upload-zone__icon,
+    .desmonte-upload-zone__title,
+    .desmonte-upload-zone__subtitle {
+      color: var(--fundo-400);
+    }
+
+    /* Impede qualquer clique dentro da área */
+    pointer-events: none;
+  }
+
+  /* --- ESTADO: CARREGANDO (LOADING) --- */
+  &.desmonte-upload-zone--loading {
+    background-color: var(--azul-50); // Mantém o fundo neutro
+    border-color: var(--azul-200);
+    cursor: wait;
+
+    .desmonte-upload-zone__icon {
+      color: var(--azul-500); // Destaca o spinner
+    }
+
+    pointer-events: none; // Evita que o usuário arraste mais arquivos enquanto envia
+  }
+
+}
+
+/* <--- FIM DO BLOCO .desmonte-upload-zone */
 
 // ==========================================================================
 // INTEGRAÇÃO COM PRIMENG E ESTADOS EXTERNOS
