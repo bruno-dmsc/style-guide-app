@@ -7,12 +7,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { BadgeModule } from 'primeng/badge';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule, FileUploadModule, ProgressSpinnerModule],
+  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule, FileUploadModule, ProgressSpinnerModule, BadgeModule],
   templateUrl: './app.html'
 })
 export class AppComponent implements AfterViewInit, OnDestroy {

@@ -1,0 +1,32 @@
+.badge {
+  // Layout e Espaçamentos
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-s);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--size-s);
+
+  // Tipografia (H5)
+  font-family: var(--font-family-base);
+  font-size: var(--text-size-h5);
+  font-weight: var(--font-weight-semibold);
+  
+  // Variações Semânticas
+  &.badge-danger {
+    background-color: var(--vermelho-200);
+    border-color: var(--vermelho-800);
+    color: var(--vermelho-800);
+  }
+
+  &.badge-warning {
+    background-color: var(--laranja-200);
+    border-color: var(--laranja-800);
+    color: var(--laranja-800);
+  }
+
+  &.badge-success {
+    background-color: var(--verde-200);
+    border-color: var(--verde-800);
+    color: var(--verde-800);
+  }
+}

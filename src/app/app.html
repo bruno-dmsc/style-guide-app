@@ -705,6 +705,36 @@
 
       </section>
 
+      <section id="componente-badges" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Badges</h2>
+          <h5 class="desmonte-card__subtitle">Indicadores de status, classificações e outras informações compactas</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+        <div class="desmonte-card__content">
+          <p>As badges servem tanto para classificar registros em uma tabela, como também para informar dados simples
+            com certo destaque. Via de regra, se assemelham a pílulas, com o conteúdo sendo exibido em seu interior. As
+            características das badges que iremos montar são as seguintes:</p>
+          <ul>
+            <li>Fundo: bg-color cor-200, border-width 1, border-color cor-800, border-radius S</li>
+            <li>Texto: tipografia H5, color cor-800, padding-left M, padding-right M, padding-top S, padding-bottom S
+            </li>
+          </ul>
+          <h3>Exemplos</h3>
+
+          <!-- Erro / Crítico -->
+          <span class="badge badge-danger" style="margin-right: var(--spacing-m);">A categoria do Mercado Livre não foi informada.</span>
+
+          <!-- Alerta / Atenção -->
+          <span class="badge badge-warning" style="margin-right: var(--spacing-m);">Alguns campos da ficha técnica estão em branco.</span>
+
+          <!-- Sucesso -->
+          <span class="badge badge-success">Todos os dados estão preenchidos corretamente!</span>
+
+
+        </div>
+      </section>
+
     </div>
 
     <div class="col-12 lg:col-3">
@@ -755,6 +785,11 @@
             <li class="desmonte-scrollspy__item"
               [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-upload'">
               <a href="#componente-upload">Upload de arquivos</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-badges'">
+              <a href="#componente-badges">Badges</a>
             </li>
 
           </ul>
