@@ -589,45 +589,55 @@
 
         <div class="desmonte-card__content">
 
-          <!-- 
-      O componente nativo do PrimeNG. 
-      Em um cenário real, você configuraria os (onSelect), accept, maxFileSize, etc. 
-    -->
-          <p-fileUpload mode="advanced" [multiple]="true" accept="image/*,video/mp4">
+          <p>Para que os registros que tenham comonentes de mídia (sejam eles arquivos, documentos, imagens ou vídeos)
+            possam ter estas informações vinculadas, é necessário criar um componente que permita tanto a seleção de
+            arquivos do computador, como um componente fácil de arrastar-e-soltar (drag-and-drop). As características
+            deste componente são as listadas abaixo:</p>
+          <ul>
+            <li>Fundo: bg-color peso-50</li>
+            <li>Borda: dashed border-color peso-300 border-radius S</li>
+            <li>Ícone central: tipografia IconXL, color peso-600, padding-top XL</li>
+            <li>Texto principal: tipografia H4, color peso-900, padding-top S</li>
+            <li>Botão secundário: estilo terciário</li>
+            <li>Texto secundário: tipografia H5, color peso-600</li>
+          </ul>
 
-            <!-- Template quando não há arquivos selecionados -->
-            <ng-template pTemplate="empty">
+          <div class="grid">
+            <div class="col-6">
+              <h6>Exemplo: Estado de Erro</h6>
+              <!-- Adicionamos a referência #uploadRef -->
+              <p-fileUpload #uploadRef mode="advanced" [multiple]="true" accept="image/*,video/mp4">
+                <ng-template pTemplate="empty">
+                  <!-- Adicionamos os eventos nativos de drag e a classe dinâmica -->
+                  <div class="desmonte-upload-zone" [class.desmonte-upload-zone--dragover]="isDragging"
+                    (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
 
-              <!-- Nossa zona customizada -->
-              <div class="desmonte-upload-zone">
-                <i class="pi pi-image desmonte-upload-zone__icon"></i>
+                    <i class="pi pi-image desmonte-upload-zone__icon"></i>
+                    <p class="desmonte-upload-zone__title">Arraste e solte as imagens da peça aqui</p>
 
-                <p class="desmonte-upload-zone__title">Arraste e solte as imagens da peça aqui</p>
+                    <div class="desmonte-upload-zone__actions">
+                      <button pButton label="Ou clique para procurar" severity="secondary" [text]="true"
+                        (click)="uploadRef.choose()"></button>
+                    </div>
 
-                <div class="desmonte-upload-zone__actions">
-                  <!-- Botão Terciário (Ghost) usando [text]="true" -->
-                  <button pButton label="Ou clique para procurar" severity="secondary" [text]="true"></button>
+                    <p class="desmonte-upload-zone__subtitle">Formatos: JPG, PNG, MP4. Máximo de 50MB por arquivo</p>
+                  </div>
+                </ng-template>
+              </p-fileUpload>
+            </div>
+            <div class="col-6">
+              <div>
+                <h6>Exemplo: Estado de Erro</h6>
+                <div class="desmonte-upload-zone desmonte-upload-zone--error">
+                  <i class="pi pi-times-circle desmonte-upload-zone__icon"></i>
+                  <p class="desmonte-upload-zone__title">Arquivo excede o tamanho máximo permitido (50MB)</p>
+                  <div class="desmonte-upload-zone__actions">
+                    <button pButton label="Tentar novamente" severity="danger" [text]="true"></button>
+                  </div>
                 </div>
-
-                <p class="desmonte-upload-zone__subtitle">Formatos: JPG, PNG, MP4. Máximo de 50MB por arquivo</p>
-              </div>
-
-            </ng-template>
-
-          </p-fileUpload>
-
-          <!-- Exemplo de Estado de Erro (Apenas para documentação no Style Guide) -->
-          <div style="margin-top: var(--spacing-l);">
-            <h3>Exemplo: Estado de Erro</h3>
-            <div class="desmonte-upload-zone desmonte-upload-zone--error">
-              <i class="pi pi-times-circle desmonte-upload-zone__icon"></i>
-              <p class="desmonte-upload-zone__title">Arquivo excede o tamanho máximo permitido (50MB)</p>
-              <div class="desmonte-upload-zone__actions">
-                <button pButton label="Tentar novamente" severity="danger" [text]="true"></button>
               </div>
             </div>
           </div>
-
         </div>
       </section>
 

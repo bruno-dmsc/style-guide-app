@@ -9,30 +9,32 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  
+
   /* Fundos e Bordas Base */
   background-color: var(--azul-50);
   border: 1px dashed var(--azul-300);
   border-radius: var(--spacing-s);
-  
+
   /* O padding-bottom equilibra o topo, criando o espaçamento ideal */
-  padding-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-l);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 
+  min-height: 212px;
+
   /* --- Elementos Internos --- */
-  
+
   &__icon {
     /* Tipografia IconXL */
-    font-size: 4rem; 
+    font-size: 4rem;
     color: var(--fundo-600);
-    padding-top: var(--spacing-xl);
+    padding-top: var(--spacing-l);
   }
 
   &__title {
     font-family: var(--font-family-base);
     font-size: var(--text-size-h4);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-semibold);
     color: var(--fundo-900);
     padding-top: var(--spacing-s);
     margin: 0;
@@ -51,11 +53,21 @@
     margin: 0;
   }
 
+  /* 
+  TRUQUE DE USABILIDADE (Prevenção de Flicker): 
+  Quando o usuário arrasta o arquivo e passa o mouse por cima do ícone ou dos textos, 
+  o navegador acha que "saiu" da zona de drop. Desabilitar os eventos de ponteiro 
+  nesses elementos internos resolve o problema.*/
+  &__icon,
+  &__title,
+  &__subtitle {
+    pointer-events: none;
+  }
+
   /* --- Estados (TODOs da Especificação) --- */
-  
-  /* Drag Hover: Quando o usuário está arrastando um arquivo por cima */
-  &.desmonte-upload-zone--dragover,
-  &:hover {
+
+  /* Drag Hover: Quando o usuário está arrastando um arquivo por cima (Fallback) */
+  &.desmonte-upload-zone--dragover, &:hover {
     background-color: var(--azul-100);
     border-color: var(--azul-500);
   }
@@ -64,14 +76,20 @@
   &.desmonte-upload-zone--error {
     background-color: var(--vermelho-50);
     border-color: var(--vermelho-500);
-    
+
+    /* O & comercial aponta para a raiz .desmonte-upload-zone */
     .desmonte-upload-zone__icon,
     .desmonte-upload-zone__title,
     .desmonte-upload-zone__subtitle {
       color: var(--vermelho-600);
     }
   }
-}
+} /* <--- FIM DO BLOCO .desmonte-upload-zone */
+
+// ==========================================================================
+// INTEGRAÇÃO COM PRIMENG E ESTADOS EXTERNOS
+// ==========================================================================
+
 
 /* 
   Ajuste para integrar com o p-fileUpload do PrimeNG.
@@ -82,6 +100,7 @@
   border: none !important;
   background: transparent !important;
 }
+
 .p-fileupload .p-fileupload-buttonbar {
-  display: none !important; /* Oculta a barra padrão se formos usar o template vazio customizado */
+  display: none !important;
 }

@@ -66,5 +66,26 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   linhasSelecionadas: any[] = [];
+
+  // Variável que controla a cor do drag-and-drop
+  isDragging: boolean = false;
+
+  // Dispara quando o arquivo está sobrevoando a área
+  onDragOver(event: DragEvent) {
+    event.preventDefault(); // Necessário para o navegador permitir o drop
+    this.isDragging = true;
+  }
+
+  // Dispara quando o arquivo sai da área sem ser solto
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = false;
+  }
+
+  // Dispara quando o arquivo é solto
+  onDrop(event: DragEvent) {
+    // Não usamos preventDefault() aqui para não quebrar o upload nativo do PrimeNG
+    this.isDragging = false;
+  }
   
 }
