@@ -1,0 +1,356 @@
+// ==========================================================================
+// COMPONENTE: BOTÕES (Versão Refinada - Arquitetura em 3 Níveis)
+// ==========================================================================
+
+.p-button.p-component {
+  /* --- ANATOMIA BASE --- */
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size-h4);
+  padding: var(--spacing-s) var(--spacing-m);
+  border-radius: var(--spacing-s);
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-s);
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+
+  /* --- AJUSTE PARA BOTÕES APENAS COM ÍCONE (Tabelas/Ações) --- */
+&.p-button-icon-only {
+    padding: var(--spacing-s);
+    gap: 0;
+    justify-content: center;
+    
+    .p-button-label {
+      display: none;
+    }
+  }
+
+  // ========================================================================
+  // 1. BOTÕES PRIMÁRIOS (SÓLIDOS)
+  // ========================================================================
+
+  // Principal (Azul - Cor de Marca)
+  &,
+  &.p-button-primary {
+    background: var(--azul-500);
+    border-color: var(--azul-500);
+    color: var(--fundo-0);
+
+    &:enabled:hover {
+      background: var(--azul-600);
+      border-color: var(--azul-600);
+    }
+
+    &:disabled {
+      background: var(--azul-100) !important;
+      border-color: var(--azul-100) !important;
+      color: var(--azul-300) !important;
+      cursor: not-allowed;
+    }
+  }
+
+  // Info / Neutro (Cinza) - Mapeado para 'help'
+  &.p-button-help:not(.p-button-outlined):not(.p-button-text) {
+    background: var(--fundo-500);
+    border-color: var(--fundo-500);
+    color: var(--fundo-0);
+
+    &:enabled:hover {
+      background: var(--fundo-600);
+      border-color: var(--fundo-600);
+    }
+
+    &:disabled {
+      background: var(--fundo-100) !important;
+      border-color: var(--fundo-100) !important;
+      color: var(--fundo-300) !important;
+      cursor: not-allowed;
+    }
+  }
+
+  // Verde (Success)
+  &.p-button-success:not(.p-button-outlined):not(.p-button-text) {
+    background: var(--verde-600);
+    border-color: var(--verde-600);
+    color: var(--fundo-0);
+
+    &:enabled:hover {
+      background: var(--verde-700);
+      border-color: var(--verde-700);
+    }
+
+    &:disabled {
+      background: var(--verde-100) !important;
+      border-color: var(--verde-100) !important;
+      color: var(--verde-300) !important;
+      cursor: not-allowed;
+    }
+  }
+
+  // Laranja (Warning)
+  &.p-button-warning:not(.p-button-outlined):not(.p-button-text) {
+    background: var(--laranja-500);
+    border-color: var(--laranja-500);
+    color: var(--fundo-0);
+
+    &:enabled:hover {
+      background: var(--laranja-600);
+      border-color: var(--laranja-600);
+    }
+
+    &:disabled {
+      background: var(--laranja-100) !important;
+      border-color: var(--laranja-100) !important;
+      color: var(--laranja-300) !important;
+      cursor: not-allowed;
+    }
+  }
+
+  // Vermelho (Danger)
+  &.p-button-danger:not(.p-button-outlined):not(.p-button-text) {
+    background: var(--vermelho-500);
+    border-color: var(--vermelho-500);
+    color: var(--fundo-0);
+
+    &:enabled:hover {
+      background: var(--vermelho-600);
+      border-color: var(--vermelho-600);
+    }
+
+    &:disabled {
+      background: var(--vermelho-100) !important;
+      border-color: var(--vermelho-100) !important;
+      color: var(--vermelho-300) !important;
+      cursor: not-allowed;
+    }
+  }
+
+  // ========================================================================
+  // 2. BOTÕES SECUNDÁRIOS (OUTLINE)
+  // ========================================================================
+
+  // Mapeamento automático: Secondary vira Outline Azul
+  &.p-button-secondary {
+    background: transparent !important;
+    color: var(--azul-500) !important;
+    border: 1px solid var(--azul-500) !important;
+
+    &:enabled:hover {
+      background: var(--azul-50) !important;
+      border-color: var(--azul-500) !important;
+      color: var(--azul-600) !important;
+    }
+
+    &:disabled {
+      background: transparent !important;
+      border-color: var(--azul-100) !important;
+      color: var(--azul-300) !important;
+      cursor: not-allowed;
+    }
+  }
+
+  // Outras cores em Outline
+  &.p-button-outlined:not(.p-button-secondary) {
+    background: transparent !important;
+
+    &,
+    &.p-button-primary {
+      color: var(--azul-500) !important;
+      border-color: var(--azul-500);
+
+      &:enabled:hover {
+        background: var(--azul-50) !important;
+      }
+
+      &:disabled {
+        border-color: var(--azul-100) !important;
+        color: var(--azul-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-success {
+      color: var(--verde-600) !important;
+      border-color: var(--verde-600);
+
+      &:enabled:hover {
+        background: var(--verde-50) !important;
+      }
+
+      &:disabled {
+        border-color: var(--verde-100) !important;
+        color: var(--verde-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-warning {
+      color: var(--laranja-500) !important;
+      border-color: var(--laranja-500);
+
+      &:enabled:hover {
+        background: var(--laranja-50) !important;
+      }
+
+      &:disabled {
+        border-color: var(--laranja-100) !important;
+        color: var(--laranja-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-danger {
+      color: var(--vermelho-500) !important;
+      border-color: var(--vermelho-500);
+
+      &:enabled:hover {
+        background: var(--vermelho-50) !important;
+      }
+
+      &:disabled {
+        border-color: var(--vermelho-100) !important;
+        color: var(--vermelho-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-help {
+      color: var(--fundo-600) !important;
+      border-color: var(--fundo-400);
+
+      &:enabled:hover {
+        background: var(--fundo-50) !important;
+      }
+
+      &:disabled {
+        border-color: var(--fundo-100) !important;
+        color: var(--fundo-300) !important;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // ========================================================================
+  // 3. BOTÕES TERCIÁRIOS (GHOST / TEXTO)
+  // ========================================================================
+
+  &.p-button-text {
+    background: transparent !important;
+    border-color: transparent !important;
+
+    &,
+    &.p-button-primary {
+      color: var(--azul-500) !important;
+
+      &:enabled:hover {
+        background: var(--azul-50) !important;
+      }
+
+      &:disabled {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: var(--azul-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-success {
+      color: var(--verde-600) !important;
+
+      &:enabled:hover {
+        background: var(--verde-50) !important;
+      }
+
+      &:disabled {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: var(--verde-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-warning {
+      color: var(--laranja-500) !important;
+
+      &:enabled:hover {
+        background: var(--laranja-50) !important;
+      }
+
+      &:disabled {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: var(--laranja-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-danger {
+      color: var(--vermelho-500) !important;
+
+      &:enabled:hover {
+        background: var(--vermelho-50) !important;
+      }
+
+      &:disabled {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: var(--vermelho-300) !important;
+        cursor: not-allowed;
+      }
+    }
+
+    &.p-button-help {
+      color: var(--fundo-600) !important;
+
+      &:enabled:hover {
+        background: var(--fundo-50) !important;
+      }
+
+      &:disabled {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: var(--fundo-300) !important;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // ========================================================================
+  // 4. ESTADOS DE FOCO (FOCUS)
+  // ========================================================================
+
+  &:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 var(--spacing-xs) var(--azul-100) !important;
+  }
+
+  &.p-button-info:focus,
+  &.p-button-secondary:focus,
+  &.p-button-primary:focus {
+    box-shadow: 0 0 0 var(--spacing-xs) var(--azul-100) !important;
+  }
+
+  &.p-button-success:focus {
+    box-shadow: 0 0 0 var(--spacing-xs) var(--verde-100) !important;
+  }
+
+  &.p-button-warning:focus {
+    box-shadow: 0 0 0 var(--spacing-xs) var(--laranja-100) !important;
+  }
+
+  &.p-button-danger:focus {
+    box-shadow: 0 0 0 var(--spacing-xs) var(--vermelho-100) !important;
+  }
+
+  &.p-button-help:focus {
+    box-shadow: 0 0 0 var(--spacing-xs) var(--fundo-100) !important;
+  }
+
+  &.p-button-text:focus {
+    background: transparent !important;
+  }
+}

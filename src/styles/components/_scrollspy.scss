@@ -1,0 +1,71 @@
+// ==========================================================================
+// COMPONENTE: SCROLLSPY
+// Guia lateral de navegação rápida para formulários extensos.
+// ==========================================================================
+
+.desmonte-scrollspy {
+  /* Fundo da caixa principal idêntico ao dos cards */
+  background-color: var(--fundo-0);
+  
+  box-shadow: 0 var(--spacing-s) var(--spacing-m) rgba(0, 0, 0, 0.1);
+  border-radius: var(--spacing-s);
+  
+  position: sticky;
+  top: var(--spacing-l); 
+  padding: var(--spacing-l);
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    /* Reduzi levemente o gap, pois agora os itens possuem padding interno */
+    gap: var(--spacing-s); 
+  }
+
+  &__item {
+    cursor: pointer;
+    
+    /* Tipografia H4 */
+    color: var(--fundo-900);
+    font-size: var(--text-size-h4);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-h4);
+
+    /* O padding garante que o fundo azul (quando ativo) tenha "respiro" ao redor do texto.
+       Top/Bottom: S (8px) | Left/Right: M (16px) */
+    padding: var(--spacing-s) var(--spacing-m); 
+    border-radius: var(--spacing-s);
+    transition: background-color 0.2s ease;
+
+    a {
+      text-decoration: none; /* Remove o sublinhado */
+      color: inherit; /* Puxa a cor do item pai (fundo-900) */
+      display: block; /* Faz o link preencher todo o padding do item, tornando a área de clique maior */
+    }
+
+    /* Estado Ativo (Selecionado) */
+    &--active {
+      /* Aplica o fundo azul apenas no item selecionado */
+      background-color: var(--azul-50);
+      
+      /* Opcional: Se quiser dar ainda mais destaque ao texto ativo, 
+         pode mudar a cor aqui. Por enquanto, mantive fundo-900. */
+    }
+
+    /* Opcional: Feedback visual ao passar o mouse em itens inativos */
+    &:hover:not(&--active) {
+      background-color: var(--fundo-50);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s); // Espaço entre os dois botões
+    padding-top: var(--spacing-m);
+    border-top: 1px solid var(--fundo-200); // Linha sutil para separar da lista
+  }
+
+}

@@ -1,0 +1,105 @@
+// ==========================================================================
+// COMPONENTE: TABELAS
+// ==========================================================================
+
+.p-datatable {
+
+  padding-bottom: var(--spacing-l);
+
+  /* --- CABEÇALHO --- */
+  .p-datatable-thead>tr>th {
+    background-color: var(--fundo-50) !important;
+    border: none !important;
+    border-bottom: 1px solid var(--fundo-300) !important;
+    color: var(--fundo-900) !important;
+
+    // Tipografia H6
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-h6);
+    font-weight: var(--font-weight-semibold);
+
+    padding: var(--spacing-m) var(--spacing-m) var(--spacing-m) var(--spacing-l) !important;
+  }
+
+  /* --- LINHAS (BODY) --- */
+  .p-datatable-tbody>tr {
+    background-color: var(--fundo-0) !important;
+    transition: background-color 0.2s;
+
+    /* Células / Texto */
+    >td {
+      border: none !important;
+      border-bottom: 1px solid var(--fundo-200) !important;
+      color: var(--fundo-900) !important;
+
+      // Tipografia P
+      font-family: var(--font-family-base);
+      font-size: var(--text-size-p);
+
+      // Padding: top M, right M, bottom M, left L
+      padding: var(--spacing-m) var(--spacing-m) var(--spacing-m) var(--spacing-l) !important;
+    }
+
+    /* Estado: Hover */
+    &:hover {
+      background-color: var(--fundo-50) !important;
+    }
+
+    /* Estado: Checked (Selecionado) */
+    &.p-highlight {
+      background-color: var(--azul-50) !important;
+      color: var(--fundo-900) !important;
+    }
+  }
+
+  // Centralização vertical do Checkbox
+  .p-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- CLASSES UTILITÁRIAS DA TABELA DESMONTE --- */
+
+  /* Larguras fixas para colunas de controle */
+  .desmonte-table__col-checkbox {
+    width: var(--size-xl);
+    text-align: center;
+  }
+
+  .desmonte-table__col-actions {
+    width: var(--size-3xl);
+    text-align: center;
+    background-color: var(--fundo-0) !important;
+  }
+
+  /* Wrapper para alinhar múltiplos botões de ação lado a lado */
+  .desmonte-table__actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  /* --- VARIAÇÃO: TABELA COMPACTA (Relatórios e Alta Densidade) --- */
+  &.p-datatable-sm {
+
+    // Reduz o padding do cabeçalho
+    .p-datatable-thead>tr>th {
+      // Top/Bottom com tamanho S (8px), laterais com M (16px)
+      padding: var(--spacing-s) var(--spacing-m) !important;
+    }
+
+    // Reduz o padding das linhas do corpo
+    .p-datatable-tbody>tr>td {
+      // Top/Bottom com tamanho S (8px), laterais com M (16px)
+      // Substitui o padding padrão que usava M e L
+      padding: var(--spacing-s) var(--spacing-m) !important;
+
+      // Opcional: Para tabelas muito densas, textos um pouco menores ajudam na leitura
+      // font-size: var(--text-size-p-small); // Se você tiver um token menor que o P padrão
+    }
+  }
+
+}

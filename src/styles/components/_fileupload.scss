@@ -1,0 +1,87 @@
+// ==========================================================================
+// COMPONENTE: UPLOAD DE ARQUIVOS (Drag-and-Drop)
+// ==========================================================================
+
+/* Container do componente customizado */
+.desmonte-upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  /* Fundos e Bordas Base */
+  background-color: var(--azul-50);
+  border: 1px dashed var(--azul-300);
+  border-radius: var(--spacing-s);
+  
+  /* O padding-bottom equilibra o topo, criando o espaçamento ideal */
+  padding-bottom: var(--spacing-xl);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  /* --- Elementos Internos --- */
+  
+  &__icon {
+    /* Tipografia IconXL */
+    font-size: 4rem; 
+    color: var(--fundo-600);
+    padding-top: var(--spacing-xl);
+  }
+
+  &__title {
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-h4);
+    font-weight: var(--font-weight-bold);
+    color: var(--fundo-900);
+    padding-top: var(--spacing-s);
+    margin: 0;
+  }
+
+  &__actions {
+    /* Espaçamento para o botão terciário */
+    padding-top: var(--spacing-s);
+    padding-bottom: var(--spacing-s);
+  }
+
+  &__subtitle {
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-h5);
+    color: var(--fundo-600);
+    margin: 0;
+  }
+
+  /* --- Estados (TODOs da Especificação) --- */
+  
+  /* Drag Hover: Quando o usuário está arrastando um arquivo por cima */
+  &.desmonte-upload-zone--dragover,
+  &:hover {
+    background-color: var(--azul-100);
+    border-color: var(--azul-500);
+  }
+
+  /* Erro de Validação: Arquivo grande demais, formato inválido, etc. */
+  &.desmonte-upload-zone--error {
+    background-color: var(--vermelho-50);
+    border-color: var(--vermelho-500);
+    
+    .desmonte-upload-zone__icon,
+    .desmonte-upload-zone__title,
+    .desmonte-upload-zone__subtitle {
+      color: var(--vermelho-600);
+    }
+  }
+}
+
+/* 
+  Ajuste para integrar com o p-fileUpload do PrimeNG.
+  Removemos a borda e fundo nativos para que nossa .desmonte-upload-zone assuma o controle visual.
+*/
+.p-fileupload .p-fileupload-content {
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+.p-fileupload .p-fileupload-buttonbar {
+  display: none !important; /* Oculta a barra padrão se formos usar o template vazio customizado */
+}

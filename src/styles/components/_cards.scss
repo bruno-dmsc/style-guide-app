@@ -1,0 +1,81 @@
+// ==========================================================================
+// COMPONENTE: CARDS
+// Agrupamento de campos semelhantes e destaque de dados contra a tela principal.
+// ==========================================================================
+
+.desmonte-card {
+  /* Fundo */
+  background-color: var(--fundo-0);
+  
+  /* Sombra: Deslocamento Y = S (8px), Blur = M (16px), Cor Preta com 10% de opacidade */
+  box-shadow: 0 var(--spacing-s) var(--spacing-m) rgba(0, 0, 0, 0.1);
+  
+  /* Adicionei um border-radius padrão baseado na imagem de exemplo */
+  border-radius: var(--spacing-s); 
+  
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: var(--spacing-l);
+
+  /* Evita margem dupla se for o último item de um container */
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // ========================================================================
+  // CABEÇALHO DO CARD (Título e Subtítulo)
+  // ========================================================================
+  &__header {
+    /* Padding: Top L, Right L, Bottom M, Left L */
+    padding: var(--spacing-l) var(--spacing-l) var(--spacing-m) var(--spacing-l);
+  }
+
+  &__title {
+    color: var(--fundo-900);
+    margin: 0;
+    
+    /* Herdando os tokens da Tipografia H2 (definidos no _typography.scss) */
+    font-size: var(--text-size-h2);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-h2);
+  }
+
+  &__subtitle {
+    color: var(--fundo-700);
+    margin: 0;
+    /* Aplica o padding top S (8px) para distanciar o subtítulo do título */
+    padding-top: var(--spacing-s); 
+    
+    /* Herdando os tokens da Tipografia H5 */
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-h5);
+  }
+
+  // ========================================================================
+  // DIVISOR OPCIONAL
+  // ========================================================================
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--fundo-200);
+    margin: 0;
+    /* O padding-bottom L do divisor atua como margem para empurrar o que vier abaixo */
+    //margin-bottom: var(--spacing-l); 
+  }
+
+  // ========================================================================
+  // CONTEÚDO GERAL
+  // ========================================================================
+  &__content {
+    /* Padding: Top L, Right L, Bottom L, Left L */
+    padding: var(--spacing-l);
+    
+    /* Ajuste fino: se houver um header imediatamente antes sem divisor, 
+       podemos remover o padding-top para não somar com o padding-bottom M do header.
+       (Pode ser removido se a intenção for somar os espaçamentos) */
+    .desmonte-card__header + & {
+      padding-top: 0; 
+    }
+  }
+}

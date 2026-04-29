@@ -1,0 +1,644 @@
+<main class="layout-main-content">
+  <div class="grid">
+
+    <div class="col-12 lg:col-9">
+
+      <section id="tokens-cores" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Cores</h2>
+          <h5 class="desmonte-card__subtitle">Tokens de cores para serem usados em todo o projeto</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+        <div class="desmonte-card__content">
+          <p>As cores são definidas em tokens variando de 50 a 950. Cada um terá seu uso definido nos componentes mais
+            abaixo nesta documentação.</p>
+        </div>
+      </section>
+
+      <section id="tokens-tipografia" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Tipografia</h2>
+          <h5 class="desmonte-card__subtitle">Hierarquia e legibilidade com Roboto</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+        <div class="desmonte-card__content">
+          <p>A tipografia padrão é a Roboto, com espaçamento normal entre linhas. A depender da aplicação do texto, usar
+            uma das escalas abaixo.</p>
+          <h1>Título da página - H1</h1>
+          <h2>Subtítulos e títulos de blocos de informação - H2</h2>
+          <h3>Títulos de cards e seções internas - H3</h3>
+          <h4>Informações em destaque - H4</h4>
+          <p>Texto padrão - P</p>
+          <h5>Legendas e helpers em inputs - H5</h5>
+          <h6>Cabeçalhos de grids e badges</h6>
+        </div>
+      </section>
+
+      <section id="tokens-espacamento" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Espaçamentos</h2>
+          <h5 class="desmonte-card__subtitle">Espaçamentos padrão entre componentes visuais da tela</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+        <div class="desmonte-card__content">
+          <p>Usaremos os seguintes distanciamentos padrão, evitando o uso de outros distanciamentos:</p>
+          <ul>
+            <li>XS (extra small): 4px</li>
+            <li>S (small): 8px</li>
+            <li>M (medium): 16px</li>
+            <li>L (large): 24px</li>
+            <li>XL (extra large): 48px</li>
+            <li>XXL (extra extra large): 64px</li>
+          </ul>
+          <p>O conteúdo da tela principal (abaixo da navbar) terá margens de tamanho L (padding: 24px), no topo e nas
+            laterais.</p>
+          <p>Cada componente terá suas próprias regras de padding, que serão descritas mais abaixo.</p>
+        </div>
+      </section>
+
+      <section id="componente-cards" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Cards</h2>
+          <h5 class="desmonte-card__subtitle">O contêiner padrão para dados e ações</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+        <div class="desmonte-card__content">
+          <p>Os cards servem para destacar os dados contra a tela principal. As características do card são as
+            seguintes:</p>
+          <ul>
+            <li>Fundo: bg-color fundo-0</li>
+            <li>Sombra: drop-shadow Y S, blur M 10%</li>
+            <li>Título: texto em H2, color fundo-900, padding-top L, padding-left L, padding-right L, padding-bottom M
+              (S para subtítulo)</li>
+            <li>Subtítulo: texto em H5, color fundo-700</li>
+            <li>Divisor: opcional, linha horizontal de 1px abaixo do título, cor fundo-200, padding-bottom L</li>
+            <li>Conteúdo geral: padding-top L, padding-left L, padding-right L, padding-bottom L</li>
+          </ul>
+          <h3>Exemplo</h3>
+          <p>O próprio conteúdo deste card é um exemplo de estilo.</p>
+        </div>
+      </section>
+
+      <section id="componente-scrollspy" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Scrollspy</h2>
+          <h5 class="desmonte-card__subtitle">Navegação contextual para formulários</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+        <div class="desmonte-card__content">
+          <p>O scrollspy serve como guia para indicar ao usuário em que ponto do formulário ele está. Sua presença é
+            opcional, mas sempre que houver ao menos dois cards em uma tela, recomenda-se o seu uso. Ele estará sempre
+            posicionado à direita do conteúdo, ficando visível a todo momento. Isso significa que o conteúdo dos cards
+            pode ter rolagem, mas o scrollspy se mantém fixo na lateral. Cada linha representa um card em tela. As
+            características do scrollspy são seguintes:</p>
+          <ul>
+            <li>Fundo: idêntico ao card</li>
+            <li>Itens:</li>
+            <ul>
+              <li>Texto: fonte H4, color fundo-900, padding-bottom M</li>
+              <li>Indicador de seleção: fundo do texto azul-50</li>
+            </ul>
+          </ul>
+          <h3>Exemplo</h3>
+          <p>O próximo card é um exemplo de scrollspy; está exibido em separado por conta do fundo idêntico ao do card.
+          </p>
+        </div>
+      </section>
+
+      <section id="componente-inputs" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Inputs de Texto</h2>
+          <h5 class="desmonte-card__subtitle">Padronização de campos de formulário</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+        <div class="desmonte-card__content">
+
+          <p>O input terá label fixa, acima do campo. A versão atual do Desmonte usa o input flutuante do Material
+            Design, mas iremos seguir por outro caminho na nova versão.</p>
+          <ul>
+            <li>Label: texto em H5, padding-bottom XS, color fundo-700, sempre acompanhado de dois pontos “:”</li>
+            <li>Border: border-width 1, border-color fundo-200, border-radius XS, padding-bottom M</li>
+            <li>Texto: padding-left M, padding-top S, padding-bottom S, color fundo-900, alinhado à esquerda</li>
+            <li>Placeholder: idem ao texto, com color fundo-300</li>
+            <li>Obrigatoriedade: asterisco “*” color vermelho-500, incluir após os dois pontos e com um espaço</li>
+            <li>Foco: border-color azul-400</li>
+            <li>Bloqueado/desabilitado: bg-color fundo-50</li>
+            <li>Erro: border-color vermelho-500</li>
+            <li>Motivo do erro: texto em H5 abaixo do input, padding-top XS, color vermelho-500</li>
+            <li>Hover: border-color fundo-300</li>
+            <li>Espaçamento vertical entre inputs: padding-bottom M</li>
+          </ul>
+          <div class="grid">
+            <div class="col-12 md:col-6 lg:col-4">
+              <div class="desmonte-field">
+                <label class="desmonte-field__label desmonte-field__label--required">Nome da Peça:</label>
+                <input type="text" pInputText placeholder="Ex: Radiador de Corsa" />
+              </div>
+            </div>
+
+            <div class="col-12 md:col-6 lg:col-4">
+              <div class="desmonte-field">
+                <label class="desmonte-field__label">Código Interno:</label>
+                <input type="text" pInputText class="p-invalid" value="123-ABC" />
+                <p class="desmonte-field__error-message">Código já cadastrado no sistema.</p>
+              </div>
+            </div>
+
+            <div class="col-12 md:col-6 lg:col-4">
+              <div class="desmonte-field">
+                <label class="desmonte-field__label">ID do Desmonte:</label>
+                <input type="text" pInputText [disabled]="true" value="DS-2024-001" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="componente-botoes" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Botões</h2>
+          <h5 class="desmonte-card__subtitle">Ações principais e secundárias do sistema</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+
+        <div class="desmonte-card__content">
+          <p>Os botões servem para efetuar ações como salvar formulários, gerar relatórios, fechar uma tela, entre
+            outras atividades. Os botões possuem vários estados diferentes, e três estilos: principal, secundário e
+            terciário. Cada uma destas combinações será explicada abaixo.</p>
+          <h3>Estrutura base</h3>
+          <p>Independente do estilo, estado e cor do botão, sua estilização será essencialmente a mesma por todo o
+            Desmonte:</p>
+          <ul>
+            <li>Border: border-width 1, border-radius XS, padding-bottom M, padding-left S, padding-right S</li>
+            <li>Texto: H4, padding-left M, padding-right M, padding-top S, padding-bottom S, centralizado</li>
+          </ul>
+          <p>Isso significa que a altura do botão será a mesma do input, o que viabiliza o alinhamento correto dos
+            campos em tela quando necessário. Não há necessidade de botões maiores ou menores, a única diferenciação
+            será a questão de bordas entre os estilos.</p>
+
+          <h3>Botão Principal</h3>
+          <p>O botão principal deve servir ao principal propósito da tela em questão. Devido a isso, deve haver somente
+            um único botão com este estilo por tela. Demais botões devem estar com estilos secundários ou
+            terciários.<br>
+            Este botão terá o fundo preenchido e texto branco, independente da cor selecionada. Devido a isso, a cor
+            utilizada será o de peso 500, para facilitar o contraste. Para cada status, haverá uma variação da cor de
+            fundo, e os exemplos serão demonstrados abaixo:</p>
+
+          <div class="grid">
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Primário</p>
+              <button pButton label="Confirmar" icon="pi pi-check" class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Sucesso</p>
+              <button pButton label="Ativar" severity="success" icon="pi pi-play" class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Atenção</p>
+              <button pButton label="Pendente" severity="warning" icon="pi pi-exclamation-triangle"
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Perigo</p>
+              <button pButton label="Excluir" severity="danger" icon="pi pi-trash" class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Info</p>
+              <button pButton label="Ajuda" severity="help" icon="pi pi-info" class="w-full"></button>
+            </div>
+
+          </div>
+
+          <div class="grid" style="margin-bottom: var(--spacing-m);">
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Confirmar" icon="pi pi-check" class="w-full" disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Ativar" severity="success" icon="pi pi-play" class="w-full" disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Pendente" severity="warning" icon="pi pi-exclamation-triangle" class="w-full"
+                disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Excluir" severity="danger" icon="pi pi-trash" class="w-full" disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Ajuda" severity="help" icon="pi pi-info" class="w-full" disabled></button>
+            </div>
+
+          </div>
+
+
+          <h3>Botão Secundário</h3>
+          <p>O botão secundário serve para indicar as ações complementares da tela. Via dde regra serão ações
+            afirmativas, que executam alguma ação de fato; por isso não devem ser usadas para botões de fechar um modal
+            ou excluir um registro. Visualmente, os botões são vazados, com uma borda para identificar que são um botão.
+            Os exemplos de status são os abaixo:</p>
+
+          <div class="grid">
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Secundário</p>
+              <button pButton label="Editar" severity="secondary" icon="pi pi-pencil" class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Sucesso Outline</p>
+              <button pButton label="Reativar" severity="success" [outlined]="true" icon="pi pi-refresh"
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Atenção Outline</p>
+              <button pButton label="Revisar" severity="warning" [outlined]="true" icon="pi pi-search"
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Perigo Outline</p>
+              <button pButton label="Descartar" severity="danger" [outlined]="true" icon="pi pi-times"
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Info</p>
+              <button pButton label="Relatório" severity="help" [outlined]="true" icon="pi pi-chart-bar"
+                class="w-full"></button>
+            </div>
+
+          </div>
+          <div class="grid" style="margin-bottom: var(--spacing-m);">
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Editar" severity="secondary" icon="pi pi-pencil" class="w-full" disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Reativar" severity="success" [outlined]="true" icon="pi pi-refresh" class="w-full"
+                disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Revisar" severity="warning" [outlined]="true" icon="pi pi-search" class="w-full"
+                disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Descartar" severity="danger" [outlined]="true" icon="pi pi-times" class="w-full"
+                disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Relatório" severity="help" [outlined]="true" icon="pi pi-chart-bar" class="w-full"
+                disabled></button>
+            </div>
+
+          </div>
+
+          <h3>Botão Terciário</h3>
+          <p>O botão terciário serve para as ações que envolvem principalmente fechar telas, excluir registros e outras
+            funções que tenham uma relevância menor no contexto da tela em que se encontram. Visualmente, serão
+            diferenciados dos demais botões pelo fato de não terem uma borda definida, apenas o conteúdo sendo listado.
+            Devido a isso, a recomendação é que sempre contenham um ícone ao seu lado, para dar ao usuário a sensação de
+            que é de fato um botão. Os estados são os abaixo:</p>
+
+          <div class="grid">
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Terciário</p>
+              <button pButton label="Cancelar" [text]="true" icon="pi pi-times" class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Sucesso Ghost</p>
+              <button pButton label="Ver Mais" severity="success" [text]="true" icon="pi pi-eye"
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Atenção Ghost</p>
+              <button pButton label="Ajuda" severity="warning" [text]="true" icon="pi pi-question-circle"
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Perigo Ghost</p>
+              <button pButton label="Remover" severity="danger" [text]="true" icon="pi pi-trash"
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <p class="h6">Info Ghost</p>
+              <button pButton label="Fechar" severity="help" [text]="true" icon="pi pi-times" class="w-full"></button>
+            </div>
+
+          </div>
+
+          <div class="grid">
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Cancelar" [text]="true" icon="pi pi-times" class="w-full" disabled></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Ver Mais" severity="success" [text]="true" icon="pi pi-eye" disabled
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Ajuda" severity="warning" [text]="true" icon="pi pi-question-circle" disabled
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Remover" severity="danger" [text]="true" icon="pi pi-trash" disabled
+                class="w-full"></button>
+            </div>
+
+            <div class="col-12 md:col-2">
+              <button pButton label="Fechar" severity="help" [text]="true" icon="pi pi-times" class="w-full"
+                disabled></button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <section id="componente-tabelas" class="desmonte-card">
+        <div class="desmonte-card__header">
+          <h2 class="desmonte-card__title">Tabelas</h2>
+          <h5 class="desmonte-card__subtitle">Exibição de dados em listagens e relatórios</h5>
+        </div>
+        <hr class="desmonte-card__divider" />
+
+        <div class="desmonte-card__content">
+          <p>As tabelas tem uma função principal de apresentar dados em linhas e colunas, podendo ou não conter ações
+            para cada registro listado. Aqui vamos considerar dois usos distintos: apresentação de dados (relatórios), e
+            listagens com ações (cadastros e lançamentos). Cada um terá densidades diferentes, e serão apresentados em
+            detalhes na sequência.</p>
+          <h3>Tabela Padrão</h3>
+          <p>A tabela padrão será usada em telas que tenham ações a serem executadas para cada linha. Devido a isso, a
+            linha precisa ser mais alta para comportar botão para ações.</p>
+          <ul style="padding-bottom:var(--spacing-m)">
+            <li>Cabeçalho:</li>
+            <ul>
+              <li>Fundo: bg-color fundo-0, margin-bottom 1px fundo-300</li>
+              <li>Texto: tipografia H6, color fundo-900, padding M, alinhamento seguindo o conteúdo da coluna</li>
+            </ul>
+            <li>Linha:</li>
+            <ul>
+              <li>Fundo:</li>
+              <ul>
+                <li>Padrão: bg-color fundo-0, margin-bottom 1px fundo-200</li>
+                <li>Hover: idêntico ao padrão, com bg-color fundo-50</li>
+                <li>Checked: idêntico ao padrão, com bg-color azul-50</li>
+              </ul>
+              <li>Texto: tipografia P, color fundo-900, padding-top M, padding-bottom M, padding-left L</li>
+              <li>Alinhamento do texto:</li>
+              <ul>
+                <li>Esquerda: textos, datas</li>
+                <li>Centralizado: badges, checkboxes, botões</li>
+                <li>Direita: números, valores monetários</li>
+              </ul>
+            </ul>
+            <li>Adicionais:</li>
+            <ul>
+              <li>Caso a tabela tenha checkboxes, o checkbox deve ser obrigatoriamente a primeira coluna, com checkbox
+                seguindo as mesmas regras visuais do texto</li>
+              <li>Botões de ação devem estar fixos e visíveis (sticky) na direita da linha, e centralizados. Os ícones
+                devem ser
+                do estilo terciário. Se houver apenas uma ação, exibi-la, caso exista mais de uma, incluir menu com
+                dropdown
+                para exibir as opções disponíveis; é possível ter uma ação principal em destaque junto com as demais
+                ações.
+                Hover no botão com cor diferenciada, para destacar.</li>
+            </ul>
+          </ul>
+
+
+          <!-- Exemplo de Tabela Padrão -->
+          <p-table [value]="[
+    { codigo: '7095', nome: 'Volante direção Fiat Mobi 2017', marca: 'Fiat Mobi', valor: 'R$ 300,00', qtd: 1 },
+    { codigo: '7096', nome: 'Volante direção Fiat Mobi 2017', marca: 'Fiat Mobi', valor: 'R$ 300,00', qtd: 1 },
+    { codigo: '7097', nome: 'Volante direção Fiat Mobi 2017', marca: 'Fiat Mobi', valor: 'R$ 300,00', qtd: 1 }
+  ]" [(selection)]="linhasSelecionadas" dataKey="codigo" [scrollable]="true" responsiveLayout="scroll">
+
+            <!-- Cabeçalho -->
+            <ng-template pTemplate="header">
+              <tr>
+                <!-- Uso da classe semântica ao invés de style -->
+                <th class="desmonte-table__col-checkbox">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th class="text-left">CÓDIGO</th>
+                <th class="text-left">NOME</th>
+                <th class="text-left">MARCA/MODELO</th>
+                <th class="text-right">VALOR DE VENDA</th>
+                <th class="text-right">QUANTIDADE</th>
+
+                <!-- Uso da classe semântica ao invés de style -->
+                <th pFrozenColumn alignFrozen="right" class="desmonte-table__col-actions"></th>
+              </tr>
+            </ng-template>
+
+            <!-- Corpo -->
+            <ng-template pTemplate="body" let-item>
+              <tr [pSelectableRow]="item">
+                <td class="desmonte-table__col-checkbox">
+                  <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                </td>
+                <td class="text-left">{{ item.codigo }}</td>
+                <td class="text-left">{{ item.nome }}</td>
+                <td class="text-left">{{ item.marca }}</td>
+                <td class="text-right">{{ item.valor }}</td>
+                <td class="text-right">{{ item.qtd }}</td>
+
+                <!-- Ações Fixas (Sticky) -->
+                <td pFrozenColumn alignFrozen="right" class="desmonte-table__col-actions">
+                  <!-- Novo wrapper que coloca os botões lado a lado -->
+                  <div class="desmonte-table__actions-wrapper">
+                    <button pButton severity="help" [text]="true" icon="pi pi-pencil"></button>
+                    <button pButton severity="help" [text]="true" icon="pi pi-ellipsis-v"></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <h3>Scroll lateral</h3>
+          <p>Caso a tabela tenha muitas colunas, o scroll lateral vai ocorrer. Neste caso, definir um min-width para
+            cada cabeçalho, e a coluna de ações e checkbox ficarão sobrepostas.</p>
+
+          <!-- A propriedade [scrollable]="true" e um estilo de min-width nas colunas forçam o overflow -->
+          <p-table [value]="[
+        { id: '1042', peca: 'Motor Parcial 1.0 Fire Flex', veiculo: 'Fiat Uno 2012', placa: 'ABC-1234', chassi: '9BD...', km: '120.000', fornecedor: 'Leilão Receita', data: '12/04/2026', prateleira: 'A-12', valor: 'R$ 2.500,00' },
+        { id: '1043', peca: 'Caixa de Câmbio Manual', veiculo: 'VW Gol G6 2015', placa: 'XYZ-9876', chassi: '9BW...', km: '85.000', fornecedor: 'Seguradora X', data: '14/04/2026', prateleira: 'B-04', valor: 'R$ 1.800,00' },
+        { id: '1044', peca: 'Radiador de Água Original', veiculo: 'Chevrolet Onix 2018', placa: 'DEF-5678', chassi: '9BG...', km: '60.000', fornecedor: 'Leilão Detran', data: '20/04/2026', prateleira: 'C-01', valor: 'R$ 450,00' }
+      ]" [(selection)]="linhasSelecionadas" dataKey="id" [scrollable]="true" responsiveLayout="scroll">
+
+            <!-- Cabeçalho -->
+            <ng-template pTemplate="header">
+              <tr>
+                <th pFrozenColumn alignFrozen="left" class="desmonte-table__col-checkbox">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <!-- Utilizando min-width nas th para forçar o scroll horizontal -->
+                <th class="text-left" style="min-width: 100px;">CÓDIGO</th>
+                <th class="text-left" style="min-width: 250px;">PEÇA</th>
+                <th class="text-left" style="min-width: 200px;">VEÍCULO ORIGEM</th>
+                <th class="text-left" style="min-width: 120px;">PLACA</th>
+                <th class="text-left" style="min-width: 150px;">CHASSI</th>
+                <th class="text-right" style="min-width: 120px;">QUILOMETRAGEM</th>
+                <th class="text-left" style="min-width: 200px;">FORNECEDOR</th>
+                <th class="text-center" style="min-width: 120px;">DATA ENTRADA</th>
+                <th class="text-center" style="min-width: 120px;">LOCALIZAÇÃO</th>
+                <th class="text-right" style="min-width: 150px;">VALOR</th>
+
+                <!-- Coluna Fixa para Ação de Excluir -->
+                <th pFrozenColumn alignFrozen="right" class="desmonte-table__col-actions"></th>
+              </tr>
+            </ng-template>
+
+            <!-- Corpo -->
+            <ng-template pTemplate="body" let-item>
+              <tr [pSelectableRow]="item">
+                <td pFrozenColumn alignFrozen="left" class="desmonte-table__col-checkbox">
+                  <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                </td>
+                <td class="text-left">{{ item.id }}</td>
+                <td class="text-left">{{ item.peca }}</td>
+                <td class="text-left">{{ item.veiculo }}</td>
+                <td class="text-left">{{ item.placa }}</td>
+                <td class="text-left">{{ item.chassi }}</td>
+                <td class="text-right">{{ item.km }}</td>
+                <td class="text-left">{{ item.fornecedor }}</td>
+                <td class="text-center">{{ item.data }}</td>
+                <td class="text-center">{{ item.prateleira }}</td>
+                <td class="text-right">{{ item.valor }}</td>
+
+                <!-- Ação Fixa (Sticky) -->
+                <td pFrozenColumn alignFrozen="right" class="desmonte-table__col-actions">
+                  <div class="desmonte-table__actions-wrapper">
+                    <!-- Botão Terciário (Ghost) Perigo -->
+                    <button pButton icon="pi pi-trash" severity="danger" [text]="true"></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <h3>Altura reduzida para relatórios</h3>
+          <p>Para relatórios, usar o atributo styleClass="p-datatable-sm". Dessa forma, as linhas ficam mais compactas e
+            ajuda na exibição de mais registros. Importante destacar que isso só deve ocorrer se não houver nenhuma ação
+            a ser executada na listagem.</p>
+
+          <!-- A propriedade styleClass="p-datatable-sm" aciona a nossa variação SCSS -->
+          <p-table styleClass="p-datatable-sm" [value]="[
+        { data: '02/03/2026', nf: '001.234', fornecedor: 'Auto Peças Silva', valor: 'R$ 1.500,00', status: 'Processado' },
+        { data: '03/03/2026', nf: '001.235', fornecedor: 'Sucata e Cia', valor: 'R$ 3.200,00', status: 'Pendente' },
+        { data: '04/03/2026', nf: '001.236', fornecedor: 'Leilão Detran', valor: 'R$ 8.900,00', status: 'Processado' },
+        { data: '05/03/2026', nf: '001.237', fornecedor: 'Seguradora X', valor: 'R$ 4.100,00', status: 'Processado' }
+      ]" [scrollable]="true" responsiveLayout="scroll">
+
+            <!-- Cabeçalho Compacto -->
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="text-center">DATA</th>
+                <th class="text-left">NOTA FISCAL</th>
+                <th class="text-left">FORNECEDOR</th>
+                <th class="text-right">VALOR TOTAL</th>
+                <th class="text-center">STATUS</th>
+              </tr>
+            </ng-template>
+
+            <!-- Corpo Compacto -->
+            <ng-template pTemplate="body" let-item>
+              <tr>
+                <td class="text-center">{{ item.data }}</td>
+                <td class="text-left">{{ item.nf }}</td>
+                <td class="text-left">{{ item.fornecedor }}</td>
+                <td class="text-right">{{ item.valor }}</td>
+                <td class="text-center">{{ item.status }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+
+        </div>
+      </section>
+
+    </div>
+
+    <div class="col-12 lg:col-3">
+      <aside class="desmonte-sidebar-fixed">
+        <nav class="desmonte-scrollspy">
+          <ul class="desmonte-scrollspy__list">
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'tokens-cores'">
+              <a href="#tokens-cores">Tokens de Cores</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'tokens-tipografia'">
+              <a href="#tokens-tipografia">Tipografia</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'tokens-espacamento'">
+              <a href="#tokens-espacamento">Espaçamentos</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-cards'">
+              <a href="#componente-cards">Cards</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-scrollspy'">
+              <a href="#componente-scrollspy">Scrollspy</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-inputs'">
+              <a href="#componente-inputs">Inputs</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-botoes'">
+              <a href="#componente-botoes">Botões</a>
+            </li>
+
+            <li class="desmonte-scrollspy__item"
+              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-tabelas'">
+              <a href="#componente-tabelas">Tabelas</a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+        <div class="desmonte-sidebar-actions">
+          <button pButton label="Publicar Documentação" icon="pi pi-send" class="w-full"></button>
+          <button pButton label="Fechar" severity="help" [text]="true" icon="pi pi-times" class="w-full"></button>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+</main>

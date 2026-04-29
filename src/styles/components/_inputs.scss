@@ -1,0 +1,82 @@
+// ==========================================================================
+// COMPONENTE: INPUTS (Nova Versão Desmonte)
+// Substitui o modelo flutuante por labels fixas e bordas definidas.
+// ==========================================================================
+
+.desmonte-field {
+  display: flex;
+  flex-direction: column;
+  /* Espaçamento vertical entre inputs: padding-bottom M (16px) */
+  margin-bottom: var(--spacing-m);
+
+  &__label {
+    /* Label: H5, color fundo-700, padding-bottom XS (4px) */
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-medium);
+    color: var(--fundo-700);
+    padding-bottom: var(--spacing-xs);
+    display: block;
+
+    /* Obrigatoriedade: Asterisco vermelho após os dois pontos */
+    &--required::after {
+      content: " *";
+      color: var(--vermelho-500);
+    }
+  }
+
+  &__error-message {
+    /* Motivo do erro: H5, padding-top XS (4px), color vermelho-500 */
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-medium);
+    color: var(--vermelho-500);
+    padding-top: var(--spacing-xs);
+    margin: 0;
+  }
+}
+
+/* Seletores reforçados para garantir a borda definida e o estilo da caixa */
+.p-inputtext.p-component {
+  /* Border: width 1, color fundo-200, radius XS (4px) */
+  border: 1px solid var(--fundo-200) !important;
+  border-radius: var(--spacing-xs) !important;
+  background-color: var(--fundo-0);
+  
+  /* Texto: padding-left M, padding-top S, padding-bottom S, color fundo-900 */
+  padding: var(--spacing-s) var(--spacing-m) !important;
+  color: var(--fundo-900);
+  font-family: var(--font-family-base);
+  font-size: var(--text-size-p);
+  width: 100%;
+  box-shadow: none; /* Remove sombras padrão do PrimeNG que podem sujar o visual */
+
+  /* Placeholder: color fundo-300 */
+  &::placeholder {
+    color: var(--fundo-300);
+  }
+
+  /* Hover: border-color fundo-300 */
+  &:enabled:hover {
+    border-color: var(--fundo-300) !important;
+  }
+
+  /* Foco: border-color azul-400 */
+  &:enabled:focus {
+    border-color: var(--azul-400) !important;
+    outline: none;
+  }
+
+  /* Erro: border-color vermelho-500 */
+  &.ng-invalid.ng-dirty, 
+  &.p-invalid {
+    border-color: var(--vermelho-500) !important;
+  }
+
+  /* Bloqueado/desabilitado: bg-color fundo-50 */
+  &:disabled {
+    background-color: var(--fundo-50) !important;
+    border-color: var(--fundo-200) !important;
+    color: var(--fundo-400);
+    cursor: not-allowed;
+    opacity: 1;
+  }
+}

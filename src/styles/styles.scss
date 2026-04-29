@@ -1,0 +1,36 @@
+// ==========================================================================
+// DESIGN SYSTEM - DESMONTE ERP
+// Arquivo central de estilos globais
+// ==========================================================================
+
+// 1. TOKENS (Fundações primitivas: cores, tipografia, espaçamentos)
+@import 'tokens/colors';
+@import 'tokens/typography';
+@import 'tokens/spacing';
+
+// 2. TEMA (Mapeamento de variáveis para o PrimeNG)
+@import 'themes/primeng-theme';
+
+// 3. COMPONENTES CUSTOMIZADOS
+@import 'components/cards';
+@import 'components/scrollspy';
+@import 'components/inputs';
+@import 'components/buttons';
+@import 'components/sidebar_actions';
+@import 'components/tables';
+
+// ==========================================================================
+// CONFIGURAÇÕES GERAIS DO PROJETO
+// ==========================================================================
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--body-bg); // Variável que criamos no _colors.scss
+  min-height: 100vh;
+  scroll-behavior: smooth; /* Garante o deslizamento suave ao clicar em âncoras */
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}

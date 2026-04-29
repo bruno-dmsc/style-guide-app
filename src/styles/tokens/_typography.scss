@@ -1,0 +1,154 @@
+// ==========================================================================
+// TOKENS DE TIPOGRAFIA
+// Variáveis base para famílias de fontes, pesos e tamanhos.
+// ==========================================================================
+
+:root {
+  /* Famílias de Fonte */
+  --font-family-base: 'Roboto', sans-serif;
+  --font-family-icon: 'Material Icons'; // O PrimeNG também usa o 'PrimeIcons', se precisar no futuro
+
+  /* Pesos (Weights) - Mapeamento para o padrão numérico da web */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Tamanhos de Fonte (Font Sizes) */
+  --text-size-h1: 24px;
+  --text-size-h2: 20px;
+  --text-size-h3: 16px;
+  --text-size-h4: 14px;
+  --text-size-h5: 12px;
+  --text-size-h6: 10px; /* Ajustado provisoriamente (você enviou 24px) */
+  --text-size-p: 14px;
+
+  /* Tamanhos de Ícones */
+  --icon-size-md: 20px;
+  --icon-size-xl: 64px;
+
+  /* Altura de Linha (Line Heights) */
+  --line-height-h1: 32px;
+  --line-height-h2: 28px;
+  --line-height-h3: 24px;
+  --line-height-h4: 20px;
+  --line-height-h5: 16px;
+  --line-height-h6: 16px;
+  --line-height-p: 20px;
+}
+
+// ==========================================================================
+// APLICAÇÃO GLOBAL E CLASSES UTILITÁRIAS
+// ==========================================================================
+
+/* Reset básico para garantir que o body siga a tipografia do sistema */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--text-size-p);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-p);
+  color: var(--text-color); /* Esta variável vem do nosso arquivo do PrimeNG */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Atribuindo tanto para as tags nativas HTML quanto para classes utilitárias (.h1, .h2).
+  Isso ajuda quando você quer que um <span> ou <div> pareça um título, 
+  mas sem quebrar a semântica do SEO/Acessibilidade com tags de cabeçalho incorretas.
+*/
+
+h1, .h1 {
+  font-size: var(--text-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-h1);
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+}
+
+h2, .h2 {
+  font-size: var(--text-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-h2);
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+}
+
+h3, .h3 {
+  font-size: var(--text-size-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h3);
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+}
+
+h4, .h4 {
+  font-size: var(--text-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+}
+
+h5, .h5 {
+  font-size: var(--text-size-h5);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-h5);
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+}
+
+h6, .h6 {
+  font-size: var(--text-size-h6);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h6);
+  text-transform: uppercase;
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+}
+
+p, .text-p {
+  font-size: var(--text-size-p);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-p);
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+}
+
+.desmonte-card__content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   ÍCONES (MATERIAL ICONS)
+========================================================================== */
+
+/* Basta adicionar as classes aos seus ícones no HTML:
+  Ex: <span class="material-icons icon-xl">check_circle</span>
+*/
+.icon-md {
+  font-family: var(--font-family-icon);
+  font-size: var(--icon-size-md);
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  line-height: 1; /* Garante que o ícone não empurre o texto ao redor */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-xl {
+  font-family: var(--font-family-icon);
+  font-size: var(--icon-size-xl);
+  width: var(--icon-size-xl);
+  height: var(--icon-size-xl);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

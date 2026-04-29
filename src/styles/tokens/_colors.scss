@@ -1,0 +1,104 @@
+// ==========================================================================
+// TOKENS DE CORES (CSS Custom Properties)
+// Escala de 50 a 950 para cada família de cor.
+// Substitua os valores #000000 pelos Hex codes exatos do Figma.
+// ==========================================================================
+
+:root {
+  /* --- Azul --- */
+  --azul-50: #E5F0FF;
+  --azul-100: #CCE0FF;
+  --azul-200: #99C2FF;
+  --azul-300: #66A3FF;
+  --azul-400: #3385FF;
+  --azul-500: #0066FF; /* Cor principal */
+  --azul-600: #0052CC;
+  --azul-700: #003D99;
+  --azul-800: #002966;
+  --azul-900: #001433;
+  --azul-950: #000E24;
+
+  /* --- Vermelho --- */
+  --vermelho-50: #FFE7E5;
+  --vermelho-100: #FFCFCC;
+  --vermelho-200: #FFA099;
+  --vermelho-300: #FF7066;
+  --vermelho-400: #FF4133;
+  --vermelho-500: #FF1100;
+  --vermelho-600: #CC0E00;
+  --vermelho-700: #990A00;
+  --vermelho-800: #660700;
+  --vermelho-900: #330300;
+  --vermelho-950: #240200;
+
+  /* --- Verde --- */
+  --verde-50: #E5FFEC;
+  --verde-100: #CCFFDA;
+  --verde-200: #99FFB4;
+  --verde-300: #66FF8F;
+  --verde-400: #33FF69;
+  --verde-500: #00FF44;
+  --verde-600: #00CC36;
+  --verde-700: #009929;
+  --verde-800: #00661B;
+  --verde-900: #00330E;
+  --verde-950: #00240A;
+
+  /* --- Amarelo --- */
+  --amarelo-50: #FCFFE5;
+  --amarelo-100: #F8FFCC;
+  --amarelo-200: #F1FF99;
+  --amarelo-300: #EBFF66;
+  --amarelo-400: #E4FF33;
+  --amarelo-500: #DDFF00;
+  --amarelo-600: #B1CC00;
+  --amarelo-700: #859900;
+  --amarelo-800: #586600;
+  --amarelo-900: #2C3300;
+  --amarelo-950: #1F2400;
+
+  /* --- Laranja --- */
+  --laranja-50: #FFF0E5;
+  --laranja-100: #FFE0CC;
+  --laranja-200: #FFC299;
+  --laranja-300: #FFA366;
+  --laranja-400: #FF8533;
+  --laranja-500: #FF6600;
+  --laranja-600: #CC5200;
+  --laranja-700: #993D00;
+  --laranja-800: #662900;
+  --laranja-900: #331400;
+  --laranja-950: #240E00;
+
+  /* --- Fundo (Neutros/Cinzas) --- */
+  --fundo-0: #FFFFFF;
+  --fundo-50: #F2F2F2;
+  --fundo-100: #E6E6E6;
+  --fundo-200: #CCCCCC;
+  --fundo-300: #B3B3B3;
+  --fundo-400: #999999;
+  --fundo-500: #808080;
+  --fundo-600: #666666;
+  --fundo-700: #4D4D4D;
+  --fundo-800: #333333;
+  --fundo-900: #1A1A1A;
+  --fundo-950: #121212;
+
+  --body-bg: var(--fundo-50);
+}
+
+body.dark-theme {
+  --fundo-0: #121212;
+  --fundo-50: #121212;
+  --fundo-100: #1A1A1A;
+  --fundo-200: #333333;
+  --fundo-300: #4D4D4D;
+  --fundo-400: #666666;
+  --fundo-500: #808080;
+  --fundo-600: #999999;
+  --fundo-700: #B3B3B3;
+  --fundo-800: #CCCCCC;
+  --fundo-900: #E6E6E6;
+  --fundo-950: #F2F2F2;
+  --body-bg: var(--fundo-50);
+}

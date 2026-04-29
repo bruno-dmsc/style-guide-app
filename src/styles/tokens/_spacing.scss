@@ -1,0 +1,48 @@
+// ==========================================================================
+// TOKENS DE ESPAÇAMENTO
+// Escala padronizada para paddings, margins e gaps (grids/flexbox).
+// ==========================================================================
+
+:root {
+  --spacing-xs: 4px;
+  --spacing-s: 8px;
+  --spacing-m: 16px;
+  --spacing-l: 24px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 64px;
+
+  --size-xs: 4px;
+  --size-s: 8px;
+  --size-m: 16px;
+  --size-l: 24px;
+  --size-xl: 48px;
+  --size-xxl: 64px;
+  --size-3xl: 128px;
+}
+
+// ==========================================================================
+// CLASSES ESTRUTURAIS DE LAYOUT
+// ==========================================================================
+
+/* Container principal da aplicação (abaixo da Navbar) */
+.layout-main-content {
+  /* Aplica o tamanho L (24px) no topo, direita e esquerda. 
+     O bottom fica zerado inicialmente, podendo ser ajustado caso haja footer. */
+  padding-top: var(--spacing-l);
+  padding-right: var(--spacing-l);
+  padding-left: var(--spacing-l);
+  padding-bottom: 0; 
+  
+  /* Alternativa em shorthand: padding: var(--spacing-l) var(--spacing-l) 0; */
+
+  /* Trava o crescimento máximo da tela. 
+     1440px é o padrão ideal para Dashboards e ERPs. 
+     Se achar muito largo, pode testar 1280px ou 1200px. */
+  max-width: 1440px; 
+  
+  /* O '0' zera a margem superior/inferior.
+     O 'auto' calcula automaticamente o espaço que sobrou na tela 
+     e divide igualmente entre a direita e a esquerda, centralizando o container. */
+  margin: 0 auto;
+
+}
