@@ -94,27 +94,24 @@
         </ul>
         <div class="grid">
           <div class="col-12 md:col-6 lg:col-4">
-            <div class="desmonte-field">
-              <label class="desmonte-field__label desmonte-field__label--required">Nome da Peça:</label>
-              <input type="text" pInputText placeholder="Ex: Radiador de Corsa" />
-            </div>
+            <app-field-text id="input-exemplo-1" formControlName="input-exemplo-1" label="Nome da Peça"
+              placeholder="Ex: Radiador de Corsa" [required]="true" helperText="Insira a descrição exata da peça.">
+            </app-field-text>
           </div>
 
           <div class="col-12 md:col-6 lg:col-4">
-            <div class="desmonte-field">
-              <label class="desmonte-field__label">Código Interno:</label>
-              <input type="text" pInputText class="p-invalid" value="123-ABC" />
-              <p class="desmonte-field__error-message">Código já cadastrado no sistema.</p>
-            </div>
+            <app-field-text id="input-exemplo-2" formControlName="input-exemplo-2" label="Código Interno"
+              value="123-ABC" placeholder="Ex: 123-ABC" errorMessage="Código já cadastrado no sistema.">
+            </app-field-text>
           </div>
 
           <div class="col-12 md:col-6 lg:col-4">
-            <div class="desmonte-field">
-              <label class="desmonte-field__label">ID do Desmonte:</label>
-              <input type="text" pInputText [disabled]="true" value="DS-2024-001" />
-            </div>
+            <app-field-text id="input-exemplo-3" formControlName="input-exemplo-3" label="ID do Desmonte"
+              value="DS-2024-001" [disabled]="true">
+            </app-field-text>
           </div>
         </div>
+        <p>[TODO]: contador de caracteres, máscara e exemplo prático de erro de validação</p>
       </app-card>
 
       <app-card id="componente-botoes" title="Botões" subtitle="Ações principais e secundárias do sistema">
@@ -692,24 +689,25 @@
         </div>
       </app-card>
 
-      <app-card id="componente-badges" title="Badges" subtitle="Indicadores de status, classificações e outras informações compactas">
+      <app-card id="componente-badges" title="Badges"
+        subtitle="Indicadores de status, classificações e outras informações compactas">
         <p>As badges servem tanto para classificar registros em uma tabela, como também para informar dados simples
-            com certo destaque. Via de regra, se assemelham a pílulas, com o conteúdo sendo exibido em seu interior. As
-            características das badges que iremos montar são as seguintes:</p>
-          <ul>
-            <li>Fundo: bg-color cor-200, border-width 1, border-color cor-800, border-radius S</li>
-            <li>Texto: tipografia H5, color cor-800, padding-left M, padding-right M, padding-top S, padding-bottom S
-            </li>
-          </ul>
-          <h3>Exemplos</h3>
-          <!-- Erro / Crítico -->
-          <span class="badge badge-danger" style="margin-right: var(--spacing-m);">A categoria do Mercado Livre não foi
-            informada.</span>
-          <!-- Alerta / Atenção -->
-          <span class="badge badge-warning" style="margin-right: var(--spacing-m);">Alguns campos da ficha técnica estão
-            em branco.</span>
-          <!-- Sucesso -->
-          <span class="badge badge-success">Todos os dados estão preenchidos corretamente!</span>
+          com certo destaque. Via de regra, se assemelham a pílulas, com o conteúdo sendo exibido em seu interior. As
+          características das badges que iremos montar são as seguintes:</p>
+        <ul>
+          <li>Fundo: bg-color cor-200, border-width 1, border-color cor-800, border-radius S</li>
+          <li>Texto: tipografia H5, color cor-800, padding-left M, padding-right M, padding-top S, padding-bottom S
+          </li>
+        </ul>
+        <h3>Exemplos</h3>
+        <!-- Erro / Crítico -->
+        <span class="badge badge-danger" style="margin-right: var(--spacing-m);">A categoria do Mercado Livre não foi
+          informada.</span>
+        <!-- Alerta / Atenção -->
+        <span class="badge badge-warning" style="margin-right: var(--spacing-m);">Alguns campos da ficha técnica estão
+          em branco.</span>
+        <!-- Sucesso -->
+        <span class="badge badge-success">Todos os dados estão preenchidos corretamente!</span>
       </app-card>
 
     </div>

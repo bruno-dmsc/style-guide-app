@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 export class FieldComponent {
   @Input() label: string = '';
   @Input() required: boolean = false;
-  @Input() placeholder: string = '';
   @Input() errorMessage: string = '';
   @Input() helperText: string = '';
 }
