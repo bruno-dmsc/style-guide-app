@@ -4,23 +4,23 @@
 // ==========================================================================
 
 // 1. TOKENS (Fundações primitivas: cores, tipografia, espaçamentos)
-@import 'tokens/colors';
-@import 'tokens/typography';
-@import 'tokens/spacing';
+@use 'tokens/colors';
+@use 'tokens/typography';
+@use 'tokens/spacing';
 
 // 2. TEMA (Mapeamento de variáveis para o PrimeNG)
-@import 'themes/primeng-theme';
+@use 'themes/primeng-theme';
 
 // 3. COMPONENTES CUSTOMIZADOS
-@import 'components/cards';
-@import 'components/scrollspy';
-@import 'components/inputs';
-@import 'components/buttons';
-@import 'components/sidebar_actions';
-@import 'components/tables';
-@import 'components/fileupload';
-@import 'components/badges';
-@import 'components/gallery';
+@use 'components/cards';
+@use 'components/scrollspy';
+@use 'components/inputs';
+@use 'components/buttons';
+@use 'components/sidebar_actions';
+@use 'components/tables';
+@use 'components/fileupload';
+@use 'components/badges';
+@use 'components/gallery';
 
 // ==========================================================================
 // CONFIGURAÇÕES GERAIS DO PROJETO
