@@ -192,7 +192,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   // Variáveis da Tabela
   dadosRelatorio: any[] = [];
   totalRegistrosRelatorio: number = this.bancoDeDadosRelatorio.length;
-  
+
   // Nova variável de estado
   carregandoRelatorio: boolean = false;
 
@@ -214,15 +214,15 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     // 3. A Requisição Simulada
     this.timeoutRef = setTimeout(() => {
       const inicio = eventoLazy.first ?? 0;
-      const quantidade = 3; 
+      const quantidade = eventoLazy.rows ?? 3;
 
       this.dadosRelatorio = this.bancoDeDadosRelatorio.slice(inicio, inicio + quantidade);
 
       // 4. Desliga o loading e avisa o Angular novamente
       this.carregandoRelatorio = false;
       this.cdr.detectChanges();
-      
-    }, 500); 
+
+    }, 500);
   }
 
   // Variável que controla a cor do drag-and-drop

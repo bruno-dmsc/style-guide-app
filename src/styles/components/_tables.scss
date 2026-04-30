@@ -162,6 +162,62 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+
+    /* Dropdown de Linhas por Página */
+    .p-dropdown {
+      height: 32px !important;
+      display: flex;
+      align-items: center;
+      border-radius: var(--spacing-xs) !important;
+      border: 1px solid var(--fundo-200);
+      margin-left: var(--spacing-m);
+
+      /* Ajuste do texto interno do dropdown */
+      .p-dropdown-label {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        display: flex;
+        align-items: center;
+        font-family: var(--font-family-base);
+        font-size: var(--text-size-p);
+        color: var(--fundo-700);
+      }
+    }
+
+  }
+
+  // ==========================================================================
+  // ESTADOS DA TABELA (LOADING E EMPTY)
+  // ==========================================================================
+
+  /* 1. O "Véu" de carregamento (Overlay) */
+  /* 1. O "Véu" de carregamento (Overlay) */
+  .p-datatable-loading-overlay {
+    /* Usa a cor de fundo nativa do tema (claro ou escuro) e aplica 70% de opacidade */
+    background-color: color-mix(in srgb, var(--fundo-0) 70%, transparent) !important;
+    backdrop-filter: blur(2px); 
+    z-index: 2;
+  }
+
+  /* 2. O conteúdo centralizado (Ícone + Mensagem) */
+  .desmonte-table__loading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-s); // Distância entre o ícone e o texto
+
+    i {
+      font-size: var(--icon-size-md);
+      color: var(--azul-500); // Usa a cor principal do sistema para o spinner
+    }
+
+    .desmonte-table__loading-text {
+      font-family: var(--font-family-base);
+      font-size: var(--text-size-h5);
+      font-weight: var(--font-weight-medium);
+      color: var(--fundo-900);
+    }
   }
 
 }

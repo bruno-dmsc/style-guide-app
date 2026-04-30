@@ -11,6 +11,7 @@
 
   [showCurrentPageReport]="showCurrentPageReport"
   currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+  [rowsPerPageOptions]="rowsPerPageOptions"
 
   [selection]="selectedItems" 
   (selectionChange)="selectedItemsChange.emit($event)"
@@ -68,4 +69,15 @@
 
     </tr>
   </ng-template>
+
+  <!-- Template de Loading Customizado -->
+  <ng-template pTemplate="loadingicon">
+    <div class="desmonte-table__loading-wrapper">
+      <!-- Ícone girando com a cor de destaque (usando o pi-spinner ou pi-sync) -->
+      <i class="pi pi-spin pi-spinner"></i>
+      <!-- A mensagem dinâmica -->
+      <span class="desmonte-table__loading-text">{{ loadingMessage }}</span>
+    </div>
+  </ng-template>
+  
 </p-table>

@@ -42,14 +42,18 @@ export class TableComponent {
   @Input() rows: number = 10;          // Quantidade de linhas por página
   @Input() totalRecords: number = 0;   // Essencial para o cálculo de páginas totais
 
-  // Adicione junto das outras propriedades de paginação
   @Input() showCurrentPageReport: boolean = true;
+
+  // Nova propriedade: Opções de quantidade por página
+  @Input() rowsPerPageOptions: number[] = [10, 25, 50];
 
   // O "pulo do gato" do PrimeNG para o Server-side
   @Input() lazy: boolean = false;
 
   @Input() loading: boolean = false;
+  @Input() loadingMessage: string = 'Carregando dados...';
 
   // Emissor que avisa a tela pai que o usuário trocou de página, filtrou ou ordenou
   @Output() onLoadData = new EventEmitter<any>();
+
 }

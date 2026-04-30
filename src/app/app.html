@@ -326,7 +326,7 @@
           a ser executada na listagem.</p>
 
         <app-table dataKey="nf" [items]="dadosRelatorio" [columns]="colunasRelatorio" [compact]="true"
-          [paginator]="true" [rows]="3" [lazy]="true" [totalRecords]="totalRegistrosRelatorio"
+          [paginator]="true" [rows]="3" [rowsPerPageOptions]="[2, 3, 4]" [lazy]="true" [totalRecords]="totalRegistrosRelatorio"
           [loading]="carregandoRelatorio" (onLoadData)="carregarPaginaRelatorio($event)">
         </app-table>
 
