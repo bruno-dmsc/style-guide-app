@@ -1,0 +1,22 @@
+<div class="desmonte-field">
+      <!-- Label com os dois pontos fixos e classe de required condicional -->
+      <label 
+        class="desmonte-field__label" 
+        [class.desmonte-field__label--required]="required"
+        *ngIf="label">
+        {{ label }}:
+      </label>
+
+      <!-- Aqui o desenvolvedor injeta o input pInputText nativo -->
+      <ng-content></ng-content>
+
+      <!-- Mensagem de Erro (Tem prioridade visual, se houver erro, esconde o helper) -->
+      <p class="desmonte-field__error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <!-- Helper Text (Aparece apenas se não houver erro) -->
+      <p class="desmonte-field__helper-message" *ngIf="helperText && !errorMessage">
+        {{ helperText }}
+      </p>
+    </div>

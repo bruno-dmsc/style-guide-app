@@ -32,6 +32,15 @@
     padding-top: var(--spacing-xs);
     margin: 0;
   }
+
+  &__helper-message {
+    /* Helper: H5, padding-top XS, color fundo-500 (sutil para não brigar com o input) */
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-medium);
+    color: var(--fundo-500);
+    padding-top: var(--spacing-xs);
+    margin: 0;
+  }
 }
 
 /* Seletores reforçados para garantir a borda definida e o estilo da caixa */
@@ -40,14 +49,15 @@
   border: 1px solid var(--fundo-200) !important;
   border-radius: var(--spacing-xs) !important;
   background-color: var(--fundo-0);
-  
+
   /* Texto: padding-left M, padding-top S, padding-bottom S, color fundo-900 */
   padding: var(--spacing-s) var(--spacing-m) !important;
   color: var(--fundo-900);
   font-family: var(--font-family-base);
   font-size: var(--text-size-p);
   width: 100%;
-  box-shadow: none; /* Remove sombras padrão do PrimeNG que podem sujar o visual */
+  box-shadow: none;
+  /* Remove sombras padrão do PrimeNG que podem sujar o visual */
 
   /* Placeholder: color fundo-300 */
   &::placeholder {
@@ -66,7 +76,7 @@
   }
 
   /* Erro: border-color vermelho-500 */
-  &.ng-invalid.ng-dirty, 
+  &.ng-invalid.ng-dirty,
   &.p-invalid {
     border-color: var(--vermelho-500) !important;
   }
