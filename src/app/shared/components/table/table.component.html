@@ -1,0 +1,68 @@
+<p-table 
+  [value]="items" 
+  [dataKey]="dataKey"
+
+  [paginator]="paginator"
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  [lazy]="lazy"
+  [loading]="loading"
+  (onLazyLoad)="onLoadData.emit($event)"
+
+  [selection]="selectedItems" 
+  (selectionChange)="selectedItemsChange.emit($event)"
+  [scrollable]="true" 
+  responsiveLayout="scroll"
+  [styleClass]="compact ? 'p-datatable-sm' : ''"> <!-- Aplica o estilo compacto se true[cite: 10] -->
+
+  <!-- Cabeçalho Dinâmico -->
+  <ng-template pTemplate="header">
+    <tr>
+      <!-- Coluna Checkbox -->
+      <th *ngIf="selectable" class="desmonte-table__col-checkbox">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+
+      <!-- Colunas de Dados -->
+      <th *ngFor="let col of columns" [ngClass]="'text-' + (col.align || 'left')" [ngStyle]="{'min-width': col.minWidth}">
+        {{ col.header }}
+      </th>
+
+      <!-- Coluna de Ações -->
+      <th *ngIf="actions.length > 0" pFrozenColumn alignFrozen="right" class="desmonte-table__col-actions"></th>
+    </tr>
+  </ng-template>
+
+  <!-- Corpo Dinâmico -->
+  <ng-template pTemplate="body" let-item>
+    <tr [pSelectableRow]="item">
+      
+      <!-- Checkbox da Linha -->
+      <td *ngIf="selectable" class="desmonte-table__col-checkbox">
+        <p-tableCheckbox [value]="item"></p-tableCheckbox>
+      </td>
+
+      <!-- Valores das Células -->
+      <td *ngFor="let col of columns" [ngClass]="'text-' + (col.align || 'left')" [ngStyle]="{'min-width': col.minWidth}">
+        {{ item[col.field] }}
+      </td>
+
+      <!-- Ações Fixas (Sticky)[cite: 10] -->
+      <td *ngIf="actions.length > 0" pFrozenColumn alignFrozen="right" class="desmonte-table__col-actions">
+        <div class="desmonte-table__actions-wrapper">
+          
+          <!-- Loop para desenhar os botões configurados no TypeScript -->
+          <app-button 
+            *ngFor="let btn of actions"
+            variant="tertiary" 
+            [color]="btn.color || 'help'" 
+            [icon]="btn.icon" 
+            (onClick)="onAction.emit({ actionId: btn.id, item: item })">
+          </app-button>
+
+        </div>
+      </td>
+
+    </tr>
+  </ng-template>
+</p-table>
