@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { BaseField } from '../base-field.component';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext'; // Importe o módulo do PrimeNG
@@ -17,19 +18,11 @@ import { FieldComponent } from '../field-wrapper/field.component'; // Importa a 
         }
     ]
 })
-export class FieldTextComponent implements ControlValueAccessor {
+export class FieldTextComponent extends BaseField implements ControlValueAccessor {
     // Propriedades visuais
-    @Input() label: string = '';
     @Input() value: string = '';
     @Input() placeholder: string = '';
-    @Input() required: boolean = false;
-    @Input() disabled: boolean = false;
-    @Input() errorMessage: string = '';
-    @Input() helperText: string = '';
-
-    // Nova variável para Testes Automatizados
-    @Input() id: string = '';
-
+    
     // Emissor de eventos customizados
     @Output() onBlur = new EventEmitter<FocusEvent>();
     @Output() onFocus = new EventEmitter<FocusEvent>();

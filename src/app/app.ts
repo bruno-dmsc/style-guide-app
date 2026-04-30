@@ -11,12 +11,13 @@ import { BadgeModule } from 'primeng/badge';
 
 import { CardComponent } from './shared/components/card/card.component';
 import { FieldTextComponent } from './shared/components/field/field-text/field-text.component';
+import { ButtonComponent } from './shared/components/button/button.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule, FileUploadModule, ProgressSpinnerModule, BadgeModule, CardComponent, FieldTextComponent],
+  imports: [CommonModule, ButtonModule, CardModule, InputTextModule, TableModule, FileUploadModule, ProgressSpinnerModule, BadgeModule, CardComponent, FieldTextComponent, ButtonComponent],
   templateUrl: './app.html'
 })
 export class AppComponent implements AfterViewInit, OnDestroy {

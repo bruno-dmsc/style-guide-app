@@ -1,4 +1,4 @@
-<section id="{{id}}" class="desmonte-card" style="margin-bottom: var(--spacing-l);">
+<section id="{{id}}" class="desmonte-card" [ngClass]="styleClass" [ngStyle]="customStyle">
     <div class="desmonte-card__header" *ngIf="title">
         <h2 class="desmonte-card__title">{{ title }}</h2>
         <h5 class="desmonte-card__subtitle">{{ subtitle }}</h5>

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BaseUIComponent } from '../base-ui.component';
 import { CommonModule } from '@angular/common'; // Necessário se usar Standalone Components
 
 @Component({
@@ -7,10 +8,11 @@ import { CommonModule } from '@angular/common'; // Necessário se usar Standalon
   imports: [CommonModule],
   templateUrl: './card.component.html',
 })
-export class CardComponent {
-  @Input() id: string = '';
+export class CardComponent extends BaseUIComponent {
   @Input() title: string = '';
   @Input() subtitle: string = '';
   @Input() icon: string = ''; // Nova propriedade para o ícone do PrimeNG
   @Input() showDivider: boolean = true;
+
+  @Input() override customStyle: { [klass: string]: any } | null = {'margin-bottom': 'var(--spacing-l)'};
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BaseField } from '../base-field.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,9 +8,6 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './field.component.html'
 })
-export class FieldComponent {
-  @Input() label: string = '';
-  @Input() required: boolean = false;
-  @Input() errorMessage: string = '';
-  @Input() helperText: string = '';
+export class FieldComponent extends BaseField {
+  
 }

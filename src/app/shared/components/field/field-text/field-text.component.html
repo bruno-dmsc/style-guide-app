@@ -1,19 +1,7 @@
-<app-field 
-  [label]="label" 
-  [required]="required" 
-  [errorMessage]="errorMessage" 
-  [helperText]="helperText">
-  
-  <input 
-    type="text" 
-    pInputText 
-    [id]="id"
-    [value]="value" 
-    [placeholder]="placeholder"
-    [disabled]="disabled"
-    [class.p-invalid]="errorMessage"
-    (input)="onInput($event)"
-    (blur)="handleBlur($event)"
-    (focus)="handleFocus($event)" />
-    
+<app-field [label]="label" [required]="required" [errorMessage]="errorMessage" [helperText]="helperText"
+    [styleClass]="styleClass" [customStyle]="customStyle">
+
+    <input type="text" pInputText [id]="id" [value]="value" [placeholder]="placeholder" [disabled]="disabled"
+        [class.p-invalid]="errorMessage" (input)="onInput($event)" (blur)="handleBlur($event)"
+        (focus)="handleFocus($event)" [ngClass]="controlStyleClass" [ngStyle]="controlCustomStyle" />
 </app-field>

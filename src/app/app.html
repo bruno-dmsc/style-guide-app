@@ -98,13 +98,11 @@
               placeholder="Ex: Radiador de Corsa" [required]="true" helperText="Insira a descrição exata da peça.">
             </app-field-text>
           </div>
-
           <div class="col-12 md:col-6 lg:col-4">
             <app-field-text id="input-exemplo-2" formControlName="input-exemplo-2" label="Código Interno"
               value="123-ABC" placeholder="Ex: 123-ABC" errorMessage="Código já cadastrado no sistema.">
             </app-field-text>
           </div>
-
           <div class="col-12 md:col-6 lg:col-4">
             <app-field-text id="input-exemplo-3" formControlName="input-exemplo-3" label="ID do Desmonte"
               value="DS-2024-001" [disabled]="true">
@@ -136,62 +134,34 @@
           Este botão terá o fundo preenchido e texto branco, independente da cor selecionada. Devido a isso, a cor
           utilizada será o de peso 500, para facilitar o contraste. Para cada status, haverá uma variação da cor de
           fundo, e os exemplos serão demonstrados abaixo:</p>
-
+        
         <div class="grid">
-
           <div class="col-12 md:col-2">
             <p class="h6">Primário</p>
-            <button pButton label="Confirmar" icon="pi pi-check" class="w-full"></button>
+            <app-button label="Confirmar" icon="pi-check" [fullWidth]="true"></app-button>
+            <app-button label="Confirmar" icon="pi-check" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
-
           <div class="col-12 md:col-2">
             <p class="h6">Sucesso</p>
-            <button pButton label="Ativar" severity="success" icon="pi pi-play" class="w-full"></button>
+            <app-button label="Ativar" color="success" icon="pi-play" [fullWidth]="true"></app-button>
+            <app-button label="Ativar" color="success" icon="pi-play" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
-
           <div class="col-12 md:col-2">
             <p class="h6">Atenção</p>
-            <button pButton label="Pendente" severity="warning" icon="pi pi-exclamation-triangle"
-              class="w-full"></button>
+            <app-button label="Pendente" color="warning" icon="pi-exclamation-triangle" [fullWidth]="true"></app-button>
+            <app-button label="Pendente" color="warning" icon="pi-exclamation-triangle" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
-
           <div class="col-12 md:col-2">
             <p class="h6">Perigo</p>
-            <button pButton label="Excluir" severity="danger" icon="pi pi-trash" class="w-full"></button>
+            <app-button label="Excluir" color="danger" icon="pi-trash" [fullWidth]="true"></app-button>
+            <app-button label="Excluir" color="danger" icon="pi-trash" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
-
           <div class="col-12 md:col-2">
             <p class="h6">Info</p>
-            <button pButton label="Ajuda" severity="help" icon="pi pi-info" class="w-full"></button>
+            <app-button label="Ajuda" color="help" icon="pi-info" [fullWidth]="true"></app-button>
+            <app-button label="Ajuda" color="help" icon="pi-info" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
-
         </div>
-
-        <div class="grid" style="margin-bottom: var(--spacing-m);">
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Confirmar" icon="pi pi-check" class="w-full" disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Ativar" severity="success" icon="pi pi-play" class="w-full" disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Pendente" severity="warning" icon="pi pi-exclamation-triangle" class="w-full"
-              disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Excluir" severity="danger" icon="pi pi-trash" class="w-full" disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Ajuda" severity="help" icon="pi pi-info" class="w-full" disabled></button>
-          </div>
-
-        </div>
-
 
         <h3>Botão Secundário</h3>
         <p>O botão secundário serve para indicar as ações complementares da tela. Via dde regra serão ações
@@ -203,60 +173,33 @@
 
           <div class="col-12 md:col-2">
             <p class="h6">Secundário</p>
-            <button pButton label="Editar" severity="secondary" icon="pi pi-pencil" class="w-full"></button>
+            <app-button label="Editar" variant="secondary" icon="pi-pencil" [fullWidth]="true"></app-button>
+            <app-button label="Editar" variant="secondary" icon="pi-pencil" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Sucesso Outline</p>
-            <button pButton label="Reativar" severity="success" [outlined]="true" icon="pi pi-refresh"
-              class="w-full"></button>
+            <app-button label="Reativar" variant="secondary" color="success" icon="pi-refresh" [fullWidth]="true"></app-button>
+            <app-button label="Reativar" variant="secondary" color="success" icon="pi-refresh" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Atenção Outline</p>
-            <button pButton label="Revisar" severity="warning" [outlined]="true" icon="pi pi-search"
-              class="w-full"></button>
+            <app-button label="Revisar" variant="secondary" color="warning" icon="pi-search" [fullWidth]="true"></app-button>
+            <app-button label="Revisar" variant="secondary" color="warning" icon="pi-search" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Perigo Outline</p>
-            <button pButton label="Descartar" severity="danger" [outlined]="true" icon="pi pi-times"
-              class="w-full"></button>
+            <app-button label="Descartar" variant="secondary" color="danger" icon="pi-times" [fullWidth]="true"></app-button>
+            <app-button label="Descartar" variant="secondary" color="danger" icon="pi-times" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Info</p>
-            <button pButton label="Relatório" severity="help" [outlined]="true" icon="pi pi-chart-bar"
-              class="w-full"></button>
+            <app-button label="Relatório" variant="secondary" color="help" icon="pi-chart-bar" [fullWidth]="true"></app-button>
+            <app-button label="Relatório" variant="secondary" color="help" icon="pi-chart-bar" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
-
-        </div>
-        <div class="grid" style="margin-bottom: var(--spacing-m);">
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Editar" severity="secondary" icon="pi pi-pencil" class="w-full" disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Reativar" severity="success" [outlined]="true" icon="pi pi-refresh" class="w-full"
-              disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Revisar" severity="warning" [outlined]="true" icon="pi pi-search" class="w-full"
-              disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Descartar" severity="danger" [outlined]="true" icon="pi pi-times" class="w-full"
-              disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Relatório" severity="help" [outlined]="true" icon="pi pi-chart-bar" class="w-full"
-              disabled></button>
-          </div>
-
         </div>
 
         <h3>Botão Terciário</h3>
@@ -270,59 +213,36 @@
 
           <div class="col-12 md:col-2">
             <p class="h6">Terciário</p>
-            <button pButton label="Cancelar" [text]="true" icon="pi pi-times" class="w-full"></button>
+            <app-button label="Cancelar" variant="tertiary" icon="pi-times" [fullWidth]="true"></app-button>
+            <app-button label="Cancelar" variant="tertiary" icon="pi-times" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Sucesso Ghost</p>
-            <button pButton label="Ver Mais" severity="success" [text]="true" icon="pi pi-eye" class="w-full"></button>
+            <app-button label="Ver Mais" variant="tertiary" color="success" icon="pi-eye" [fullWidth]="true"></app-button>
+            <app-button label="Ver Mais" variant="tertiary" color="success" icon="pi-eye" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Atenção Ghost</p>
-            <button pButton label="Ajuda" severity="warning" [text]="true" icon="pi pi-question-circle"
-              class="w-full"></button>
+            <app-button label="Ajuda" variant="tertiary" color="warning" icon="pi-question-circle" [fullWidth]="true"></app-button>
+            <app-button label="Ajuda" variant="tertiary" color="warning" icon="pi-question-circle" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Perigo Ghost</p>
-            <button pButton label="Remover" severity="danger" [text]="true" icon="pi pi-trash" class="w-full"></button>
+            <app-button label="Remover" variant="tertiary" color="danger" icon="pi-trash" [fullWidth]="true"></app-button>
+            <app-button label="Remover" variant="tertiary" color="danger" icon="pi-trash" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
           <div class="col-12 md:col-2">
             <p class="h6">Info Ghost</p>
-            <button pButton label="Fechar" severity="help" [text]="true" icon="pi pi-times" class="w-full"></button>
+            <app-button label="Fechar" variant="tertiary" color="help" icon="pi-times" [fullWidth]="true"></app-button>
+            <app-button label="Fechar" variant="tertiary" color="help" icon="pi-times" [fullWidth]="true" [disabled]="true"></app-button>
           </div>
 
         </div>
 
-        <div class="grid">
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Cancelar" [text]="true" icon="pi pi-times" class="w-full" disabled></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Ver Mais" severity="success" [text]="true" icon="pi pi-eye" disabled
-              class="w-full"></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Ajuda" severity="warning" [text]="true" icon="pi pi-question-circle" disabled
-              class="w-full"></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Remover" severity="danger" [text]="true" icon="pi pi-trash" disabled
-              class="w-full"></button>
-          </div>
-
-          <div class="col-12 md:col-2">
-            <button pButton label="Fechar" severity="help" [text]="true" icon="pi pi-times" class="w-full"
-              disabled></button>
-          </div>
-
-        </div>
       </app-card>
 
       <app-card id="componente-tabelas" title="Tabelas" subtitle="Exibição de dados em listagens e relatórios">
@@ -772,8 +692,8 @@
         </nav>
 
         <div class="desmonte-sidebar-actions">
-          <button pButton label="Publicar Documentação" icon="pi pi-send" class="w-full"></button>
-          <button pButton label="Fechar" severity="help" [text]="true" icon="pi pi-times" class="w-full"></button>
+          <app-button label="Publicar" icon="pi-send" [fullWidth]="true"></app-button>
+          <app-button label="Fechar" variant="tertiary" color="help" icon="pi-times" [fullWidth]="true"></app-button>
         </div>
 
       </aside>

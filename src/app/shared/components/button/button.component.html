@@ -1,0 +1,14 @@
+<button 
+  pButton
+  [type]="type"
+  [label]="label"
+  [icon]="icon ? 'pi ' + icon : ''"
+  [severity]="computedSeverity"
+  [outlined]="isOutlined"
+  [text]="isText"
+  [disabled]="disabled"
+  [class.w-full]="fullWidth"
+  (click)="onClick.emit($event)"
+  [ngClass]="styleClass" 
+  [ngStyle]="customStyle">
+</button>
