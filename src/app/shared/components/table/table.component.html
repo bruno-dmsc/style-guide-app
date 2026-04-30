@@ -9,11 +9,14 @@
   [loading]="loading"
   (onLazyLoad)="onLoadData.emit($event)"
 
+  [showCurrentPageReport]="showCurrentPageReport"
+  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+
   [selection]="selectedItems" 
   (selectionChange)="selectedItemsChange.emit($event)"
   [scrollable]="true" 
   responsiveLayout="scroll"
-  [styleClass]="compact ? 'p-datatable-sm' : ''"> <!-- Aplica o estilo compacto se true[cite: 10] -->
+  [styleClass]="compact ? 'p-datatable-sm' : ''">
 
   <!-- Cabeçalho Dinâmico -->
   <ng-template pTemplate="header">

@@ -15,7 +15,7 @@ export class TableComponent {
   @Input() items: any[] = [];
   @Input() columns: TableColumn[] = [];
   @Input() dataKey: string = 'id';
-  
+
   // Variações Visuais e de Comportamento
   @Input() selectable: boolean = false;
   @Input() showActions: boolean = false;
@@ -30,7 +30,7 @@ export class TableComponent {
   @Output() onOptions = new EventEmitter<any>();
 
   // Novo Array de Ações
-  @Input() actions: TableAction[] = []; 
+  @Input() actions: TableAction[] = [];
 
   // Novo Emissor Único de Ações
   @Output() onAction = new EventEmitter<{ actionId: string, item: any }>();
@@ -42,8 +42,11 @@ export class TableComponent {
   @Input() rows: number = 10;          // Quantidade de linhas por página
   @Input() totalRecords: number = 0;   // Essencial para o cálculo de páginas totais
 
+  // Adicione junto das outras propriedades de paginação
+  @Input() showCurrentPageReport: boolean = true;
+
   // O "pulo do gato" do PrimeNG para o Server-side
-  @Input() lazy: boolean = false;      
+  @Input() lazy: boolean = false;
 
   @Input() loading: boolean = false;
 

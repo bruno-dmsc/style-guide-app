@@ -102,4 +102,66 @@
     }
   }
 
+  // ==========================================================================
+  // PAGINAÇÃO DA TABELA
+  // ==========================================================================
+
+  .p-paginator {
+    background-color: var(--fundo-0) !important;
+    border: none !important;
+    /* Cria uma linha sutil para separar os dados dos controles */
+    //border-top: 1px solid var(--fundo-200) !important;
+    /* Espaçamento superior M (16px) e sem espaços embaixo para não somar com o card */
+    padding: 0 !important;
+    justify-content: flex-end;
+
+    /* Texto Informativo ("Mostrando 1 a 10...") */
+    .p-paginator-current {
+      color: var(--fundo-600) !important;
+      font-family: var(--font-family-base);
+      font-size: var(--text-size-p);
+      font-weight: var(--font-weight-regular);
+      /* Joga o texto totalmente para a esquerda, e os botões para a direita */
+      margin-right: auto;
+      padding: 0;
+    }
+
+    /* Botões de Página e Navegação */
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last,
+    .p-paginator-page {
+      color: var(--fundo-700) !important;
+      border-radius: var(--spacing-xs) !important;
+      margin: 0 var(--spacing-xs) !important;
+      min-width: 32px !important;
+      height: 32px !important;
+      font-family: var(--font-family-base);
+      font-size: var(--text-size-p);
+      font-weight: var(--font-weight-regular);
+      transition: all 0.2s;
+
+      /* Estado de Hover (Imita o botão Ghost/Terciário) */
+      &:not(.p-disabled):hover {
+        background-color: var(--azul-50) !important;
+        color: var(--fundo-900) !important;
+      }
+
+      /* Estado da Página Atual (Ativa) */
+      &.p-highlight {
+        background-color: var(--azul-50) !important;
+        color: var(--azul-500) !important;
+        font-size: var(--text-size-h4) !important;
+        font-weight: var(--font-weight-semibold) !important;
+      }
+    }
+
+    /* Botões desabilitados (ex: "Voltar" quando já está na página 1) */
+    .p-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
 }
