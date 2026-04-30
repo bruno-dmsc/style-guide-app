@@ -196,21 +196,31 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   // Nova variável de estado
   carregandoRelatorio: boolean = false;
 
+  // Adicione esta variável junto com as outras da tabela
+  private timeoutRef: any;
+
   carregarPaginaRelatorio(eventoLazy: any) {
-    // 1. O Truque Angular: empurra a mudança para o próximo ciclo de renderização
-    // Isso evita o erro NG0100 (ExpressionChangedAfterItHasBeenCheckedError)
-    setTimeout(() => {
-      this.carregandoRelatorio = true; 
+    // 1. Debounce: Previne chamadas duplas do PrimeNG cancelando a anterior
+    if (this.timeoutRef) {
+      clearTimeout(this.timeoutRef);
+    }
+
+    // 2. Microtask: Forma correta e à prova de falhas para evitar o NG0100
+    Promise.resolve().then(() => {
+      this.carregandoRelatorio = true;
+      this.cdr.detectChanges(); // Força o Angular a desenhar o véu de loading na hora[cite: 11]
     });
 
-    // 2. A sua simulação de API de 500ms continua igual
-    setTimeout(() => {
+    // 3. A Requisição Simulada
+    this.timeoutRef = setTimeout(() => {
       const inicio = eventoLazy.first ?? 0;
       const quantidade = 3; 
-      
+
       this.dadosRelatorio = this.bancoDeDadosRelatorio.slice(inicio, inicio + quantidade);
-      
-      this.carregandoRelatorio = false; 
+
+      // 4. Desliga o loading e avisa o Angular novamente
+      this.carregandoRelatorio = false;
+      this.cdr.detectChanges();
       
     }, 500); 
   }
