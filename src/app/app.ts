@@ -14,6 +14,9 @@ import { FieldTextComponent } from './shared/components/field/field-text/field-t
 import { ButtonComponent } from './shared/components/button/button.component';
 import { TableComponent } from './shared/components/table/table.component';
 import { TableColumn, TableAction } from './shared/components/table/table-column.interface';
+import { BadgeComponent } from './shared/components/badge/badge.component';
+import { FieldDropdownComponent } from './shared/components/field/field-dropdown/field-dropdown.component';
+
 
 
 @Component({
@@ -31,7 +34,9 @@ import { TableColumn, TableAction } from './shared/components/table/table-column
     CardComponent,
     FieldTextComponent,
     ButtonComponent,
-    TableComponent
+    TableComponent,
+    BadgeComponent,
+    FieldDropdownComponent
   ],
   templateUrl: './app.html'
 })
@@ -286,8 +291,23 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.estaCarregando = false;
     }, 1500);
+
+
   }
 
+  // app.ts
+  condicoesPeca = [
+    { label: 'Nova', value: 'NOVA' },
+    { label: 'Usada - Excelente', value: 'USADA_EXCELENTE' },
+    { label: 'Usada - Com Avarias', value: 'USADA_AVARIA' },
+    { label: 'Recondicionada', value: 'RECONDICIONADA' }
+  ];
 
+  marcasVeiculo = [
+    { label: 'Chevrolet', value: 'chevrolet' },
+    { label: 'Fiat', value: 'fiat' },
+    { label: 'Volkswagen', value: 'vw' },
+    { label: 'Toyota', value: 'toyota' }
+  ];
 
 }

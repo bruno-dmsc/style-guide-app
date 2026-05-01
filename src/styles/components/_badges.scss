@@ -5,12 +5,17 @@
   border-style: solid;
   border-width: 1px;
   border-radius: var(--size-s);
+  //gap: var(--spacing-xs);
 
   // Tipografia (H5)
   font-family: var(--font-family-base);
   font-size: var(--text-size-h5);
   font-weight: var(--font-weight-semibold);
-  
+
+  background-color: var(--azul-200);
+  border-color: var(--azul-800);
+  color: var(--azul-800);
+
   // Variações Semânticas
   &.badge-danger {
     background-color: var(--vermelho-200);
@@ -29,4 +34,13 @@
     border-color: var(--verde-800);
     color: var(--verde-800);
   }
+
+
+}
+
+.badge i {
+  /* 1em faz com que o ícone herde exatamente o tamanho da fonte (H5) do elemento pai */
+  font-size: var(--icon-size-xs);
+  margin-right: var(--spacing-xs);
+  //display: flex; /* Remove o espaçamento fantasma da linha base da fonte */
 }

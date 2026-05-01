@@ -1,0 +1,23 @@
+<div class="desmonte-field">
+    <label *ngIf="label" 
+           class="desmonte-field__label" 
+           [class.desmonte-field__label--required]="required">
+      {{ label }}
+    </label>
+    
+    <p-dropdown 
+      [options]="options" 
+      [(ngModel)]="value" 
+      (onChange)="onChange($event)"
+      optionLabel="label" 
+      optionValue="value"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [ngClass]="{'ng-invalid ng-dirty': hasError}"
+      styleClass="w-full"> <!-- w-full garante que ocupe 100% da largura -->
+    </p-dropdown>
+  
+    <p *ngIf="hasError" class="desmonte-field__error-message">
+      Campo obrigatório
+    </p>
+  </div>

@@ -12,7 +12,8 @@
             <h6>{{ weight }}</h6>
           </div>
         </div>
-        <div class="grid" *ngFor="let palette of colorPalettes" style="align-items: center; margin-bottom: var(--size-xs);">
+        <div class="grid" *ngFor="let palette of colorPalettes"
+          style="align-items: center; margin-bottom: var(--size-xs);">
           <!-- Nome da Cor -->
           <div class="col-1">
             <p style="margin: 0;">{{ palette.name }}</p>
@@ -125,6 +126,31 @@
           </div>
         </div>
         <p>[TODO]: contador de caracteres, máscara e exemplo prático de erro de validação</p>
+
+        <h3>Dropdowns / Selects</h3>
+        <p class="text-secondary mb-4">Campos de seleção única padronizados para formulários.</p>
+
+        <div class="grid">
+          <!-- Dropdown Padrão -->
+          <div class="col-4">
+            <app-field-dropdown label="Condição da Peça" placeholder="Selecione o estado..." [options]="condicoesPeca">
+            </app-field-dropdown>
+          </div>
+
+          <!-- Dropdown Obrigatório -->
+          <div class="col-4">
+            <app-field-dropdown label="Marca do Veículo compatível" placeholder="Selecione a marca"
+              [options]="marcasVeiculo" [required]="true">
+            </app-field-dropdown>
+          </div>
+
+          <!-- Dropdown Desabilitado -->
+          <div class="col-4">
+            <app-field-dropdown label="Lote de Origem" placeholder="Bloqueado para edição" [options]="[]"
+              [disabled]="true">
+            </app-field-dropdown>
+          </div>
+        </div>
       </app-card>
 
       <app-card id="componente-botoes" title="Botões" subtitle="Ações principais e secundárias do sistema">
@@ -531,13 +557,13 @@
         </ul>
         <h3>Exemplos</h3>
         <!-- Erro / Crítico -->
-        <span class="badge badge-danger" style="margin-right: var(--spacing-m);">A categoria do Mercado Livre não foi
-          informada.</span>
-        <!-- Alerta / Atenção -->
-        <span class="badge badge-warning" style="margin-right: var(--spacing-m);">Alguns campos da ficha técnica estão
-          em branco.</span>
-        <!-- Sucesso -->
-        <span class="badge badge-success">Todos os dados estão preenchidos corretamente!</span>
+        <app-badge style="margin-right: var(--spacing-m);">Novo</app-badge>
+        <app-badge color="danger" style="margin-right: var(--spacing-m);">A categoria do Mercado Livre não foi
+          informada.</app-badge>
+        <app-badge color="warning" style="margin-right: var(--spacing-m);">Alguns campos da ficha técnica estão
+          em branco.</app-badge>
+        <app-badge color="success" style="margin-right: var(--spacing-m);">Todos os dados estão preenchidos
+          corretamente!</app-badge>
       </app-card>
 
     </div>

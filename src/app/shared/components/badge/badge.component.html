@@ -1,0 +1,7 @@
+<span class="badge" [ngClass]="['badge-' + color, variant !== 'default' ? 'badge-' + variant : '']">
+    <!-- Ícone opcional, renderizado antes do texto -->
+    <i *ngIf="icon" [class]="icon"></i>
+    
+    <!-- Onde o texto (ou outro HTML) inserido pelo dev vai aparecer -->
+    <ng-content></ng-content>
+  </span>
