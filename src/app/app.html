@@ -151,6 +151,19 @@
             </app-field-dropdown>
           </div>
         </div>
+
+        <h3>AutoComplete / Busca Avançada</h3>
+        <p class="text-secondary">Campos de pesquisa dinâmica com suporte a modal de busca complexa.</p>
+
+        <div class="grid">
+          <div class="col-12">
+            <app-field-autocomplete label="CFOP da Operação"
+              [suggestions]="cfopsSugeridos" [(value)]="cfopSelecionado" (onSearch)="buscarCfop($event)"
+              (onAdvancedSearch)="abrirModalPesquisa($event)">
+            </app-field-autocomplete>
+          </div>
+        </div>
+
       </app-card>
 
       <app-card id="componente-botoes" title="Botões" subtitle="Ações principais e secundárias do sistema">

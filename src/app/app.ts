@@ -16,6 +16,7 @@ import { TableComponent } from './shared/components/table/table.component';
 import { TableColumn, TableAction } from './shared/components/table/table-column.interface';
 import { BadgeComponent } from './shared/components/badge/badge.component';
 import { FieldDropdownComponent } from './shared/components/field/field-dropdown/field-dropdown.component';
+import { FieldAutocompleteComponent } from './shared/components/field/field-autocomplete/field-autocomplete.component'
 
 
 
@@ -36,7 +37,8 @@ import { FieldDropdownComponent } from './shared/components/field/field-dropdown
     ButtonComponent,
     TableComponent,
     BadgeComponent,
-    FieldDropdownComponent
+    FieldDropdownComponent,
+    FieldAutocompleteComponent
   ],
   templateUrl: './app.html'
 })
@@ -309,5 +311,37 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     { label: 'Volkswagen', value: 'vw' },
     { label: 'Toyota', value: 'toyota' }
   ];
+
+
+  cfopSelecionado: any;
+
+  // 2. O nosso "Banco de Dados" genérico de CFOPs
+  cfopDatabase = [
+    { label: '5101 - Venda de produção do estabelecimento', value: '5101' },
+    { label: '5102 - Venda de mercadoria de terceiros', value: '5102' },
+    { label: '5202 - Devolução de compra para comercialização', value: '5202' },
+    { label: '5405 - Venda de mercadoria sujeita a ST', value: '5405' },
+    { label: '6102 - Venda de mercadoria de terceiros (Fora do Estado)', value: '6102' }
+  ];
+
+  // 3. A lista vazia que vai alimentar a gaveta do AutoComplete
+  cfopsSugeridos: any[] = [];
+
+  // 4. A função que o componente vai chamar a cada letra digitada
+  buscarCfop(query: string) {
+    const textoBuscado = query.toLowerCase();
+
+    // Filtra o nosso banco de dados procurando pelo texto no 'label' ou no 'value'
+    this.cfopsSugeridos = this.cfopDatabase.filter(cfop =>
+      cfop.label.toLowerCase().includes(textoBuscado) ||
+      cfop.value.toLowerCase().includes(textoBuscado)
+    );
+  }
+
+  // 5. Função simulando a abertura da sua Modal
+  abrirModalPesquisa(query: string) {
+    alert(`Abrindo modal de busca avançada! O campo de busca da modal já virá preenchido com: "${query}"`);
+    // Aqui no futuro você chamaria o seu servico de modal: this.dialogService.open(ModalComponent, { data: { busca: query } })
+  }
 
 }

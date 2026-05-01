@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule, DropdownChangeEvent } from 'primeng/dropdown';
-import { BaseField } from '../base-field.component';
+import { BaseFieldComponent } from '../base-field.component';
 
 export interface DropdownOption {
   label: string;
@@ -15,7 +15,7 @@ export interface DropdownOption {
   imports: [CommonModule, FormsModule, DropdownModule],
   templateUrl: './field-dropdown.component.html'
 })
-export class FieldDropdownComponent extends BaseField {
+export class FieldDropdownComponent extends BaseFieldComponent {
   @Input() placeholder: string = 'Selecione uma opção';
   @Input() options: DropdownOption[] = [];
   @Input() value: any = null;

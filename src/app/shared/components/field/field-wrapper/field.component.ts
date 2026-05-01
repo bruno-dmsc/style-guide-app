@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BaseField } from '../base-field.component';
+import { BaseFieldComponent } from '../base-field.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,6 +8,6 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './field.component.html'
 })
-export class FieldComponent extends BaseField {
+export class FieldComponent extends BaseFieldComponent {
   
 }

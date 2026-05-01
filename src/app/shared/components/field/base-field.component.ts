@@ -2,7 +2,7 @@ import { Directive, Input } from '@angular/core';
 import { BaseUIComponent } from '../base-ui.component';
 
 @Directive()
-export abstract class BaseField extends BaseUIComponent {
+export abstract class BaseFieldComponent extends BaseUIComponent {
   // Todo campo do sistema tem isso
   @Input() label: string = '';
   @Input() required: boolean = false;

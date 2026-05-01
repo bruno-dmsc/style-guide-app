@@ -157,7 +157,6 @@
       .p-dropdown-filter {
         width: 100%;
         padding: var(--spacing-s) var(--spacing-m);
-        padding-right: 2.5rem; /* Espaço para a lupa */
         border: 1px solid var(--fundo-200);
         border-radius: var(--spacing-xs);
         color: var(--fundo-900);
@@ -205,6 +204,116 @@
         color: var(--azul-700);
         font-weight: var(--font-weight-medium);
       }
+    }
+  }
+}
+
+/* ==========================================================================
+   AutoComplete (PrimeNG <p-autoComplete>)
+   ========================================================================== */
+
+/* Garante que o container do auto-complete ocupe 100% da tela */
+.p-autocomplete {
+  width: 100%;
+}
+
+.autocomplete-wrapper {
+  position: relative;
+  display: block; /* Removemos o flex para não conflitar com a estrutura do PrimeNG */
+  width: 100%;
+
+  /* 1. Força a tag do componente Angular e o span interno a esticarem */
+  p-autoComplete,
+  .p-autocomplete {
+    width: 100%;
+    display: block;
+  }
+
+  /* 2. Força o input real a ocupar 100% do espaço liberado acima */
+  .p-autocomplete-input {
+    width: 100% !important;
+    padding-right: 2.5rem !important; /* Espaço reservado para a lupa */
+  }
+
+  /* 3. Posicionamento absoluto e centralizado para a lupa */
+  .autocomplete-search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza verticalmente com perfeição */
+    color: var(--fundo-500);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 1;
+
+    &:hover {
+      color: var(--azul-500);
+    }
+  }
+}
+
+/* O Painel Flutuante (A lista de sugestões) */
+.p-autocomplete-panel {
+  background-color: var(--fundo-0);
+  border: 1px solid var(--fundo-200);
+  border-radius: var(--spacing-xs);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 2px; 
+
+  .p-autocomplete-items {
+    padding: var(--spacing-xs) 0;
+
+    .p-autocomplete-item {
+      padding: var(--spacing-s) var(--spacing-m);
+      color: var(--fundo-900);
+      font-family: var(--font-family-base);
+      font-size: var(--text-size-p);
+      transition: background-color 0.2s, color 0.2s;
+      margin: 0 var(--spacing-xs); 
+      border-radius: 4px;
+
+      &:hover {
+        background-color: var(--fundo-50);
+        color: var(--azul-600);
+      }
+    }
+  }
+}
+
+/* Estilo do bloco de "Não encontrado / Busca Avançada" */
+.autocomplete-empty-state {
+  padding: var(--spacing-m);
+  text-align: center;
+  
+  .empty-message {
+    color: var(--fundo-500);
+    font-size: var(--text-size-p);
+    margin: 0 0 var(--spacing-s) 0;
+    
+    strong {
+      color: var(--fundo-900);
+    }
+  }
+
+  .btn-advanced-search {
+    background: none;
+    border: 1px dashed var(--azul-400);
+    border-radius: var(--spacing-xs);
+    color: var(--azul-600);
+    padding: var(--spacing-s) var(--spacing-m);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+
+    &:hover {
+      background-color: var(--azul-50);
+      border-style: solid;
     }
   }
 }

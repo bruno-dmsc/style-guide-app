@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { BaseField } from '../base-field.component';
+import { BaseFieldComponent } from '../base-field.component';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext'; // Importe o módulo do PrimeNG
@@ -18,7 +18,7 @@ import { FieldComponent } from '../field-wrapper/field.component'; // Importa a 
         }
     ]
 })
-export class FieldTextComponent extends BaseField implements ControlValueAccessor {
+export class FieldTextComponent extends BaseFieldComponent implements ControlValueAccessor {
     // Propriedades visuais
     @Input() value: string = '';
     @Input() placeholder: string = '';
