@@ -16,9 +16,8 @@ import { TableComponent } from './shared/components/table/table.component';
 import { TableColumn, TableAction } from './shared/components/table/table-column.interface';
 import { BadgeComponent } from './shared/components/badge/badge.component';
 import { FieldDropdownComponent } from './shared/components/field/field-dropdown/field-dropdown.component';
-import { FieldAutocompleteComponent } from './shared/components/field/field-autocomplete/field-autocomplete.component'
-
-
+import { FieldAutocompleteComponent } from './shared/components/field/field-autocomplete/field-autocomplete.component';
+import { FieldSwitchComponent} from './shared/components/field/field-switch/field-switch.component';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +37,8 @@ import { FieldAutocompleteComponent } from './shared/components/field/field-auto
     TableComponent,
     BadgeComponent,
     FieldDropdownComponent,
-    FieldAutocompleteComponent
+    FieldAutocompleteComponent,
+    FieldSwitchComponent
   ],
   templateUrl: './app.html'
 })
@@ -343,5 +343,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     alert(`Abrindo modal de busca avançada! O campo de busca da modal já virá preenchido com: "${query}"`);
     // Aqui no futuro você chamaria o seu servico de modal: this.dialogService.open(ModalComponent, { data: { busca: query } })
   }
+
+  anuncioAtivo: boolean = true;
+  pecaTestada: boolean = false;
 
 }

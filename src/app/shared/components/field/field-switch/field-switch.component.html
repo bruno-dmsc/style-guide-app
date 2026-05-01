@@ -1,0 +1,14 @@
+<div class="desmonte-field desmonte-field--inline">
+    <p-inputSwitch 
+      [inputId]="switchId"
+      [(ngModel)]="value" 
+      [disabled]="disabled"
+      (onChange)="onChange($event)">
+    </p-inputSwitch>
+  
+    <label *ngIf="label" 
+           [for]="switchId" 
+           class="desmonte-field__label desmonte-field__label--switch">
+      {{ label }}
+    </label>
+  </div>

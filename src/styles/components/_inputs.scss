@@ -3,37 +3,37 @@
 // ==========================================================================
 
 .desmonte-field {
-  display: flex; 
-  flex-direction: column; 
-  margin-bottom: var(--spacing-m); 
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-m);
 
   &__label {
-    font-size: var(--text-size-h5); 
-    font-weight: var(--font-weight-medium); 
-    color: var(--fundo-700); 
-    padding-bottom: var(--spacing-xs); 
-    display: block; 
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-medium);
+    color: var(--fundo-700);
+    padding-bottom: var(--spacing-xs);
+    display: block;
 
     &--required::after {
-      content: " *"; 
-      color: var(--vermelho-500); 
+      content: " *";
+      color: var(--vermelho-500);
     }
   }
 
   &__error-message {
-    font-size: var(--text-size-h5); 
-    font-weight: var(--font-weight-medium); 
-    color: var(--vermelho-500); 
-    padding-top: var(--spacing-xs); 
-    margin: 0; 
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-medium);
+    color: var(--vermelho-500);
+    padding-top: var(--spacing-xs);
+    margin: 0;
   }
 
   &__helper-message {
-    font-size: var(--text-size-h5); 
-    font-weight: var(--font-weight-medium); 
-    color: var(--fundo-500); 
-    padding-top: var(--spacing-xs); 
-    margin: 0; 
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-medium);
+    color: var(--fundo-500);
+    padding-top: var(--spacing-xs);
+    margin: 0;
   }
 }
 
@@ -41,41 +41,41 @@
    Inputs de Texto (PrimeNG) 
    ========================================================================== */
 .p-inputtext.p-component {
-  border: 1px solid var(--fundo-200) !important; 
-  border-radius: var(--spacing-xs) !important; 
-  background-color: var(--fundo-0); 
-  padding: var(--spacing-s) var(--spacing-m) !important; 
-  color: var(--fundo-900); 
-  font-family: var(--font-family-base); 
-  font-size: var(--text-size-p); 
-  width: 100%; 
-  box-shadow: none; 
-  transition: border-color 0.2s, box-shadow 0.2s; 
+  border: 1px solid var(--fundo-200) !important;
+  border-radius: var(--spacing-xs) !important;
+  background-color: var(--fundo-0);
+  padding: var(--spacing-s) var(--spacing-m) !important;
+  color: var(--fundo-900);
+  font-family: var(--font-family-base);
+  font-size: var(--text-size-p);
+  width: 100%;
+  box-shadow: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 
   &::placeholder {
-    color: var(--fundo-300); 
+    color: var(--fundo-300);
   }
 
   &:enabled:hover {
-    border-color: var(--fundo-300) !important; 
+    border-color: var(--fundo-300) !important;
   }
 
   &:enabled:focus {
-    border-color: var(--azul-400) !important; 
-    outline: none; 
+    border-color: var(--azul-400) !important;
+    outline: none;
   }
 
   &.ng-invalid.ng-dirty,
   &.p-invalid {
-    border-color: var(--vermelho-500) !important; 
+    border-color: var(--vermelho-500) !important;
   }
 
   &:disabled {
-    background-color: var(--fundo-50) !important; 
-    border-color: var(--fundo-200) !important; 
-    color: var(--fundo-400); 
-    cursor: not-allowed; 
-    opacity: 1; 
+    background-color: var(--fundo-50) !important;
+    border-color: var(--fundo-200) !important;
+    color: var(--fundo-400);
+    cursor: not-allowed;
+    opacity: 1;
   }
 }
 
@@ -97,7 +97,7 @@
     color: var(--fundo-900);
     font-family: var(--font-family-base);
     font-size: var(--text-size-p);
-    
+
     /* FIX: Cor correta para o placeholder */
     &.p-placeholder {
       color: var(--fundo-300);
@@ -139,12 +139,13 @@
   border: 1px solid var(--fundo-200);
   border-radius: var(--spacing-xs);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 2px; 
+  margin-top: 2px;
 
   /* NOVO: Estilização do cabeçalho de filtro */
   .p-dropdown-header {
     padding: var(--spacing-s) var(--spacing-m);
-    background-color: var(--fundo-50); /* Fundo levemente destacado para a área de busca */
+    background-color: var(--fundo-50);
+    /* Fundo levemente destacado para a área de busca */
     border-bottom: 1px solid var(--fundo-200);
     border-top-left-radius: var(--spacing-xs);
     border-top-right-radius: var(--spacing-xs);
@@ -169,7 +170,7 @@
           border-color: var(--azul-400);
           outline: none;
         }
-        
+
         &::placeholder {
           color: var(--fundo-300);
         }
@@ -191,14 +192,14 @@
       font-family: var(--font-family-base);
       font-size: var(--text-size-p);
       transition: background-color 0.2s, color 0.2s;
-      margin: 0 var(--spacing-xs); 
+      margin: 0 var(--spacing-xs);
       border-radius: 4px;
 
       &:not(.p-highlight):not(.p-disabled):hover {
         background-color: var(--fundo-50);
         color: var(--azul-600);
       }
-      
+
       &.p-highlight {
         background-color: var(--azul-50);
         color: var(--azul-700);
@@ -219,7 +220,8 @@
 
 .autocomplete-wrapper {
   position: relative;
-  display: block; /* Removemos o flex para não conflitar com a estrutura do PrimeNG */
+  display: block;
+  /* Removemos o flex para não conflitar com a estrutura do PrimeNG */
   width: 100%;
 
   /* 1. Força a tag do componente Angular e o span interno a esticarem */
@@ -232,7 +234,8 @@
   /* 2. Força o input real a ocupar 100% do espaço liberado acima */
   .p-autocomplete-input {
     width: 100% !important;
-    padding-right: 2.5rem !important; /* Espaço reservado para a lupa */
+    padding-right: 2.5rem !important;
+    /* Espaço reservado para a lupa */
   }
 
   /* 3. Posicionamento absoluto e centralizado para a lupa */
@@ -240,7 +243,8 @@
     position: absolute;
     right: 1rem;
     top: 50%;
-    transform: translateY(-50%); /* Centraliza verticalmente com perfeição */
+    transform: translateY(-50%);
+    /* Centraliza verticalmente com perfeição */
     color: var(--fundo-500);
     font-size: 1rem;
     cursor: pointer;
@@ -259,7 +263,7 @@
   border: 1px solid var(--fundo-200);
   border-radius: var(--spacing-xs);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 2px; 
+  margin-top: 2px;
 
   .p-autocomplete-items {
     padding: var(--spacing-xs) 0;
@@ -270,7 +274,7 @@
       font-family: var(--font-family-base);
       font-size: var(--text-size-p);
       transition: background-color 0.2s, color 0.2s;
-      margin: 0 var(--spacing-xs); 
+      margin: 0 var(--spacing-xs);
       border-radius: 4px;
 
       &:hover {
@@ -285,12 +289,12 @@
 .autocomplete-empty-state {
   padding: var(--spacing-m);
   text-align: center;
-  
+
   .empty-message {
     color: var(--fundo-500);
     font-size: var(--text-size-p);
     margin: 0 0 var(--spacing-s) 0;
-    
+
     strong {
       color: var(--fundo-900);
     }
@@ -314,6 +318,93 @@
     &:hover {
       background-color: var(--azul-50);
       border-style: solid;
+    }
+  }
+}
+
+/* ==========================================================================
+   Modificadores do Desmonte Field
+   ========================================================================== */
+
+/* Coloca a label e o input lado a lado (usado no Switch/Toggle) */
+.desmonte-field--inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-s);
+  /* Espaço entre o botão e o texto */
+  margin-bottom: var(--spacing-m);
+
+
+
+  .desmonte-field__label--switch {
+    //padding-bottom: 0;
+    /* Remove o padding inferior padrão da label */
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    /* Evita que o texto seja selecionado ao clicar rápido */
+
+    font-size: var(--text-size-p);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-p);
+  }
+}
+
+/* ==========================================================================
+   Toggle / Switch (PrimeNG <p-inputSwitch>)
+   ========================================================================== */
+.p-inputswitch {
+  width: var(--size-xl);
+  height: var(--size-l);
+
+  .p-inputswitch-slider {
+    background-color: var(--fundo-300);
+    /* Cor do fundo inativo */
+    border-radius: 30px;
+    transition: background-color 0.2s;
+
+    /* A "bolinha" do switch */
+    &:before {
+      background-color: var(--fundo-0);
+      width: 1.125rem;
+      height: 1.125rem;
+      left: 0.25rem;
+      margin-top: -0.5625rem;
+      /* Centraliza verticalmente a bolinha */
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Estado: Ligado (Ativo) */
+  &.p-inputswitch-checked .p-inputswitch-slider {
+    background-color: var(--azul-500);
+
+    &:before {
+      transform: translateX(1.5rem);
+      /* Move a bolinha para a direita */
+    }
+  }
+
+  /* Estados: Hover */
+  &:not(.p-disabled):hover .p-inputswitch-slider {
+    background-color: var(--fundo-600);
+    /* Hover inativo fica um pouco mais escuro */
+  }
+
+  &.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+    background-color: var(--azul-600);
+    /* Hover ativo */
+  }
+
+  /* Estado: Desabilitado */
+  &.p-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    .p-inputswitch-slider {
+      cursor: not-allowed;
     }
   }
 }

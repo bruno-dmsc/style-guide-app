@@ -157,13 +157,32 @@
 
         <div class="grid">
           <div class="col-12">
-            <app-field-autocomplete label="CFOP da Operação"
-              [suggestions]="cfopsSugeridos" [(value)]="cfopSelecionado" (onSearch)="buscarCfop($event)"
-              (onAdvancedSearch)="abrirModalPesquisa($event)">
+            <app-field-autocomplete label="CFOP da Operação" [suggestions]="cfopsSugeridos" [(value)]="cfopSelecionado"
+              (onSearch)="buscarCfop($event)" (onAdvancedSearch)="abrirModalPesquisa($event)">
             </app-field-autocomplete>
           </div>
         </div>
 
+
+        <h3>Switches (Toggles)</h3>
+        <p class="text-secondary mb-4">Usados para ativar ou desativar configurações instantâneas.</p>
+
+        <div class="grid">
+          <div class="col-4">
+            <app-field-switch label="Peça testada e funcionando" [(value)]="pecaTestada">
+            </app-field-switch>
+          </div>
+
+          <div class="col-4">
+            <app-field-switch label="Anúncio ativo no Mercado Livre" [(value)]="anuncioAtivo">
+            </app-field-switch>
+          </div>
+
+          <div class="col-4">
+            <app-field-switch label="Sincronização automática" [disabled]="true" [value]="true">
+            </app-field-switch>
+          </div>
+        </div>
       </app-card>
 
       <app-card id="componente-botoes" title="Botões" subtitle="Ações principais e secundárias do sistema">
