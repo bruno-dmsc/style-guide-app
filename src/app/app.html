@@ -4,10 +4,25 @@
     <div class="col-12 lg:col-9">
 
       <app-card id="tokens-cores" title="Cores" subtitle="Tokens de cores para serem usados em todo o projeto">
-
         <p>As cores são definidas em tokens variando de 50 a 950. Cada um terá seu uso definido nos componentes mais
           abaixo nesta documentação.</p>
-
+        <div class="grid" style="text-align: center;">
+          <div class="col-1"></div>
+          <div class="col-1" *ngFor="let weight of colorWeights">
+            <h6>{{ weight }}</h6>
+          </div>
+        </div>
+        <div class="grid" *ngFor="let palette of colorPalettes" style="align-items: center; margin-bottom: var(--size-xs);">
+          <!-- Nome da Cor -->
+          <div class="col-1">
+            <p style="margin: 0;">{{ palette.name }}</p>
+          </div>
+          <!-- Quadrados de Cor gerados dinamicamente -->
+          <div class="col-1" *ngFor="let weight of colorWeights"
+            [style.backgroundColor]="'var(--' + palette.prefix + '-' + weight + ')'"
+            style="min-height: var(--size-xl);">
+          </div>
+        </div>
       </app-card>
 
       <app-card id="tokens-tipografia" title="Tipografia" subtitle="Hierarquia e legibilidade com Roboto">
@@ -326,8 +341,9 @@
           a ser executada na listagem.</p>
 
         <app-table dataKey="nf" [items]="dadosRelatorio" [columns]="colunasRelatorio" [compact]="true"
-          [paginator]="true" [rows]="3" [rowsPerPageOptions]="[2, 3, 4]" [lazy]="true" [totalRecords]="totalRegistrosRelatorio"
-          [loading]="carregandoRelatorio" (onLoadData)="carregarPaginaRelatorio($event)">
+          [paginator]="true" [rows]="3" [rowsPerPageOptions]="[2, 3, 4]" [lazy]="true"
+          [totalRecords]="totalRegistrosRelatorio" [loading]="carregandoRelatorio"
+          (onLoadData)="carregarPaginaRelatorio($event)">
         </app-table>
 
       </app-card>

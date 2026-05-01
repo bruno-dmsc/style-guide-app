@@ -106,6 +106,19 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     { codigo: '7097', nome: 'Volante direção Fiat Mobi 2017', marca: 'Fiat Mobi', valor: 'R$ 300,00', qtd: 1 }
   ];
 
+
+  colorWeights = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+
+  // Definição das paletas
+  colorPalettes = [
+    { name: 'Azul', prefix: 'azul' },
+    { name: 'Vermelho', prefix: 'vermelho' },
+    { name: 'Verde', prefix: 'verde' },
+    { name: 'Amarelo', prefix: 'amarelo' },
+    { name: 'Laranja', prefix: 'laranja' },
+    { name: 'Fundo', prefix: 'fundo' }
+  ];
+
   // ==========================================
   // DADOS: TABELA SCROLL LATERAL
   // ==========================================
