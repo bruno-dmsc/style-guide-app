@@ -139,8 +139,8 @@
 
           <!-- Dropdown Obrigatório -->
           <div class="col-4">
-            <app-field-dropdown label="Marca do Veículo compatível" placeholder="Selecione a marca"
-              [options]="marcasVeiculo" [required]="true">
+            <app-field-dropdown label="Marca do Veículo" placeholder="Selecione a marca" [options]="marcasVeiculo"
+              [filter]="true" filterPlaceholder="Buscar marca...">
             </app-field-dropdown>
           </div>
 

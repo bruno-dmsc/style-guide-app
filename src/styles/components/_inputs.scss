@@ -1,6 +1,5 @@
 // ==========================================================================
 // COMPONENTE: INPUTS (Nova Versão Desmonte)
-// Substitui o modelo flutuante por labels fixas e bordas definidas.
 // ==========================================================================
 
 .desmonte-field {
@@ -38,41 +37,36 @@
   }
 }
 
-/* 
-  Agrupando os estilos base para Inputs de Texto (PrimeNG) e Selects Nativos 
-*/
-.p-inputtext.p-component,
-.select-input {
+/* ==========================================================================
+   Inputs de Texto (PrimeNG) 
+   ========================================================================== */
+.p-inputtext.p-component {
   border: 1px solid var(--fundo-200) !important; 
   border-radius: var(--spacing-xs) !important; 
   background-color: var(--fundo-0); 
-
   padding: var(--spacing-s) var(--spacing-m) !important; 
   color: var(--fundo-900); 
   font-family: var(--font-family-base); 
   font-size: var(--text-size-p); 
   width: 100%; 
   box-shadow: none; 
-  transition: border-color 0.2s, box-shadow 0.2s; /* Adicionado para suavidade */
+  transition: border-color 0.2s, box-shadow 0.2s; 
 
   &::placeholder {
     color: var(--fundo-300); 
   }
 
-  &:enabled:hover,
-  &:not(:disabled):hover {
+  &:enabled:hover {
     border-color: var(--fundo-300) !important; 
   }
 
-  &:enabled:focus,
-  &:focus {
+  &:enabled:focus {
     border-color: var(--azul-400) !important; 
     outline: none; 
   }
 
   &.ng-invalid.ng-dirty,
-  &.p-invalid,
-  &.is-invalid {
+  &.p-invalid {
     border-color: var(--vermelho-500) !important; 
   }
 
@@ -86,65 +80,7 @@
 }
 
 /* ==========================================================================
-   Específicos do Dropdown (Select) 
-   ========================================================================== */
-.select-wrapper {
-  position: relative; 
-  display: flex; 
-  align-items: center; 
-}
-
-.select-input {
-  appearance: none; 
-  -webkit-appearance: none; 
-  -moz-appearance: none; 
-  cursor: pointer; 
-  /* Sobrescreve o padding-right base para o texto não ficar por baixo do ícone */
-  padding-right: 2.5rem !important; 
-}
-
-.select-icon {
-  position: absolute; 
-  right: 1rem; 
-  pointer-events: none; 
-  /* Atualizado para usar a paleta correta do Desmonte em vez de gray */
-  color: var(--fundo-500); 
-  font-size: 0.875rem; 
-}
-
-/* Customizando a lista flutuante do PrimeNG */
-.p-dropdown-panel {
-  background-color: var(--fundo-0);
-  border: 1px solid var(--fundo-200);
-  border-radius: var(--spacing-xs);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-
-  .p-dropdown-items {
-    padding: var(--spacing-xs) 0;
-
-    .p-dropdown-item {
-      padding: var(--spacing-s) var(--spacing-m);
-      color: var(--fundo-900);
-      font-family: var(--font-family-base);
-
-      /* Cor ao passar o mouse na opção */
-      &:hover {
-        background-color: var(--fundo-50);
-        color: var(--azul-600);
-      }
-      
-      /* Cor da opção selecionada */
-      &.p-highlight {
-        background-color: var(--azul-50);
-        color: var(--azul-700);
-        font-weight: var(--font-weight-medium);
-      }
-    }
-  }
-}
-
-/* ==========================================================================
-   Específicos do Dropdown (PrimeNG <p-dropdown>)
+   Dropdown (PrimeNG <p-dropdown>)
    ========================================================================== */
 
 /* 1. A Caixa do Dropdown */
@@ -154,23 +90,25 @@
   background-color: var(--fundo-0);
   width: 100%;
   transition: border-color 0.2s, box-shadow 0.2s;
-  box-shadow: none !important; /* Remove sombras padrão do Prime */
+  box-shadow: none !important;
 
-  /* Espaçamentos e Tipografia do texto selecionado */
   .p-dropdown-label {
     padding: var(--spacing-s) var(--spacing-m);
     color: var(--fundo-900);
     font-family: var(--font-family-base);
     font-size: var(--text-size-p);
+    
+    /* FIX: Cor correta para o placeholder */
+    &.p-placeholder {
+      color: var(--fundo-300);
+    }
   }
 
-  /* Estilo da setinha */
   .p-dropdown-trigger {
     width: 3rem;
     color: var(--fundo-500);
   }
 
-  /* Estados: Hover, Foco e Inválido */
   &:not(.p-disabled):hover {
     border-color: var(--fundo-300) !important;
   }
@@ -184,7 +122,6 @@
     border-color: var(--vermelho-500) !important;
   }
 
-  /* Estado: Desabilitado */
   &.p-disabled {
     background-color: var(--fundo-50) !important;
     border-color: var(--fundo-200) !important;
@@ -202,7 +139,49 @@
   border: 1px solid var(--fundo-200);
   border-radius: var(--spacing-xs);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 2px; /* Pequeno respiro entre o campo e a lista */
+  margin-top: 2px; 
+
+  /* NOVO: Estilização do cabeçalho de filtro */
+  .p-dropdown-header {
+    padding: var(--spacing-s) var(--spacing-m);
+    background-color: var(--fundo-50); /* Fundo levemente destacado para a área de busca */
+    border-bottom: 1px solid var(--fundo-200);
+    border-top-left-radius: var(--spacing-xs);
+    border-top-right-radius: var(--spacing-xs);
+    margin: 0;
+
+    .p-dropdown-filter-container {
+      position: relative;
+
+      /* O campo de input interno do filtro */
+      .p-dropdown-filter {
+        width: 100%;
+        padding: var(--spacing-s) var(--spacing-m);
+        padding-right: 2.5rem; /* Espaço para a lupa */
+        border: 1px solid var(--fundo-200);
+        border-radius: var(--spacing-xs);
+        color: var(--fundo-900);
+        font-family: var(--font-family-base);
+        font-size: var(--text-size-p);
+        background-color: var(--fundo-0);
+        transition: border-color 0.2s;
+
+        &:focus {
+          border-color: var(--azul-400);
+          outline: none;
+        }
+        
+        &::placeholder {
+          color: var(--fundo-300);
+        }
+      }
+
+      /* Ícone da lupa */
+      .p-dropdown-filter-icon {
+        color: var(--fundo-500);
+      }
+    }
+  }
 
   .p-dropdown-items {
     padding: var(--spacing-xs) 0;
@@ -213,16 +192,14 @@
       font-family: var(--font-family-base);
       font-size: var(--text-size-p);
       transition: background-color 0.2s, color 0.2s;
-      margin: 0 var(--spacing-xs); /* Evita que a cor de hover encoste nas bordas */
+      margin: 0 var(--spacing-xs); 
       border-radius: 4px;
 
-      /* Estado: Quando passa o mouse */
       &:not(.p-highlight):not(.p-disabled):hover {
         background-color: var(--fundo-50);
         color: var(--azul-600);
       }
       
-      /* Estado: Opção Selecionada */
       &.p-highlight {
         background-color: var(--azul-50);
         color: var(--azul-700);

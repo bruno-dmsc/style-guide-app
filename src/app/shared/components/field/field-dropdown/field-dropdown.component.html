@@ -14,7 +14,10 @@
       [placeholder]="placeholder"
       [disabled]="disabled"
       [ngClass]="{'ng-invalid ng-dirty': hasError}"
-      styleClass="w-full"> <!-- w-full garante que ocupe 100% da largura -->
+      styleClass="w-full"
+      [filter]="filter"
+      filterBy="label"
+      [filterPlaceholder]="filterPlaceholder">
     </p-dropdown>
   
     <p *ngIf="hasError" class="desmonte-field__error-message">
