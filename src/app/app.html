@@ -130,7 +130,7 @@
               mask="99.999-999"></app-field-text>
           </div>
         </div>
-        <p>[TODO]: contador de caracteres, máscara e exemplo prático de erro de validação</p>
+        <p>[TODO]: contador de caracteres, exemplo prático de erro de validação</p>
 
         <h3>Campos Numéricos e Moedas</h3>
         <p class="text-secondary mb-4">Utilizados para valores monetários, pesos, medidas e quantidades.</p>
@@ -261,6 +261,22 @@
             <app-field-datepicker label="Filtro de Período" selectionMode="range"
               placeholder="Data inicial - Data final" helperText="Utilizado em relatórios.">
             </app-field-datepicker>
+          </div>
+        </div>
+
+        <div class="grid">
+          <!-- Exemplo Vertical (Padrão) -->
+          <div class="col-12 md:col-6">
+            <app-field-radio id="ladoPeca" label="Lado da Peça" [options]="ladoPecaOptions" [required]="true"
+              helperText="Selecione o lado correspondente à montagem.">
+            </app-field-radio>
+          </div>
+
+          <!-- Exemplo Horizontal -->
+          <div class="col-12 md:col-6">
+            <app-field-radio id="tipoFabricacao" label="Tipo de Fabricação" [options]="tipoPecaOptions"
+              layout="horizontal">
+            </app-field-radio>
           </div>
         </div>
 

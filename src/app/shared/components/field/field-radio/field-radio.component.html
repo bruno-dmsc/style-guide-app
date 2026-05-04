@@ -1,0 +1,24 @@
+<app-field [label]="label" [required]="required" [errorMessage]="errorMessage" [helperText]="helperText"
+    [styleClass]="styleClass" [customStyle]="customStyle">
+
+    <div class="desmonte-radio-group" [ngClass]="'desmonte-radio-group--' + layout">
+        
+        <div *ngFor="let opt of options; let i = index" class="desmonte-radio-item">
+            <!-- Usando o uniqueGroupName para garantir isolamento entre os componentes -->
+            <p-radioButton 
+                [inputId]="uniqueGroupName + '_' + i" 
+                [name]="uniqueGroupName" 
+                [value]="opt[optionValue]" 
+                [(ngModel)]="value" 
+                [disabled]="disabled"
+                (onClick)="handleSelect($event)">
+            </p-radioButton>
+            
+            <label [for]="uniqueGroupName + '_' + i" class="desmonte-radio-label" [class.disabled]="disabled">
+                {{ opt[optionLabel] }}
+            </label>
+        </div>
+
+    </div>
+
+</app-field>

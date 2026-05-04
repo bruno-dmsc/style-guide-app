@@ -703,3 +703,109 @@
     }
   }
 }
+
+
+/* ==========================================================================
+   Radio Buttons (PrimeNG <p-radioButton>)
+   ========================================================================== */
+
+/* Container geral do grupo */
+.desmonte-radio-group {
+  display: flex;
+  gap: var(--spacing-m);
+
+  &--vertical {
+    flex-direction: column;
+    gap: var(--spacing-s); /* Mais próximos quando empilhados */
+  }
+
+  &--horizontal {
+    flex-direction: row;
+    flex-wrap: wrap; /* Permite quebrar linha em telas muito finas */
+  }
+}
+
+/* Item individual (Bolinha + Texto) */
+.desmonte-radio-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s); /* Espaço entre a bolinha e o texto */
+}
+
+/* O texto (Label) */
+.desmonte-radio-label {
+  color: var(--fundo-900);
+  font-family: var(--font-family-base);
+  font-size: var(--text-size-p);
+  cursor: pointer;
+  user-select: none;
+
+  &.disabled {
+    color: var(--fundo-400);
+    cursor: not-allowed;
+  }
+}
+
+/* Customização da Bolinha Nativa do PrimeNG */
+.p-radiobutton {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .p-radiobutton-box {
+    border: 1px solid var(--fundo-200) !important;
+    background-color: var(--fundo-0) !important;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50% !important;
+    transition: border-color 0.2s, background-color 0.2s;
+
+    /* Hover na bolinha vazia */
+    &:not(.p-disabled):not(.p-highlight):hover {
+      border-color: var(--fundo-300) !important;
+    }
+
+    /* Foco acessibilidade */
+    &:not(.p-disabled).p-focus {
+      border-color: var(--azul-400) !important;
+      box-shadow: none !important;
+    }
+
+    /* Bolinha Selecionada */
+    &.p-highlight {
+      border-color: var(--azul-500) !important;
+      background-color: var(--azul-500) !important;
+
+      /* O ponto central branco */
+      .p-radiobutton-icon {
+        background-color: var(--fundo-0) !important;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        transition: transform 0.2s;
+        /* Centraliza o ponto */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  /* Estado desabilitado */
+  &.p-disabled {
+    opacity: 1;
+
+    .p-radiobutton-box {
+      background-color: var(--fundo-50) !important;
+      border-color: var(--fundo-200) !important;
+    }
+
+    .p-radiobutton-box.p-highlight {
+      background-color: var(--fundo-300) !important;
+      border-color: var(--fundo-300) !important;
+    }
+  }
+}

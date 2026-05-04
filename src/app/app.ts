@@ -22,6 +22,7 @@ import { FieldSwitchComponent } from './shared/components/field/field-switch/fie
 import { FieldTextareaComponent } from './shared/components/field/field-textarea/field-textarea.component';
 import { FieldNumberComponent } from './shared/components/field/field-number/field-number.component';
 import { FieldDatepickerComponent } from './shared/components/field/field-datepicker/field-datepicker.component';
+import { FieldRadioComponent } from './shared/components/field/field-radio/field-radio.component';
 
 @Component({
   selector: 'app-root',
@@ -45,7 +46,8 @@ import { FieldDatepickerComponent } from './shared/components/field/field-datepi
     FieldSwitchComponent,
     FieldTextareaComponent,
     FieldNumberComponent,
-    FieldDatepickerComponent
+    FieldDatepickerComponent,
+    FieldRadioComponent
   ],
   templateUrl: './app.html'
 })
@@ -368,5 +370,16 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   anuncioAtivo: boolean = true;
   pecaTestada: boolean = false;
+
+  ladoPecaOptions = [
+    { label: 'Esquerdo', value: 'esquerdo' },
+    { label: 'Direito', value: 'direito' },
+    { label: 'Central / Único', value: 'central' }
+  ];
+
+  tipoPecaOptions = [
+    { label: 'Original', value: 'original' },
+    { label: 'Paralela', value: 'paralela' }
+  ];
 
 }
