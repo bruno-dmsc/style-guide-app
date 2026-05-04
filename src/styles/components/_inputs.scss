@@ -507,19 +507,26 @@
    ========================================================================== */
 .desmonte-input-number-wrapper {
   position: relative;
-  display: flex;
+  display: block;
   align-items: center;
   width: 100%;
 
+  p-inputNumber,
+  .p-inputnumber {
+    display: block;
+    width: 100%;
+  }
+
   .desmonte-input-number-unit {
     position: absolute;
+    top: 50%;
     color: var(--fundo-500);
-    /* Fonte mais neutra */
+    transform: translateY(-50%);
     font-size: var(--text-size-p);
     font-weight: var(--font-weight-regular);
     pointer-events: none;
     /* Deixa o clique do mouse passar direto pro input */
-    z-index: 1;
+    z-index: 2;
 
     &.left {
       left: var(--spacing-m);
@@ -530,13 +537,12 @@
     }
   }
 
-  /* Libera espaço no input baseando-se na posição da unidade */
   &.has-unit-left .p-inputnumber-input {
-    padding-left: 2.5rem !important;
+    padding-left: 3rem !important; 
   }
 
   &.has-unit-right .p-inputnumber-input {
-    padding-right: 2.5rem !important;
+    padding-right: 3rem !important;
   }
 }
 
@@ -716,12 +722,14 @@
 
   &--vertical {
     flex-direction: column;
-    gap: var(--spacing-s); /* Mais próximos quando empilhados */
+    gap: var(--spacing-s);
+    /* Mais próximos quando empilhados */
   }
 
   &--horizontal {
     flex-direction: row;
-    flex-wrap: wrap; /* Permite quebrar linha em telas muito finas */
+    flex-wrap: wrap;
+    /* Permite quebrar linha em telas muito finas */
   }
 }
 
@@ -729,7 +737,8 @@
 .desmonte-radio-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-s); /* Espaço entre a bolinha e o texto */
+  gap: var(--spacing-s);
+  /* Espaço entre a bolinha e o texto */
 }
 
 /* O texto (Label) */
@@ -821,12 +830,12 @@
 
   &--vertical {
     flex-direction: column;
-    gap: var(--spacing-s); 
+    gap: var(--spacing-s);
   }
 
   &--horizontal {
     flex-direction: row;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
   }
 }
 
@@ -834,7 +843,7 @@
 .desmonte-checkbox-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-s); 
+  gap: var(--spacing-s);
 }
 
 /* O texto (Label) */
@@ -864,7 +873,8 @@
     background-color: var(--fundo-0) !important;
     width: --icon-size-s;
     height: --icon-size-s;
-    border-radius: var(--spacing-xs) !important; /* Cantos levemente arredondados */
+    border-radius: var(--spacing-xs) !important;
+    /* Cantos levemente arredondados */
     transition: border-color 0.2s, background-color 0.2s;
 
     /* Hover na caixa vazia */

@@ -761,9 +761,18 @@
           <!-- Painel 1 -->
           <app-accordion-panel id="embalagem" title="Dados da Embalagem" statusIcon="pi-check-circle"
             statusColor="var(--verde-500)">
-            <div class="grid pt-2">
-              <div class="col-12 md:col-4">
+            <div class="grid">
+              <div class="col-12 md:col-3">
                 <app-field-number label="Peso" unit="g" unitPosition="right" placeholder="0"></app-field-number>
+              </div>
+              <div class="col-12 md:col-3">
+                <app-field-number label="Altura" unit="cm" unitPosition="right" placeholder="0"></app-field-number>
+              </div>
+              <div class="col-12 md:col-3">
+                <app-field-number label="Largura" unit="cm" unitPosition="right" placeholder="0"></app-field-number>
+              </div>
+              <div class="col-12 md:col-3">
+                <app-field-number label="Comprimento" unit="cm" unitPosition="right" placeholder="0"></app-field-number>
               </div>
             </div>
           </app-accordion-panel>
