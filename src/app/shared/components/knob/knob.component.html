@@ -1,0 +1,18 @@
+<div class="desmonte-knob-container"> <!-- Usando a classe correta do seu SCSS -->
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <p-knob 
+            [(ngModel)]="value" 
+            [size]="size" 
+            [readonly]="readonly"
+            [min]="min"
+            [max]="max"
+            [step]="step"
+            [valueColor]="valueColor" 
+            [rangeColor]="rangeColor"
+            [valueTemplate]="valueTemplate">
+        </p-knob>
+        <span *ngIf="label" class="desmonte-knob__label" style="margin-top: var(--spacing-s); font-family: var(--font-family-base); color: var(--fundo-700);">
+            {{ label }}
+        </span>
+    </div>
+</div>

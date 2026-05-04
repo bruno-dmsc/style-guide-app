@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Knob (PrimeNG <p-knob>)
+   ========================================================================== */
+.desmonte-knob-container {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-s) 0;[cite: 5]
+
+  .p-knob-text {
+    font-family: var(--font-family-base) !important;[cite: 6]
+    font-weight: var(--font-weight-semibold) !important;[cite: 6]
+    fill: var(--fundo-900) !important;[cite: 4]
+  }
+}

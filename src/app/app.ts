@@ -24,6 +24,7 @@ import { FieldNumberComponent } from './shared/components/field/field-number/fie
 import { FieldDatepickerComponent } from './shared/components/field/field-datepicker/field-datepicker.component';
 import { FieldRadioComponent } from './shared/components/field/field-radio/field-radio.component';
 import { FieldCheckboxComponent } from './shared/components/field/field-checkbox/field-checkbox.component';
+import { KnobComponent } from './shared/components/knob/knob.component';
 
 @Component({
   selector: 'app-root',
@@ -49,7 +50,8 @@ import { FieldCheckboxComponent } from './shared/components/field/field-checkbox
     FieldNumberComponent,
     FieldDatepickerComponent,
     FieldRadioComponent,
-    FieldCheckboxComponent
+    FieldCheckboxComponent,
+    KnobComponent
   ],
   templateUrl: './app.html'
 })
