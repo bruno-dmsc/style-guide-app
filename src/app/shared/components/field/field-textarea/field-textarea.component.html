@@ -1,0 +1,8 @@
+<app-field [label]="label" [required]="required" [errorMessage]="errorMessage" [helperText]="helperText"
+    [styleClass]="styleClass" [customStyle]="customStyle">
+
+    <textarea pInputTextarea [id]="id" [value]="value" [placeholder]="placeholder" [disabled]="disabled" [rows]="rows"
+        [autoResize]="autoResize" [class.p-invalid]="errorMessage" (input)="onInput($event)" (blur)="handleBlur($event)"
+        (focus)="handleFocus($event)" [ngClass]="controlStyleClass" [ngStyle]="controlCustomStyle"
+        [style.resize]="resizable ? 'vertical' : 'none'">{{ value }}</textarea>
+</app-field>

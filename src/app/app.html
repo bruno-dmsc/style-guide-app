@@ -183,6 +183,24 @@
             </app-field-switch>
           </div>
         </div>
+
+        <h3>Campos de Texto Longo (Textarea)</h3>
+        <p class="text-secondary mb-4">Utilizados para descrições, observações e textos que requerem múltiplas linhas.</p>
+
+        <div class="grid">
+          <div class="col-12 md:col-6">
+            <app-field-textarea id="textarea-exemplo-1" formControlName="textarea-exemplo-1" label="Descrição da Peça"
+              placeholder="Descreva os detalhes e características da peça..." [rows]="4" [required]="true"
+              helperText="Forneça o máximo de informações possíveis.">
+            </app-field-textarea>
+          </div>
+          <div class="col-12 md:col-6">
+            <app-field-textarea id="textarea-exemplo-2" formControlName="textarea-exemplo-2" label="Observações Internas"
+              value="Peça retirada do veículo com pequenas avarias na lateral direita." [rows]="4" [disabled]="true" [resizable]="false">
+            </app-field-textarea>
+          </div>
+        </div>
+        
       </app-card>
 
       <app-card id="componente-botoes" title="Botões" subtitle="Ações principais e secundárias do sistema">

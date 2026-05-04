@@ -18,6 +18,7 @@ import { BadgeComponent } from './shared/components/badge/badge.component';
 import { FieldDropdownComponent } from './shared/components/field/field-dropdown/field-dropdown.component';
 import { FieldAutocompleteComponent } from './shared/components/field/field-autocomplete/field-autocomplete.component';
 import { FieldSwitchComponent} from './shared/components/field/field-switch/field-switch.component';
+import { FieldTextareaComponent } from './shared/components/field/field-textarea/field-textarea.component';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,8 @@ import { FieldSwitchComponent} from './shared/components/field/field-switch/fiel
     BadgeComponent,
     FieldDropdownComponent,
     FieldAutocompleteComponent,
-    FieldSwitchComponent
+    FieldSwitchComponent,
+    FieldTextareaComponent
   ],
   templateUrl: './app.html'
 })
