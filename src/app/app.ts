@@ -23,6 +23,7 @@ import { FieldTextareaComponent } from './shared/components/field/field-textarea
 import { FieldNumberComponent } from './shared/components/field/field-number/field-number.component';
 import { FieldDatepickerComponent } from './shared/components/field/field-datepicker/field-datepicker.component';
 import { FieldRadioComponent } from './shared/components/field/field-radio/field-radio.component';
+import { FieldCheckboxComponent } from './shared/components/field/field-checkbox/field-checkbox.component';
 
 @Component({
   selector: 'app-root',
@@ -47,7 +48,8 @@ import { FieldRadioComponent } from './shared/components/field/field-radio/field
     FieldTextareaComponent,
     FieldNumberComponent,
     FieldDatepickerComponent,
-    FieldRadioComponent
+    FieldRadioComponent,
+    FieldCheckboxComponent
   ],
   templateUrl: './app.html'
 })
@@ -373,13 +375,24 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   ladoPecaOptions = [
     { label: 'Esquerdo', value: 'esquerdo' },
-    { label: 'Direito', value: 'direito' },
+    { label: 'Direito', value: 'direito', disabled: true },
     { label: 'Central / Único', value: 'central' }
   ];
 
   tipoPecaOptions = [
     { label: 'Original', value: 'original' },
     { label: 'Paralela', value: 'paralela' }
+  ];
+
+  avariasOptions = [
+    { label: 'Riscos', value: 'riscos' },
+    { label: 'Amassados', value: 'amassados' },
+    { label: 'Quebrados', value: 'quebrados' }
+  ];
+  acessoriosOptions = [
+    { label: 'Parafusos', value: 'parafusos', disabled: true },
+    { label: 'Suporte', value: 'suporte' },
+    { label: 'Chicote Elétrico', value: 'chicote' }
   ];
 
 }

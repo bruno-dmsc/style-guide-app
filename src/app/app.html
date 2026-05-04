@@ -264,6 +264,8 @@
           </div>
         </div>
 
+        <h3>Seleção única (Radio buttons)</h3>
+
         <div class="grid">
           <!-- Exemplo Vertical (Padrão) -->
           <div class="col-12 md:col-6">
@@ -277,6 +279,26 @@
             <app-field-radio id="tipoFabricacao" label="Tipo de Fabricação" [options]="tipoPecaOptions"
               layout="horizontal">
             </app-field-radio>
+          </div>
+        </div>
+
+        <h3>Seleção Múltipla (Checkboxes)</h3>
+        <p class="text-secondary mb-4">Utilizados para quando o usuário pode marcar mais de uma opção simultaneamente.
+        </p>
+
+        <div class="grid">
+          <!-- Exemplo Vertical (Padrão) -->
+          <div class="col-12 md:col-6">
+            <app-field-checkbox id="avariasPeca" label="Avarias Identificadas" [options]="avariasOptions"
+              helperText="Selecione todos os danos visíveis na peça.">
+            </app-field-checkbox>
+          </div>
+
+          <!-- Exemplo Horizontal -->
+          <div class="col-12 md:col-6">
+            <app-field-checkbox id="acessoriosPeca" label="Acompanha na Venda" [options]="acessoriosOptions"
+              layout="horizontal">
+            </app-field-checkbox>
           </div>
         </div>
 

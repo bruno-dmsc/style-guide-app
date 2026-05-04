@@ -809,3 +809,101 @@
     }
   }
 }
+
+/* ==========================================================================
+   Checkboxes (PrimeNG <p-checkbox>)
+   ========================================================================== */
+
+/* Container geral do grupo */
+.desmonte-checkbox-group {
+  display: flex;
+  gap: var(--spacing-m);
+
+  &--vertical {
+    flex-direction: column;
+    gap: var(--spacing-s); 
+  }
+
+  &--horizontal {
+    flex-direction: row;
+    flex-wrap: wrap; 
+  }
+}
+
+/* Item individual (Quadrado + Texto) */
+.desmonte-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s); 
+}
+
+/* O texto (Label) */
+.desmonte-checkbox-label {
+  color: var(--fundo-900);
+  font-family: var(--font-family-base);
+  font-size: var(--text-size-p);
+  cursor: pointer;
+  user-select: none;
+
+  &.disabled {
+    color: var(--fundo-400);
+    cursor: not-allowed;
+  }
+}
+
+/* Customização da Caixa Nativa do PrimeNG */
+.p-checkbox {
+  width: --icon-size-s;
+  height: --icon-size-s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .p-checkbox-box {
+    border: 1px solid var(--fundo-200) !important;
+    background-color: var(--fundo-0) !important;
+    width: --icon-size-s;
+    height: --icon-size-s;
+    border-radius: var(--spacing-xs) !important; /* Cantos levemente arredondados */
+    transition: border-color 0.2s, background-color 0.2s;
+
+    /* Hover na caixa vazia */
+    &:not(.p-disabled):not(.p-highlight):hover {
+      border-color: var(--fundo-300) !important;
+    }
+
+    /* Foco acessibilidade */
+    &:not(.p-disabled).p-focus {
+      border-color: var(--azul-400) !important;
+      box-shadow: none !important;
+    }
+
+    /* Caixa Selecionada */
+    &.p-highlight {
+      border-color: var(--azul-500) !important;
+      background-color: var(--azul-500) !important;
+
+      /* O ícone de check interno */
+      .p-checkbox-icon {
+        color: var(--fundo-0) !important;
+        font-size: var(--icon-size-s);
+        font-weight: bold;
+      }
+    }
+  }
+
+  /* Estado desabilitado */
+  &.p-disabled {
+    opacity: 1;
+
+    .p-checkbox-box {
+      background-color: var(--fundo-50) !important;
+      border-color: var(--fundo-200) !important;
+    }
+
+    .p-checkbox-box.p-highlight {
+      background-color: var(--fundo-300) !important;
+      border-color: var(--fundo-300) !important;
+    }
+  }
+}
