@@ -109,20 +109,25 @@
           <li>Espaçamento vertical entre inputs: padding-bottom M</li>
         </ul>
         <div class="grid">
-          <div class="col-12 md:col-6 lg:col-4">
+          <div class="col-12 md:col-6 lg:col-3">
             <app-field-text id="input-exemplo-1" formControlName="input-exemplo-1" label="Nome da Peça"
               placeholder="Ex: Radiador de Corsa" [required]="true" helperText="Insira a descrição exata da peça.">
             </app-field-text>
           </div>
-          <div class="col-12 md:col-6 lg:col-4">
+          <div class="col-12 md:col-6 lg:col-3">
             <app-field-text id="input-exemplo-2" formControlName="input-exemplo-2" label="Código Interno"
               value="123-ABC" placeholder="Ex: 123-ABC" errorMessage="Código já cadastrado no sistema.">
             </app-field-text>
           </div>
-          <div class="col-12 md:col-6 lg:col-4">
+          <div class="col-12 md:col-6 lg:col-3">
             <app-field-text id="input-exemplo-3" formControlName="input-exemplo-3" label="ID do Desmonte"
               value="DS-2024-001" [disabled]="true">
             </app-field-text>
+          </div>
+          <!-- Exemplo 4: Quantidade inteira sem unidade -->
+          <div class="col-12 md:col-6 lg:col-3">
+            <app-field-text id="input-exemplo-3" formControlName="input-exemplo-4" label="CEP"
+              mask="99.999-999"></app-field-text>
           </div>
         </div>
         <p>[TODO]: contador de caracteres, máscara e exemplo prático de erro de validação</p>

@@ -1,7 +1,35 @@
 <app-field [label]="label" [required]="required" [errorMessage]="errorMessage" [helperText]="helperText"
     [styleClass]="styleClass" [customStyle]="customStyle">
 
-    <input type="text" pInputText [id]="id" [value]="value" [placeholder]="placeholder" [disabled]="disabled"
-        [class.p-invalid]="errorMessage" (input)="onInput($event)" (blur)="handleBlur($event)"
-        (focus)="handleFocus($event)" [ngClass]="controlStyleClass" [ngStyle]="controlCustomStyle" />
+    <!-- CENÁRIO 1: INPUT NORMAL (Se a propriedade mask não foi preenchida) -->
+    <input *ngIf="!mask" 
+        type="text" 
+        pInputText 
+        [id]="id" 
+        [value]="value" 
+        [placeholder]="placeholder" 
+        [disabled]="disabled"
+        [class.p-invalid]="errorMessage" 
+        (input)="onInput($event)" 
+        (blur)="handleBlur($event)"
+        (focus)="handleFocus($event)" 
+        [ngClass]="controlStyleClass" 
+        [ngStyle]="controlCustomStyle" />
+
+    <!-- CENÁRIO 2: INPUT COM MÁSCARA (Se a propriedade mask foi preenchida) -->
+    <p-inputMask *ngIf="mask"
+        [(ngModel)]="value" 
+        [inputId]="id"
+        [mask]="mask"
+        [slotChar]="slotChar"
+        [unmask]="unmask"
+        [placeholder]="placeholder" 
+        [disabled]="disabled"
+        [ngClass]="errorMessage ? 'p-invalid' : ''"
+        styleClass="w-full"
+        (ngModelChange)="onInput($event)"
+        (onBlur)="handleBlur($event)"
+        (onFocus)="handleFocus($event)">
+    </p-inputMask>
+
 </app-field>

@@ -2,13 +2,14 @@ import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/cor
 import { BaseFieldComponent } from '../base-field.component';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext'; // Importe o módulo do PrimeNG
-import { FieldComponent } from '../field-wrapper/field.component'; // Importa a casca
+import { InputTextModule } from 'primeng/inputtext'; 
+import { InputMaskModule } from 'primeng/inputmask'; // NOVO: Módulo de máscara
+import { FieldComponent } from '../field-wrapper/field.component'; 
 
 @Component({
     selector: 'app-field-text',
     standalone: true,
-    imports: [CommonModule, FormsModule, InputTextModule, FieldComponent],
+    imports: [CommonModule, FormsModule, InputTextModule, InputMaskModule, FieldComponent], // Adicionado InputMaskModule
     templateUrl: './field-text.component.html',
     providers: [
         {
@@ -19,9 +20,14 @@ import { FieldComponent } from '../field-wrapper/field.component'; // Importa a 
     ]
 })
 export class FieldTextComponent extends BaseFieldComponent implements ControlValueAccessor {
-    // Propriedades visuais
+    // Propriedades visuais originais
     @Input() value: string = '';
     @Input() placeholder: string = '';
+    
+    // NOVAS: Propriedades da Máscara
+    @Input() mask: string = ''; 
+    @Input() slotChar: string = '_'; 
+    @Input() unmask: boolean = true; 
     
     // Emissor de eventos customizados
     @Output() onBlur = new EventEmitter<FocusEvent>();
@@ -30,42 +36,39 @@ export class FieldTextComponent extends BaseFieldComponent implements ControlVal
     onChange: any = () => { };
     onTouched: any = () => { };
 
-    onInput(event: Event): void {
-        const inputValue = (event.target as HTMLInputElement).value;
+    // Atualizado para lidar com os dois cenários (input normal e PrimeNG mask)
+    onInput(event: any): void {
+        // Se vier de um input nativo, event.target existe. Se vier do ngModelChange da máscara, o event já é o próprio valor string.
+        const inputValue = event.target ? (event.target as HTMLInputElement).value : event;
         this.value = inputValue;
         this.onChange(inputValue);
     }
 
-    // Métodos que capturam eventos do DOM e repassam para quem estiver usando o componente
-    handleBlur(event: FocusEvent): void {
-        this.onTouched(); // Avisa o Angular Forms que o campo foi tocado
-        this.onBlur.emit(event); // Emite o evento para o componente pai, se ele quiser escutar
+    handleBlur(event: any): void {
+        this.onTouched(); 
+        this.onBlur.emit(event.originalEvent || event); 
     }
 
-    handleFocus(event: FocusEvent): void {
-        this.onFocus.emit(event);
+    handleFocus(event: any): void {
+        this.onFocus.emit(event.originalEvent || event);
     }
 
     // ==========================================
     // MÉTODOS DO CONTROL VALUE ACCESSOR
     // ==========================================
 
-    // Recebe o valor inicial do formControl
     writeValue(value: any): void {
         this.value = value || '';
     }
 
-    // Registra a função de mudança
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    // Registra a função de blur (quando o campo perde o foco)
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    // Define se o campo deve ficar desabilitado
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
     }
