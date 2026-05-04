@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnDestroy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PrimeNGConfig } from 'primeng/api';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -17,9 +18,10 @@ import { TableColumn, TableAction } from './shared/components/table/table-column
 import { BadgeComponent } from './shared/components/badge/badge.component';
 import { FieldDropdownComponent } from './shared/components/field/field-dropdown/field-dropdown.component';
 import { FieldAutocompleteComponent } from './shared/components/field/field-autocomplete/field-autocomplete.component';
-import { FieldSwitchComponent} from './shared/components/field/field-switch/field-switch.component';
+import { FieldSwitchComponent } from './shared/components/field/field-switch/field-switch.component';
 import { FieldTextareaComponent } from './shared/components/field/field-textarea/field-textarea.component';
 import { FieldNumberComponent } from './shared/components/field/field-number/field-number.component';
+import { FieldDatepickerComponent } from './shared/components/field/field-datepicker/field-datepicker.component';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +44,8 @@ import { FieldNumberComponent } from './shared/components/field/field-number/fie
     FieldAutocompleteComponent,
     FieldSwitchComponent,
     FieldTextareaComponent,
-    FieldNumberComponent
+    FieldNumberComponent,
+    FieldDatepickerComponent
   ],
   templateUrl: './app.html'
 })
@@ -55,8 +58,23 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private el: ElementRef,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private config: PrimeNGConfig
   ) { }
+
+  ngOnInit(): void {
+    // Configuração global de idioma do PrimeNG
+    this.config.setTranslation({
+      firstDayOfWeek: 0,
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+      dayNamesMin: ['Do', 'Se', 'Te', 'Qu', 'Qu', 'Se', 'Sá'],
+      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar'
+    });
+  }
 
   ngAfterViewInit(): void {
     const secoes = this.el.nativeElement.querySelectorAll('section[id]');

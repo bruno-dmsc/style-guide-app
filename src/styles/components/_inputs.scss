@@ -418,16 +418,16 @@
   background-color: var(--fundo-0);
   padding: var(--spacing-s) var(--spacing-m) !important;
   color: var(--fundo-900);
-  
+
   /* Mantendo a tipografia padronizada do Design System */
   font-size: var(--text-size-p);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-p);
-  
+
   width: 100%;
   box-shadow: none;
   transition: border-color 0.2s, box-shadow 0.2s;
-  
+
   &::placeholder {
     color: var(--fundo-300);
   }
@@ -513,16 +513,18 @@
 
   .desmonte-input-number-unit {
     position: absolute;
-    color: var(--fundo-500); /* Fonte mais neutra */
+    color: var(--fundo-500);
+    /* Fonte mais neutra */
     font-size: var(--text-size-p);
     font-weight: var(--font-weight-regular);
-    pointer-events: none; /* Deixa o clique do mouse passar direto pro input */
+    pointer-events: none;
+    /* Deixa o clique do mouse passar direto pro input */
     z-index: 1;
-    
+
     &.left {
       left: var(--spacing-m);
     }
-    
+
     &.right {
       right: var(--spacing-m);
     }
@@ -530,10 +532,174 @@
 
   /* Libera espaço no input baseando-se na posição da unidade */
   &.has-unit-left .p-inputnumber-input {
-    padding-left: 2.5rem !important; 
+    padding-left: 2.5rem !important;
   }
 
   &.has-unit-right .p-inputnumber-input {
-    padding-right: 2.5rem !important; 
+    padding-right: 2.5rem !important;
+  }
+}
+
+
+/* ==========================================================================
+   DatePicker / Calendar (PrimeNG <p-calendar>)
+   ========================================================================== */
+
+/* 1. O Input e o Ícone Interno */
+.desmonte-datepicker-wrapper {
+  position: relative;
+  display: block;
+  /* Alterado para block para garantir estabilidade na largura */
+  width: 100%;
+
+  /* Força a tag do Angular e a classe interna do PrimeNG a esticarem */
+  p-calendar,
+  .p-calendar,
+  .desmonte-datepicker {
+    width: 100%;
+    display: block;
+  }
+
+  .desmonte-datepicker-icon {
+    position: absolute;
+    right: var(--spacing-m);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--fundo-500);
+    font-size: var(--text-size-p);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Posicionamento do botão de limpar (X) nativo do PrimeNG */
+  .p-calendar .p-calendar-clear-icon {
+    right: var(--spacing-m) !important;
+    color: var(--fundo-500) !important;
+    margin-top: -0.5rem !important;
+
+    &:hover {
+      color: var(--vermelho-500) !important;
+      /* Feedback visual para limpar */
+    }
+  }
+
+  /* Aplica o input padrão, mas abre espaço na direita para o ícone */
+  .p-inputtext {
+    border: 1px solid var(--fundo-200) !important;
+    border-radius: var(--spacing-xs) !important;
+    background-color: var(--fundo-0);
+    padding: var(--spacing-s) var(--spacing-m) !important;
+    padding-right: 2.5rem !important;
+    /* Garante que o texto não sobreponha o ícone */
+    color: var(--fundo-900);
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-p);
+    width: 100% !important;
+    /* Força o input a ocupar a casca inteira */
+    box-shadow: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: var(--fundo-300);
+    }
+
+    &:enabled:hover {
+      border-color: var(--fundo-300) !important;
+    }
+
+    &:enabled:focus {
+      border-color: var(--azul-400) !important;
+      outline: none;
+    }
+  }
+
+  /* Borda vermelha em caso de erro */
+  .p-calendar.ng-invalid.ng-dirty .p-inputtext,
+  .p-calendar.p-invalid .p-inputtext {
+    border-color: var(--vermelho-500) !important;
+  }
+}
+
+/* 2. O Painel Flutuante do Calendário */
+.p-datepicker {
+  background-color: var(--fundo-0);
+  border: 1px solid var(--fundo-200);
+  border-radius: var(--spacing-xs);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-s);
+
+  .p-datepicker-header {
+    background-color: transparent;
+    border-bottom: 1px solid var(--fundo-100);
+    padding: var(--spacing-s);
+    color: var(--fundo-900);
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-medium);
+
+    .p-datepicker-prev,
+    .p-datepicker-next {
+      color: var(--fundo-600);
+      border-radius: var(--spacing-xs);
+
+      &:hover {
+        color: var(--azul-500);
+        background-color: var(--fundo-50);
+      }
+    }
+  }
+
+  table {
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-p);
+
+    th {
+      color: var(--fundo-500);
+      font-weight: var(--font-weight-regular);
+      padding: var(--spacing-xs);
+    }
+
+    td {
+      padding: 2px;
+
+      /* Estilo base do número (bolinha) */
+      >span {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        color: var(--fundo-900);
+        transition: background-color 0.2s, color 0.2s;
+      }
+
+      /* 
+         CORREÇÃO: A classe de "hoje" ou "selecionado" fica no <td> e não no <span>.
+         Precisamos apontar para o <span> que está dentro do <td> com essas classes.
+      */
+
+      /* 1. Dia atual (Hoje) - Fundo azul claro e texto azul escuro */
+      &.p-datepicker-today>span {
+        background-color: var(--azul-50);
+        color: var(--azul-600);
+        font-weight: var(--font-weight-medium);
+      }
+
+      /* 2. Hover (apenas para dias não selecionados e não desabilitados) */
+      &:not(.p-highlight):not(.p-disabled)>span:hover {
+        background-color: var(--azul-200);
+        color: var(--azul-600);
+      }
+
+      /* 3. Data Selecionada (Fundo azul-300, texto branco) */
+      &.p-highlight>span {
+        background-color: var(--azul-200);
+        color: var(--fundo-0);
+        font-weight: var(--font-weight-medium);
+      }
+    }
+
+    /* Faixa de período (Range) - Dias intermediários */
+    td>span.p-highlight:not(.p-datepicker-today):not(.p-highlight-start):not(.p-highlight-end) {
+      background-color: var(--azul-50);
+      color: var(--fundo-900);
+    }
   }
 }

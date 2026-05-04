@@ -1,0 +1,31 @@
+<app-field [label]="label" [required]="required" [errorMessage]="errorMessage" [helperText]="helperText"
+    [styleClass]="styleClass" [customStyle]="customStyle">
+
+    <div class="desmonte-datepicker-wrapper">
+        <p-calendar 
+            [(ngModel)]="value" 
+            [inputId]="id"
+            [placeholder]="placeholder" 
+            [disabled]="disabled"
+            dateFormat="dd/mm/yy"
+            [locale]="ptBR"
+            [showTime]="showTime"
+            [selectionMode]="selectionMode"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            [showIcon]="false"
+            [showClear]="showClear"
+            [ngClass]="errorMessage ? 'p-invalid' : ''"
+            styleClass="desmonte-datepicker"
+            (onInput)="aplicarMascara($event)"
+            (onSelect)="handleSelect($event)" 
+            (onClear)="handleClear()"
+            (onBlur)="handleBlur($event)"
+            (onFocus)="handleFocus($event)">
+        </p-calendar>
+        
+        <!-- Ícone some quando há valor, abrindo espaço para o "X" do PrimeNG -->
+        <i class="pi pi-calendar desmonte-datepicker-icon" *ngIf="!value"></i>
+    </div>
+
+</app-field>

@@ -233,6 +233,32 @@
           </div>
         </div>
 
+
+        <h3>Seletor de Datas (Datepicker)</h3>
+        <p class="text-secondary mb-4">Utilizados para datas, horários e períodos.</p>
+
+        <div class="grid">
+          <!-- 1. Data Padrão -->
+          <div class="col-12 md:col-4">
+            <app-field-datepicker label="Data de Entrada" [required]="true"
+              helperText="Data que a peça entrou no estoque.">
+            </app-field-datepicker>
+          </div>
+
+          <!-- 2. Data + Hora -->
+          <div class="col-12 md:col-4">
+            <app-field-datepicker label="Data e Hora do Desmonte" [showTime]="true" placeholder="dd/mm/aaaa hh:mm">
+            </app-field-datepicker>
+          </div>
+
+          <!-- 3. Período (Range) -->
+          <div class="col-12 md:col-4">
+            <app-field-datepicker label="Filtro de Período" selectionMode="range"
+              placeholder="Data inicial - Data final" helperText="Utilizado em relatórios.">
+            </app-field-datepicker>
+          </div>
+        </div>
+
       </app-card>
 
       <app-card id="componente-botoes" title="Botões" subtitle="Ações principais e secundárias do sistema">
