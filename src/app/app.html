@@ -751,6 +751,35 @@
 
       </app-card>
 
+      <app-card id="publicacao-ecommerce" title="Accordion"
+        subtitle="Agrupamento colapsável de conteúdo">
+
+        <p>O Accordion permite que alguns campos sejam exibidos ou escondidos por padrão. Abaixo segue um exemplo de como ele será implementado.</p>
+
+        <!-- Componente Encapsulado -->
+        <app-accordion [multiple]="true" [openTab]="['embalagem']">
+          <!-- Painel 1 -->
+          <app-accordion-panel id="embalagem" title="Dados da Embalagem" statusIcon="pi-check-circle"
+            statusColor="var(--verde-500)">
+            <div class="grid pt-2">
+              <div class="col-12 md:col-4">
+                <app-field-number label="Peso" unit="g" unitPosition="right" placeholder="0"></app-field-number>
+              </div>
+            </div>
+          </app-accordion-panel>
+          <!-- Painel 2 -->
+          <app-accordion-panel id="compatibilidade" title="Compatibilidade" statusIcon="pi-exclamation-circle"
+            statusColor="var(--laranja-500)">
+            <div class="grid pt-2">
+              <div class="col-12">
+                <app-field-text label="Modelos Compatíveis"></app-field-text>
+              </div>
+            </div>
+          </app-accordion-panel>
+        </app-accordion>
+
+      </app-card>
+
     </div>
 
     <div class="col-12 lg:col-3">

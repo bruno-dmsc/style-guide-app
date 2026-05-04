@@ -26,6 +26,8 @@ import { FieldRadioComponent } from './shared/components/field/field-radio/field
 import { FieldCheckboxComponent } from './shared/components/field/field-checkbox/field-checkbox.component';
 import { KnobComponent } from './shared/components/knob/knob.component';
 import { GaugeComponent } from './shared/components/gauge/gauge.component';
+import { AccordionComponent } from './shared/components/accordion/accordion.component';
+import { AccordionPanelComponent } from './shared/components/accordion/accordion-panel.component';
 
 
 @Component({
@@ -54,7 +56,9 @@ import { GaugeComponent } from './shared/components/gauge/gauge.component';
     FieldRadioComponent,
     FieldCheckboxComponent,
     KnobComponent,
-    GaugeComponent
+    GaugeComponent,
+    AccordionComponent,
+    AccordionPanelComponent
   ],
   templateUrl: './app.html'
 })

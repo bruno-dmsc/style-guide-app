@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Reset do Accordion PrimeNG 17
+   ========================================================================== */
+.desmonte-accordion-wrapper {
+  .p-accordion {
+    .p-accordion-tab {
+      margin-bottom: 0;
+      border: none !important; // Remove o box em volta de cada aba
+      border-bottom: 1px solid var(--fundo-100) !important; // Adiciona o divisor discreto
+
+      &:last-child {
+        border-bottom: none !important;
+      }
+    }
+
+    .p-accordion-header {
+      .p-accordion-header-link {
+        background: transparent !important; // Remove o fundo cinza da imagem
+        border: none !important;
+        padding: var(--spacing-m) 0 !important; // Alinhamento horizontal
+        box-shadow: none !important;
+        color: var(--fundo-900) !important;
+
+        &:hover {
+          background: var(--fundo-50) !important;
+        }
+      }
+    }
+
+    .p-accordion-content {
+      background: transparent !important; // Remove o fundo branco interno
+      border: none !important;
+      padding: 0 0 var(--spacing-m) 0 !important; // Respiro inferior
+    }
+  }
+}
+
+/* Tipografia e Status Customizados */
+.desmonte-accordion-title {
+  font-family: var(--font-family-base);
+  font-size: var(--text-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--fundo-900);
+}
+
+.desmonte-accordion-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+
+  i {
+    font-size: 1.25rem; // Ajuste para o tamanho do ícone circular
+  }
+}

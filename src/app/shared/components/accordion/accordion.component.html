@@ -1,0 +1,26 @@
+<div class="desmonte-accordion-wrapper">
+      <p-accordion [multiple]="multiple">
+        
+        <!-- Usando *ngFor e p-accordionTab compatíveis com o PrimeNG 17 -->
+        <ng-container *ngFor="let panel of panels">
+          
+          <p-accordionTab [selected]="openTab.includes(panel.id)">
+            
+            <!-- Cabeçalho usando o pTemplate nativo do v17 -->
+            <ng-template pTemplate="header">
+              <span class="desmonte-accordion-title">{{ panel.title }}</span>
+              
+              <div *ngIf="panel.statusIcon" class="desmonte-accordion-status" style="margin-left: var(--spacing-m);">
+                <i [class]="'pi ' + panel.statusIcon" [style.color]="panel.statusColor"></i>
+              </div>
+            </ng-template>
+            
+            <!-- Injeção do Conteúdo HTML capturado do desenvolvedor -->
+            <ng-container *ngTemplateOutlet="panel.contentTemplate"></ng-container>
+            
+          </p-accordionTab>
+
+        </ng-container>
+
+      </p-accordion>
+    </div>
