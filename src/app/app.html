@@ -732,6 +732,23 @@
             </app-knob>
           </div>
         </div>
+
+        <h3>Gauges</h3>
+
+        <div class="grid">
+          <div class="col-12 md:col-6 lg:col-4">
+            <!-- Gauge Padrão (como o protótipo da diretoria) -->
+            <app-gauge label="Confiabilidade" [value]="75"></app-gauge>
+          </div>
+          <div class="col-12 md:col-6 lg:col-4">
+            <app-gauge label="Espaço Livre" [value]="30" [radius]="100" [strokeWidth]="4"></app-gauge>
+          </div>
+          <div class="col-12 md:col-6 lg:col-4">
+            <app-gauge label="Vendas" [value]="90" [radius]="60" [strokeWidth]="30"></app-gauge>
+          </div>
+
+        </div>
+
       </app-card>
 
     </div>

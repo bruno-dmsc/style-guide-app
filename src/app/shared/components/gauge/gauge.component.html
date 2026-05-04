@@ -1,0 +1,39 @@
+<div class="desmonte-gauge-container">
+  <svg [attr.viewBox]="viewBox" class="desmonte-gauge-svg">
+    
+    <!-- Track de Fundo -->
+    <path 
+      [attr.d]="pathD" 
+      fill="none" 
+      [attr.stroke]="trackColor" 
+      [attr.stroke-width]="strokeWidth" 
+      stroke-linecap="butt"
+      pathLength="100" />
+      
+    <!-- Track de Valor (Colorido) -->
+    <path 
+      [attr.d]="pathD" 
+      fill="none" 
+      [attr.stroke]="valueColor" 
+      [attr.stroke-width]="strokeWidth" 
+      stroke-linecap="butt"
+      pathLength="100" 
+      [attr.stroke-dasharray]="value + ' 100'" 
+      class="gauge-value-path" />
+
+    <!-- Marcador de Meta -->
+    <path *ngIf="target !== null"
+      [attr.d]="pathD" 
+      fill="none" 
+      [attr.stroke]="targetColor" 
+      [attr.stroke-width]="strokeWidth + 4" 
+      stroke-linecap="butt"
+      pathLength="100" 
+      [attr.stroke-dasharray]="targetDashArray" />
+
+    <!-- Textos Dinâmicos -->
+    <text [attr.x]="centerX" [attr.y]="labelY" text-anchor="middle" class="gauge-label">{{ label }}</text>
+    <text [attr.x]="centerX" [attr.y]="valueY" text-anchor="middle" class="gauge-value">{{ formattedValue }}</text>
+
+  </svg>
+</div>
