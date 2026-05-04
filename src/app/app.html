@@ -127,6 +127,36 @@
         </div>
         <p>[TODO]: contador de caracteres, máscara e exemplo prático de erro de validação</p>
 
+        <h3>Campos Numéricos e Moedas</h3>
+        <p class="text-secondary mb-4">Utilizados para valores monetários, pesos, medidas e quantidades.</p>
+
+        <div class="grid">
+          <!-- Exemplo 1: Moeda alinhada à esquerda (Padrão) -->
+          <div class="col-12 md:col-6 lg:col-3">
+            <app-field-number label="Valor de Venda" unit="R$" placeholder="0,00" [required]="true" [digits]="2">
+            </app-field-number>
+          </div>
+
+          <!-- Exemplo 2: Medida alinhada à direita -->
+          <div class="col-12 md:col-6 lg:col-3">
+            <app-field-number label="Comprimento" unit="cm" [value]="15" unitPosition="right" placeholder="0"
+              helperText="Medida da peça embalada.">
+            </app-field-number>
+          </div>
+
+          <!-- Exemplo 3: Peso alinhado à direita -->
+          <div class="col-12 md:col-6 lg:col-3">
+            <app-field-number label="Peso Bruto" unit="kg" unitPosition="right" placeholder="0">
+            </app-field-number>
+          </div>
+
+          <!-- Exemplo 4: Quantidade inteira sem unidade -->
+          <div class="col-12 md:col-6 lg:col-3">
+            <app-field-number label="Quantidade em Estoque" [value]="12" [disabled]="true">
+            </app-field-number>
+          </div>
+        </div>
+
         <h3>Dropdowns / Selects</h3>
         <p class="text-secondary mb-4">Campos de seleção única padronizados para formulários.</p>
 
@@ -185,7 +215,8 @@
         </div>
 
         <h3>Campos de Texto Longo (Textarea)</h3>
-        <p class="text-secondary mb-4">Utilizados para descrições, observações e textos que requerem múltiplas linhas.</p>
+        <p class="text-secondary mb-4">Utilizados para descrições, observações e textos que requerem múltiplas linhas.
+        </p>
 
         <div class="grid">
           <div class="col-12 md:col-6">
@@ -195,12 +226,13 @@
             </app-field-textarea>
           </div>
           <div class="col-12 md:col-6">
-            <app-field-textarea id="textarea-exemplo-2" formControlName="textarea-exemplo-2" label="Observações Internas"
-              value="Peça retirada do veículo com pequenas avarias na lateral direita." [rows]="4" [disabled]="true" [resizable]="false">
+            <app-field-textarea id="textarea-exemplo-2" formControlName="textarea-exemplo-2"
+              label="Observações Internas" value="Peça retirada do veículo com pequenas avarias na lateral direita."
+              [rows]="4" [disabled]="true" [resizable]="false">
             </app-field-textarea>
           </div>
         </div>
-        
+
       </app-card>
 
       <app-card id="componente-botoes" title="Botões" subtitle="Ações principais e secundárias do sistema">

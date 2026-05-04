@@ -19,6 +19,7 @@ import { FieldDropdownComponent } from './shared/components/field/field-dropdown
 import { FieldAutocompleteComponent } from './shared/components/field/field-autocomplete/field-autocomplete.component';
 import { FieldSwitchComponent} from './shared/components/field/field-switch/field-switch.component';
 import { FieldTextareaComponent } from './shared/components/field/field-textarea/field-textarea.component';
+import { FieldNumberComponent } from './shared/components/field/field-number/field-number.component';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,8 @@ import { FieldTextareaComponent } from './shared/components/field/field-textarea
     FieldDropdownComponent,
     FieldAutocompleteComponent,
     FieldSwitchComponent,
-    FieldTextareaComponent
+    FieldTextareaComponent,
+    FieldNumberComponent
   ],
   templateUrl: './app.html'
 })

@@ -454,3 +454,86 @@
     opacity: 1;
   }
 }
+
+/* ==========================================================================
+   Input Number (PrimeNG <p-inputNumber>)
+   ========================================================================== */
+.p-inputnumber {
+  width: 100%;
+
+  .p-inputnumber-input {
+    border: 1px solid var(--fundo-200) !important;
+    border-radius: var(--spacing-xs) !important;
+    background-color: var(--fundo-0);
+    padding: var(--spacing-s) var(--spacing-m) !important;
+    color: var(--fundo-900);
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-p);
+    width: 100%;
+    box-shadow: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &::placeholder {
+      color: var(--fundo-300);
+    }
+
+    &:enabled:hover {
+      border-color: var(--fundo-300) !important;
+    }
+
+    &:enabled:focus {
+      border-color: var(--azul-400) !important;
+      outline: none;
+    }
+
+    &:disabled {
+      background-color: var(--fundo-50) !important;
+      border-color: var(--fundo-200) !important;
+      color: var(--fundo-400);
+      cursor: not-allowed;
+      opacity: 1;
+    }
+  }
+
+  /* Aplicação da borda de erro */
+  &.ng-invalid.ng-dirty .p-inputnumber-input,
+  &.p-invalid .p-inputnumber-input {
+    border-color: var(--vermelho-500) !important;
+  }
+}
+
+/* ==========================================================================
+   Wrapper de Unidades (R$, cm, kg)
+   ========================================================================== */
+.desmonte-input-number-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .desmonte-input-number-unit {
+    position: absolute;
+    color: var(--fundo-500); /* Fonte mais neutra */
+    font-size: var(--text-size-p);
+    font-weight: var(--font-weight-regular);
+    pointer-events: none; /* Deixa o clique do mouse passar direto pro input */
+    z-index: 1;
+    
+    &.left {
+      left: var(--spacing-m);
+    }
+    
+    &.right {
+      right: var(--spacing-m);
+    }
+  }
+
+  /* Libera espaço no input baseando-se na posição da unidade */
+  &.has-unit-left .p-inputnumber-input {
+    padding-left: 2.5rem !important; 
+  }
+
+  &.has-unit-right .p-inputnumber-input {
+    padding-right: 2.5rem !important; 
+  }
+}
