@@ -28,6 +28,8 @@ import { KnobComponent } from './shared/components/knob/knob.component';
 import { GaugeComponent } from './shared/components/gauge/gauge.component';
 import { AccordionComponent } from './shared/components/accordion/accordion.component';
 import { AccordionPanelComponent } from './shared/components/accordion/accordion-panel.component';
+import { ScrollspyComponent } from './shared/components/scrollspy/scrollspy.component';
+import { ScrollspyItem } from './shared/components/scrollspy/scrollspy-item.interface';
 
 
 @Component({
@@ -58,7 +60,8 @@ import { AccordionPanelComponent } from './shared/components/accordion/accordion
     KnobComponent,
     GaugeComponent,
     AccordionComponent,
-    AccordionPanelComponent
+    AccordionPanelComponent,
+    ScrollspyComponent
   ],
   templateUrl: './app.html'
 })
@@ -89,8 +92,23 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  menuScrollspy: ScrollspyItem[] = [
+    { id: 'tokens-cores', label: 'Tokens de Cores' },
+    { id: 'tokens-tipografia', label: 'Tipografia' },
+    { id: 'tokens-espacamento', label: 'Espaçamentos' },
+    { id: 'componente-cards', label: 'Cards' },
+    { id: 'componente-scrollspy', label: 'Scrollspy' },
+    { id: 'componente-inputs', label: 'Inputs' },
+    { id: 'componente-botoes', label: 'Botões' },
+    { id: 'componente-tabelas', label: 'Tabelas' },
+    { id: 'componente-upload', label: 'Upload de arquivos' },
+    { id: 'componente-badges', label: 'Badges' },
+    { id: 'componente-graficos', label: 'Gráficos' },
+    { id: 'componente-accordion', label: 'Accordion' }
+  ];
+
   ngAfterViewInit(): void {
-    const secoes = this.el.nativeElement.querySelectorAll('section[id]');
+    const secoes = this.el.nativeElement.querySelectorAll('app-card[id]'); 
     this.ordemDasSecoes = Array.from(secoes).map((secao: any) => secao.id);
 
     const opcoes = {

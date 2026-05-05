@@ -1,0 +1,11 @@
+<nav class="desmonte-scrollspy">
+    <ul class="desmonte-scrollspy__list">
+      <li *ngFor="let item of items" 
+          class="desmonte-scrollspy__item"
+          [class.desmonte-scrollspy__item--active]="activeItemId === item.id">
+        <a [href]="'#' + item.id" (click)="scrollTo(item.id, $event)">
+          {{ item.label }}
+        </a>
+      </li>
+    </ul>
+  </nav>

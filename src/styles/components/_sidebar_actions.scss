@@ -5,17 +5,25 @@
   flex-direction: column;
   height: fit-content;
   gap: var(--spacing-l); // Espaço entre o card do scrollspy e os botões abaixo
+  
+  // Limita a altura da barra lateral para não vazar a tela
+  max-height: calc(100vh - (var(--spacing-l) * 2));
 }
 
-/* Ajuste no scrollspy para ele não precisar mais do sticky individualmente */
-.desmonte-scrollspy {
+/* 
+  NOVA REGRA: Restaura a cadeia Flexbox dizendo que a tag customizada do Angular 
+  deve preencher o espaço, mas com permissão para encolher (min-height: 0) 
+*/
+app-scrollspy {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0; 
 }
 
 .desmonte-sidebar-actions {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-s);
-  padding: 0 var(--spacing-m); // Alinhamento lateral com o conteúdo acima
+  flex-shrink: 0; // Protege os botões: eles nunca serão encolhidos, não importa o tamanho do scrollspy
 }

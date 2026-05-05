@@ -751,7 +751,7 @@
 
       </app-card>
 
-      <app-card id="publicacao-ecommerce" title="Accordion"
+      <app-card id="componente-accordion" title="Accordion"
         subtitle="Agrupamento colapsável de conteúdo">
 
         <p>O Accordion permite que alguns campos sejam exibidos ou escondidos por padrão. Abaixo segue um exemplo de como ele será implementado.</p>
@@ -792,64 +792,14 @@
     </div>
 
     <div class="col-12 lg:col-3">
+      
+      <!-- O ASIDE agora é o contêiner principal que ficará fixo na tela -->
       <aside class="desmonte-sidebar-fixed">
-        <nav class="desmonte-scrollspy">
-          <ul class="desmonte-scrollspy__list">
+        
+        <!-- Scrollspy componente (pode existir ou não, dependendo da tela) -->
+        <app-scrollspy [items]="menuScrollspy" [activeItemId]="secaoAtiva"></app-scrollspy>
 
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'tokens-cores'">
-              <a href="#tokens-cores">Tokens de Cores</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'tokens-tipografia'">
-              <a href="#tokens-tipografia">Tipografia</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'tokens-espacamento'">
-              <a href="#tokens-espacamento">Espaçamentos</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-cards'">
-              <a href="#componente-cards">Cards</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-scrollspy'">
-              <a href="#componente-scrollspy">Scrollspy</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-inputs'">
-              <a href="#componente-inputs">Inputs</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-botoes'">
-              <a href="#componente-botoes">Botões</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-tabelas'">
-              <a href="#componente-tabelas">Tabelas</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-upload'">
-              <a href="#componente-upload">Upload de arquivos</a>
-            </li>
-
-            <li class="desmonte-scrollspy__item"
-              [class.desmonte-scrollspy__item--active]="secaoAtiva === 'componente-badges'">
-              <a href="#componente-badges">Badges</a>
-            </li>
-
-          </ul>
-
-        </nav>
-
+        <!-- Ações separadas, vivendo do lado de fora do componente -->
         <div class="desmonte-sidebar-actions">
           <app-button label="Publicar" icon="pi-send" [fullWidth]="true"></app-button>
           <app-button label="Fechar" variant="tertiary" color="help" icon="pi-times" [fullWidth]="true"></app-button>
