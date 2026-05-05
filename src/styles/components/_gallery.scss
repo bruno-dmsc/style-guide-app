@@ -6,30 +6,30 @@
   flex-wrap: wrap;
   align-items: center;
   /* Espaçamento interno e entre os itens usando tokens[cite: 3] */
-  gap: var(--spacing-m); 
-  padding: var(--spacing-l); 
-  
+  gap: var(--spacing-m);
+  padding: var(--spacing-l);
+
   /* Fundo azul claro e borda azul média[cite: 2] */
-  background-color: var(--azul-50); 
-  border: 1px solid var(--azul-300); 
-  border-radius: var(--size-s); 
+  background-color: var(--azul-50);
+  border: 1px solid var(--azul-300);
+  border-radius: var(--size-s);
 
   min-height: 212px;
 
   &__counter {
     position: absolute;
-    
+
     /* Encaixa o texto dentro do padding-top da galeria */
-    top: var(--spacing-s); 
-    right: var(--spacing-m); 
-    
+    top: var(--spacing-s);
+    right: var(--spacing-m);
+
     font-family: var(--font-family-base);
     font-size: var(--text-size-h5);
     color: var(--fundo-600);
     transition: color 0.2s ease;
 
     &--full {
-      color: var(--laranja-500); 
+      color: var(--laranja-500);
       font-weight: var(--font-weight-semibold);
     }
   }
@@ -45,9 +45,9 @@
     align-items: center;
     justify-content: center;
     color: var(--fundo-0);
-    
+
     /* ADIÇÕES DE DRAG AND DROP DAQUI PARA BAIXO: */
-    
+
     cursor: grab; // Muda o cursor indicando que pode ser "agarrado"
     transition: transform 0.2s ease, opacity 0.2s ease;
     border: 2px solid transparent; // Borda invisível para evitar pulos de layout ao dar highlight
@@ -74,10 +74,10 @@
   /* Os três pontinhos de ação */
   &__action {
     position: absolute;
-    top: var(--spacing-xs); 
-    right: var(--spacing-xs); 
+    top: var(--spacing-xs);
+    right: var(--spacing-xs);
     cursor: pointer;
-    font-size: var(--icon-size-s); 
+    font-size: var(--icon-size-s);
     color: var(--fundo-900);
     background: var(--fundo-50);
     border-radius: var(--size-xs);
@@ -90,7 +90,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    
+
     img {
       width: 100%;
       height: 100%;
@@ -104,22 +104,22 @@
   &__badge {
     position: absolute;
     /* Valores negativos para a badge "vazar" um pouco para fora da imagem */
-    bottom: calc(var(--spacing-s) * -1); 
-    left: calc(var(--spacing-s) * -1); 
-    
+    bottom: calc(var(--spacing-s) * -1);
+    left: calc(var(--spacing-s) * -1);
+
     /* Cores correspondentes à pílula azul */
-    background-color: var(--azul-200); 
-    color: var(--azul-800); 
-    border: 1px solid var(--azul-800); 
-    
+    background-color: var(--azul-200);
+    color: var(--azul-800);
+    border: 1px solid var(--azul-800);
+
     /* Layout interno da badge */
-    padding: var(--spacing-xs) var(--spacing-m); 
-    border-radius: var(--size-s); 
-    
+    padding: var(--spacing-xs) var(--spacing-m);
+    border-radius: var(--size-s);
+
     /* Tipografia H5 conforme definido nos tokens */
-    font-family: var(--font-family-base); 
-    font-size: var(--text-size-h5); 
-    font-weight: var(--font-weight-semibold); 
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-h5);
+    font-weight: var(--font-weight-semibold);
   }
 
   /* Container tracejado para Upload */
@@ -129,12 +129,13 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 180px; /* Um pouco mais largo para acomodar o texto */
+    width: 180px;
+    /* Um pouco mais largo para acomodar o texto */
     height: 120px;
     padding: var(--spacing-s);
-    
+
     /* Borda tracejada azul */
-    border: 1px dashed var(--azul-400); 
+    border: 1px dashed var(--azul-400);
     border-radius: var(--size-s);
     background-color: transparent;
     cursor: pointer;
@@ -142,14 +143,138 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: var(--fundo-0); /* Efeito sutil de hover */
+      background-color: var(--fundo-0);
+      /* Efeito sutil de hover */
     }
   }
 
   &__upload-text {
     /* Texto descritivo do upload */
-    color: var(--fundo-600); 
-    font-size: var(--text-size-h5); 
-    line-height: var(--line-height-h5); 
+    color: var(--fundo-600);
+    font-size: var(--text-size-h5);
+    line-height: var(--line-height-h5);
+  }
+}
+
+// ==========================================================================
+// MODAL FULLSCREEN (OVERLAY DINÂMICO ANCORADO AO TOPO)
+// ==========================================================================
+
+::ng-deep .desmonte-fullscreen-dialog {
+  /* Dá um respiro para o modal não ficar colado na borda física do monitor */
+  margin-top: var(--spacing-l) !important;
+
+  border-radius: var(--spacing-s) !important;
+  box-shadow: 0 var(--spacing-xl) var(--spacing-2xl) rgba(0, 0, 0, 0.4) !important;
+
+  /* ========================================== */
+  /* HEADER NATIVO */
+  /* ========================================== */
+  .p-dialog-header {
+    background-color: var(--fundo-0) !important;
+    border-bottom: none !important;
+    padding: var(--spacing-m) var(--spacing-m) 0 var(--spacing-m) !important;
+    border-top-left-radius: var(--spacing-s) !important;
+    border-top-right-radius: var(--spacing-s) !important;
+
+    .p-dialog-header-icon {
+      color: var(--fundo-600) !important;
+      background-color: var(--fundo-50) !important;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--vermelho-50) !important;
+        color: var(--vermelho-600) !important;
+      }
+    }
+  }
+
+  /* ========================================== */
+  /* CONTEÚDO (Controles + Imagem) */
+  /* ========================================== */
+  .p-dialog-content {
+    background-color: var(--fundo-0) !important;
+    /* Remove padding superior para colar os controles no header, mantendo o respiro lateral e inferior */
+    padding: 0 var(--spacing-l) var(--spacing-l) var(--spacing-l) !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centraliza tudo horizontalmente */
+  }
+
+  /* ========================================== */
+  /* ILHA DE CONTROLES (Abaixo do Header) */
+  /* ========================================== */
+  &__controls {
+    /* Mudamos de inline-flex para flex (transforma a ilha em um elemento de bloco) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+
+    width: fit-content;
+    margin: 0 auto var(--spacing-m) auto;
+
+    background-color: var(--fundo-50);
+    padding: var(--spacing-m) var(--spacing-m);
+    border-radius: 40px;
+    flex-shrink: 0;
+
+    button {
+      color: var(--fundo-900) !important;
+
+      &:hover:not(:disabled) {
+        background-color: var(--fundo-200) !important;
+      }
+
+      &:disabled {
+        opacity: 0.3;
+      }
+    }
+  }
+
+  /* Texto de 100% mantido com alinhamento vertical corrigido */
+  &__zoom-text {
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-h1);
+    color: var(--fundo-900);
+    min-width: 4rem;
+    font-weight: var(--font-weight-semibold);
+    //margin: 0 var(--spacing-xs);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ========================================== */
+  /* IMAGEM E ZOOM */
+  /* ========================================== */
+  &__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto; 
+    
+    /* Garante a centralização caso o PrimeNG force um display block */
+    margin: 0 auto; 
+    
+    max-height: calc(85vh - 120px); 
+  }
+
+  &__image {
+    max-width: 100%;
+    /* Limita na largura do monitor */
+    transition: transform 0.2s ease-out;
+
+    /* Muda o eixo de origem do zoom para cima, 
+       garantindo que a imagem cresça para baixo, longe do cabeçalho */
+    transform-origin: top center;
   }
 }

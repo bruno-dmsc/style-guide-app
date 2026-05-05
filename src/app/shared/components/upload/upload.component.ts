@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FileUploadModule, FileUpload } from 'primeng/fileupload';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
     selector: 'app-upload',
@@ -11,7 +12,8 @@ import { ButtonModule } from 'primeng/button';
         CommonModule,
         FileUploadModule,
         ProgressSpinnerModule,
-        ButtonModule
+        ButtonModule,
+        DialogModule
     ],
     templateUrl: './upload.component.html'
 })
@@ -152,5 +154,78 @@ export class UploadComponent {
     onItemDragEnd() {
         this.draggedIndex = null;
         this.dragOverIndex = null;
+    }
+
+    // ==========================================
+    // VISUALIZADOR DE MÍDIA (FULLSCREEN E ZOOM)
+    // ==========================================
+
+    displayFullscreen: boolean = false;
+    currentImageIndex: number = 0;
+    zoomLevel: number = 1;
+
+    // Retorna a URL da imagem atual de forma segura
+    get currentImageUrl(): string {
+        const file: any = this.primeUpload?.files[this.currentImageIndex];
+        return file?.objectURL || '';
+    }
+
+    // Abre o modal apenas se o item clicado for uma imagem
+    openFullscreen(index: number) {
+        const file = this.primeUpload.files[index];
+        if (file && file.type.startsWith('image')) {
+            this.currentImageIndex = index;
+            this.zoomLevel = 1; // Reseta o zoom sempre que abre uma nova foto
+            this.displayFullscreen = true;
+        }
+    }
+
+    closeFullscreen() {
+        this.displayFullscreen = false;
+    }
+
+    zoomIn() {
+        this.zoomLevel = Math.min(this.zoomLevel + 0.5, 3); // Máximo de 3x
+        this.cdr.detectChanges(); // FORÇA A ATUALIZAÇÃO VISUAL
+      }
+    
+      zoomOut() {
+        this.zoomLevel = Math.max(this.zoomLevel - 0.5, 0.5); // Mínimo de 0.5x
+        this.cdr.detectChanges(); // FORÇA A ATUALIZAÇÃO VISUAL
+      }
+
+    // Navega para a PRÓXIMA IMAGEM (pulando PDFs e outros arquivos)
+    nextImage() {
+        let nextIndex = this.currentImageIndex + 1;
+        while (nextIndex < this.primeUpload.files.length) {
+            if (this.primeUpload.files[nextIndex].type.startsWith('image')) {
+                this.currentImageIndex = nextIndex;
+                this.zoomLevel = 1;
+                return;
+            }
+            nextIndex++;
+        }
+    }
+
+    // Navega para a IMAGEM ANTERIOR (pulando PDFs e outros arquivos)
+    prevImage() {
+        let prevIndex = this.currentImageIndex - 1;
+        while (prevIndex >= 0) {
+            if (this.primeUpload.files[prevIndex].type.startsWith('image')) {
+                this.currentImageIndex = prevIndex;
+                this.zoomLevel = 1;
+                return;
+            }
+            prevIndex--;
+        }
+    }
+
+    // Verifica se há uma imagem anterior/próxima válida para exibir/esconder as setas
+    get hasPrevImage(): boolean {
+        return this.primeUpload?.files.slice(0, this.currentImageIndex).some(f => f.type.startsWith('image')) || false;
+    }
+
+    get hasNextImage(): boolean {
+        return this.primeUpload?.files.slice(this.currentImageIndex + 1).some(f => f.type.startsWith('image')) || false;
     }
 }

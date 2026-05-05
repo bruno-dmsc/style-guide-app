@@ -49,8 +49,11 @@
 
                 <i class="image-gallery__action pi pi-trash" (click)="handleRemove($event, i)"></i>
 
-                <div class="image-gallery__placeholder">
-                    <img *ngIf="file.type.startsWith('image')" [src]="file.objectURL" alt="Preview da mídia">
+                <div class="image-gallery__placeholder"
+                    (click)="file.type.startsWith('image') ? openFullscreen(i) : null"
+                    [style.cursor]="file.type.startsWith('image') ? 'zoom-in' : 'default'">
+
+                    <img *ngIf="file.type.startsWith('image')" [src]="$any(file).objectURL" alt="Preview da mídia">
                     <i *ngIf="!file.type.startsWith('image')" class="pi pi-file-pdf"
                         style="font-size: 2rem; color: var(--fundo-400);"></i>
                 </div>
@@ -67,3 +70,30 @@
 
     </ng-template>
 </p-fileUpload>
+
+<!-- ========================================== -->
+<!-- MODAL FULLSCREEN DE VISUALIZAÇÃO DE IMAGEM -->
+<!-- ========================================== -->
+<p-dialog [(visible)]="displayFullscreen" [modal]="true" [dismissableMask]="true" position="top"
+    styleClass="desmonte-fullscreen-dialog">
+
+    <!-- Ilha de Controles: Agora logo abaixo do header, no fluxo normal da tela -->
+    <div class="desmonte-fullscreen-dialog__controls" style="text-align: center;">
+        <button pButton icon="pi pi-search-minus" class="p-button-rounded p-button-text" (click)="zoomOut()"></button>
+        <span class="desmonte-fullscreen-dialog__zoom-text">{{ zoomLevel * 100 }}%</span>
+        <button pButton icon="pi pi-search-plus" class="p-button-rounded p-button-text" (click)="zoomIn()"></button>
+
+        <button pButton icon="pi pi-chevron-left" class="p-button-rounded p-button-text" (click)="prevImage()"
+            [disabled]="!hasPrevImage"></button>
+        <button pButton icon="pi pi-chevron-right" class="p-button-rounded p-button-text" (click)="nextImage()"
+            [disabled]="!hasNextImage"></button>
+    </div>
+
+    <!-- Container da Imagem (usando a sua abordagem de estilo dinâmico) -->
+    <div class="desmonte-fullscreen-dialog__image-wrapper">
+        <img [src]="currentImageUrl" [style.transform]="'scale(' + zoomLevel + ')'"
+            class="desmonte-fullscreen-dialog__image" alt="Visualização expandida da peça"
+            [style]="{objectFit: 'contain'}">
+    </div>
+
+</p-dialog>
