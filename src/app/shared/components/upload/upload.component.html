@@ -1,0 +1,64 @@
+<p-fileUpload 
+  #primeUpload 
+  mode="advanced" 
+  [multiple]="multiple" 
+  customUpload="true"
+  [disabled]="disabled"
+  (onSelect)="handleSelect($event)">
+
+  <!-- TUDO DEVE FICAR DENTRO DO TEMPLATE DO PRIMENG -->
+  <ng-template pTemplate="content" let-files>
+
+    <!-- ESTADO 1: CARREGANDO -->
+    <div *ngIf="isLoading" class="desmonte-upload-zone desmonte-upload-zone--loading">
+      <p-progressSpinner class="desmonte-upload-zone__spinner"></p-progressSpinner>
+      <p class="desmonte-upload-zone__title">{{ loadingText }}</p>
+    </div>
+
+    <!-- ESTADO 2: ERRO DE VALIDAÇÃO -->
+    <div *ngIf="errorMessage && !isLoading" class="desmonte-upload-zone desmonte-upload-zone--error">
+      <i class="pi pi-times-circle desmonte-upload-zone__icon"></i>
+      <p class="desmonte-upload-zone__title">{{ errorMessage }}</p>
+      <div class="desmonte-upload-zone__actions">
+        <button pButton label="Tentar novamente" severity="danger" [text]="true" (click)="clearError()"></button>
+      </div>
+    </div>
+
+    <!-- ESTADO 3: VAZIO -->
+    <div *ngIf="!isLoading && !errorMessage && files.length === 0" 
+         class="desmonte-upload-zone" 
+         [ngClass]="{'desmonte-upload-zone--disabled': disabled}"
+         (click)="triggerChoose()">
+      
+      <i class="desmonte-upload-zone__icon pi pi-upload" *ngIf="!disabled"></i>
+      <i class="desmonte-upload-zone__icon pi pi-lock" *ngIf="disabled"></i>
+      
+      <h3 class="desmonte-upload-zone__title">{{ disabled ? 'Upload bloqueado' : title }}</h3>
+      <p class="desmonte-upload-zone__subtitle">{{ subtitle }}</p>
+    </div>
+
+    <!-- ESTADO 4: GALERIA PREENCHIDA -->
+    <div *ngIf="!isLoading && !errorMessage && files.length > 0" class="image-gallery">
+
+      <div *ngFor="let file of files; let i = index" class="image-gallery__item">
+        <i class="image-gallery__action pi pi-trash" (click)="handleRemove($event, i)"></i>
+        
+        <div class="image-gallery__placeholder">
+          <img *ngIf="file.type.startsWith('image')" [src]="file.objectURL" alt="Preview da mídia">
+          <i *ngIf="!file.type.startsWith('image')" class="pi pi-file-pdf" style="font-size: 2rem; color: var(--fundo-400);"></i>
+        </div>
+        
+        <span *ngIf="i === 0" class="image-gallery__badge">Capa</span>
+      </div>
+
+      <div *ngIf="files.length < maxFiles" 
+           class="image-gallery__upload"
+           (click)="triggerChoose()">
+        <i class="pi pi-image" style="font-size: 2rem; color: var(--fundo-600);"></i>
+        <span class="image-gallery__upload-text">Arraste aqui ou selecione<br>um arquivo</span>
+      </div>
+
+    </div>
+
+  </ng-template>
+</p-fileUpload>

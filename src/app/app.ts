@@ -30,6 +30,8 @@ import { AccordionComponent } from './shared/components/accordion/accordion.comp
 import { AccordionPanelComponent } from './shared/components/accordion/accordion-panel.component';
 import { ScrollspyComponent } from './shared/components/scrollspy/scrollspy.component';
 import { ScrollspyItem } from './shared/components/scrollspy/scrollspy-item.interface';
+import { UploadComponent } from './shared/components/upload/upload.component';
+
 
 
 @Component({
@@ -61,7 +63,8 @@ import { ScrollspyItem } from './shared/components/scrollspy/scrollspy-item.inte
     GaugeComponent,
     AccordionComponent,
     AccordionPanelComponent,
-    ScrollspyComponent
+    ScrollspyComponent,
+    UploadComponent
   ],
   templateUrl: './app.html'
 })
@@ -108,7 +111,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ];
 
   ngAfterViewInit(): void {
-    const secoes = this.el.nativeElement.querySelectorAll('app-card[id]'); 
+    const secoes = this.el.nativeElement.querySelectorAll('app-card[id]');
     this.ordemDasSecoes = Array.from(secoes).map((secao: any) => secao.id);
 
     const opcoes = {
@@ -320,34 +323,30 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  // Configurações de limite para o componente
-  limiteArquivos: number = 4;
-  estaCarregando: boolean = false;
+  // Variáveis separadas para cada componente não "roubar" o spinner do outro
+  carregandoFotos: boolean = false;
+  carregandoLaudo: boolean = false;
 
-
-  /**
-   * Disparado no exato momento em que o usuário confirma a seleção dos arquivos
-   */
-  simularCarregamento(event: any, uploader: any) {
-    // 1. Interceptação Inteligente
-    // Verifica se a quantidade total de arquivos na fila ultrapassou o limite
-    if (uploader.files.length > this.limiteArquivos) {
-
-      // O splice "corta" o array a partir do índice limite.
-      // Ex: se o limite é 4 e vieram 6, ele mantém de 0 a 3, e exclui o resto.
-      uploader.files.splice(this.limiteArquivos);
-
-      console.warn(`Você tentou enviar mais imagens do que o permitido. Apenas as ${this.limiteArquivos} primeiras foram mantidas.`);
-    }
-
-    // 2. Fluxo normal de simulação
-    this.estaCarregando = true;
+  simularCarregamentoFotos(event: any, uploader: any) {
+    this.carregandoFotos = true;
+    this.cdr.detectChanges(); // Avisa o Angular imediatamente
 
     setTimeout(() => {
-      this.estaCarregando = false;
-    }, 1500);
+      this.carregandoFotos = false;
+      console.log('Upload de fotos concluído!');
+      this.cdr.detectChanges(); // Avisa o Angular que o timer acabou
+    }, 2000); 
+  }
 
+  simularCarregamentoLaudo(event: any, uploader: any) {
+    this.carregandoLaudo = true;
+    this.cdr.detectChanges();
 
+    setTimeout(() => {
+      this.carregandoLaudo = false;
+      console.log('Upload do Laudo concluído!');
+      this.cdr.detectChanges(); 
+    }, 2000); 
   }
 
   // app.ts

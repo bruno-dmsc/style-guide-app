@@ -525,174 +525,36 @@
 
       </app-card>
 
-      <app-card id="componente-upload" title="Upload de arquivos"
+      <app-card id="componente-upload" title="Upload de arquivos (novo)"
         subtitle="Drag-and-drop ou seleção de arquivos para upload">
-        <p>Para que os registros que tenham comonentes de mídia (sejam eles arquivos, documentos, imagens ou vídeos)
-          possam ter estas informações vinculadas, é necessário criar um componente que permita tanto a seleção de
-          arquivos do computador, como um componente fácil de arrastar-e-soltar (drag-and-drop). As características
-          deste componente são as listadas abaixo:</p>
-        <ul>
-          <li>Fundo: bg-color peso-50</li>
-          <li>Borda: dashed border-color peso-300 border-radius S</li>
-          <li>Ícone central: tipografia IconXL, color peso-600, padding-top XL</li>
-          <li>Texto principal: tipografia H4, color peso-900, padding-top S</li>
-          <li>Botão secundário: estilo terciário</li>
-          <li>Texto secundário: tipografia H5, color peso-600</li>
-        </ul>
-
-        <ul>
-          <li>TODO: Reordenação via drag-and-drop</li>
-          <li>TODO: Tooltips</li>
-          <li>TODO: Contador de arquivos</li>
-          <li>TODO: Navegação lateral em tela cheia</li>
-          <li>TODO: Zoom e rotação</li>
-          <li>TODO: menu de contexto</li>
-          <li>TODO: fullscreen</li>
-          <li>TODO: Feedback Toast</li>
-          <li>TODO: suporte a vídeo</li>
-        </ul>
-
-        <div class="grid" style="padding-bottom: var(--spacing-m);">
+        <div class="grid">
           <div class="col-12">
-            <h6>Exemplo completo</h6>
-            <!-- Adicionamos a referência #uploadRef -->
-            <p-fileUpload #fileUpload mode="advanced" multiple="true" customUpload="true"
-              (onSelect)="simularCarregamento($event, fileUpload)" accept="image/*,video/*">
+            <ul>
+              <li>TODO: Reordenação via drag-and-drop</li>
+              <li>TODO: Tooltips</li>
+              <li>TODO: Contador de arquivos</li>
+              <li>TODO: Navegação lateral em tela cheia</li>
+              <li>TODO: Zoom e rotação</li>
+              <li>TODO: menu de contexto</li>
+              <li>TODO: fullscreen</li>
+              <li>TODO: Feedback Toast</li>
+            </ul>
 
-              <div *ngIf="estaCarregando" class="desmonte-upload-zone desmonte-upload-zone--loading">
-                <p-progressSpinner class="desmonte-upload-zone__spinner"></p-progressSpinner>
-                <p class="desmonte-upload-zone__title">Processando imagens...</p>
-              </div>
+            <h6>Upload Galeria de Peça</h6>
 
-              <ng-container *ngIf="!estaCarregando">
-                <ng-template pTemplate="content" let-files>
-
-                  <!-- ESTADO VAZIO: ZONA DE UPLOAD GIGANTE -->
-                  <div *ngIf="files.length === 0" class="desmonte-upload-zone" (click)="fileUpload.choose()">
-                    <i class="desmonte-upload-zone__icon pi pi-upload"></i>
-                    <h3 class="desmonte-upload-zone__title">Arraste seus arquivos para cá</h3>
-                    <p class="desmonte-upload-zone__subtitle">ou clique para procurar no computador</p>
-                  </div>
-
-                  <!-- ESTADO PREENCHIDO: GALERIA DE IMAGENS -->
-                  <div *ngIf="files.length > 0" class="image-gallery">
-
-                    <div *ngFor="let file of files; let i = index" class="image-gallery__item">
-                      <i class="image-gallery__action pi pi-trash" (click)="fileUpload.remove($event, i)"></i>
-                      <div class="image-gallery__placeholder">
-                        <img [src]="file.objectURL" alt="Preview da mídia">
-                      </div>
-                      <span *ngIf="i === 0" class="image-gallery__badge">Capa</span>
-                    </div>
-
-                    <!-- BOTÃO TRACEJADO DA GALERIA -->
-                    <div *ngIf="files.length < limiteArquivos" class="image-gallery__upload"
-                      (click)="fileUpload.choose()">
-                      <i class="pi pi-image" style="font-size: 2rem; color: var(--fundo-600);"></i>
-                      <span class="image-gallery__upload-text">Arraste aqui ou selecione<br>um arquivo</span>
-                    </div>
-
-                  </div>
-
-                </ng-template>
-              </ng-container>
-            </p-fileUpload>
-          </div>
-          <div class="col-6">
-            <h6>Exemplo: Estado vazio</h6>
-            <p-fileUpload #uploadRef mode="advanced" [multiple]="true" accept="image/*,video/mp4">
-              <ng-template pTemplate="empty">
-                <!-- Adicionamos os eventos nativos de drag e a classe dinâmica -->
-                <div class="desmonte-upload-zone" [class.desmonte-upload-zone--dragover]="isDragging"
-                  (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
-
-                  <i class="pi pi-image desmonte-upload-zone__icon"></i>
-                  <p class="desmonte-upload-zone__title">Arraste e solte as imagens da peça aqui</p>
-
-                  <div class="desmonte-upload-zone__actions">
-                    <button pButton label="Ou clique para procurar" severity="secondary" [text]="true"
-                      (click)="uploadRef.choose()"></button>
-                  </div>
-
-                  <p class="desmonte-upload-zone__subtitle">Formatos: JPG, PNG, MP4. Máximo de 50MB por arquivo</p>
-                </div>
-              </ng-template>
-            </p-fileUpload>
-          </div>
-          <div class="col-6">
-            <div>
-              <h6>Exemplo: Estado de Erro</h6>
-              <div class="desmonte-upload-zone desmonte-upload-zone--error">
-                <i class="pi pi-times-circle desmonte-upload-zone__icon"></i>
-                <p class="desmonte-upload-zone__title">Arquivo excede o tamanho máximo permitido (50MB)</p>
-                <div class="desmonte-upload-zone__actions">
-                  <button pButton label="Tentar novamente" severity="danger" [text]="true"></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- SELEÇÃO SIMPLES -->
-          <div class="col-12 lg:col-4">
-            <h6>CORRIGIR: Seleção Simples (Apenas 1 arquivo)</h6>
-            <!-- A mudança aqui é [multiple]="false" -->
-            <p-fileUpload #uploadRefSingle mode="advanced" [multiple]="false" accept="application/pdf,image/*">
-              <ng-template pTemplate="empty">
-                <div class="desmonte-upload-zone" [class.desmonte-upload-zone--dragover]="isDragging"
-                  (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
-                  <i class="pi pi-file desmonte-upload-zone__icon"></i>
-                  <p class="desmonte-upload-zone__title">Anexar Laudo Técnico</p>
-                  <div class="desmonte-upload-zone__actions">
-                    <button pButton label="Procurar arquivo" severity="secondary" [text]="true"
-                      (click)="uploadRefSingle.choose()"></button>
-                  </div>
-                  <p class="desmonte-upload-zone__subtitle">Apenas PDF ou JPG.</p>
-                </div>
-              </ng-template>
-            </p-fileUpload>
+            <app-upload title="Arraste as fotos da peça para cá" accept="image/*,video/mp4" [multiple]="true"
+              [maxFiles]="5" [isLoading]="carregandoFotos"
+              (onFilesSelected)="simularCarregamentoFotos($event.originalEvent, $event.uploader)">
+            </app-upload>
           </div>
 
-          <!-- ESTADO DESABILITADO -->
-          <div class="col-12 lg:col-4">
-            <h6>Exemplo: Desabilitado (Sem permissão)</h6>
-            <div class="desmonte-upload-zone desmonte-upload-zone--disabled">
-              <i class="pi pi-lock desmonte-upload-zone__icon"></i>
-              <p class="desmonte-upload-zone__title">Upload bloqueado</p>
-              <div class="desmonte-upload-zone__actions">
-                <!-- Botão desabilitado nativamente -->
-                <button pButton label="Procurar arquivo" severity="help" [text]="true" disabled></button>
-              </div>
-              <p class="desmonte-upload-zone__subtitle">Você não tem permissão para alterar as fotos.</p>
-            </div>
+          <div class="col-12">
+            <h6>Upload de Laudo (Arquivo Único)</h6>
+            <app-upload title="Anexar Laudo Técnico" accept="application/pdf" [multiple]="false" [maxFiles]="1"
+              [isLoading]="carregandoLaudo"
+              (onFilesSelected)="simularCarregamentoLaudo($event.originalEvent, $event.uploader)">
+            </app-upload>
           </div>
-          <!-- ESTADO CARREGANDO (LOADING) -->
-          <div class="col-12 lg:col-4">
-            <h6>Exemplo: Carregando (Enviando ao servidor)</h6>
-            <div class="desmonte-upload-zone desmonte-upload-zone--loading">
-              <!-- Ícone de spinner rodando -->
-              <p-progressSpinner styleClass="desmonte-upload-zone__spinner" strokeWidth="4" animationDuration="1s">
-              </p-progressSpinner>
-              <p class="desmonte-upload-zone__title">Enviando arquivos...</p>
-              <div class="desmonte-upload-zone__actions">
-                <!-- Usamos um texto fixo sem botão real para evitar duplo clique -->
-                <span style="color: var(--fundo-600); font-weight: var(--font-weight-medium);">Aguarde a
-                  conclusão</span>
-              </div>
-              <p class="desmonte-upload-zone__subtitle">Processando imagens (2 de 5)</p>
-            </div>
-          </div>
-        </div>
-
-        <h3>Upload Compacto</h3>
-        <p>Ideal para formulários densos ou anexos secundários. Ajustar a exclusão do arquivo.</p>
-
-        <div class="flex gap-3">
-          <!-- Botão Primário -->
-          <p-fileUpload mode="basic" chooseLabel="Anexar NFe" chooseIcon="pi pi-paperclip"
-            accept=".xml,.pdf"></p-fileUpload>
-
-          <!-- Botão Secundário (Outline) usando a classe do PrimeNG -->
-          <p-fileUpload mode="basic" chooseLabel="Foto do Documento" chooseIcon="pi pi-camera"
-            styleClass="p-button-secondary" accept="image/*"></p-fileUpload>
         </div>
       </app-card>
 
@@ -751,10 +613,10 @@
 
       </app-card>
 
-      <app-card id="componente-accordion" title="Accordion"
-        subtitle="Agrupamento colapsável de conteúdo">
+      <app-card id="componente-accordion" title="Accordion" subtitle="Agrupamento colapsável de conteúdo">
 
-        <p>O Accordion permite que alguns campos sejam exibidos ou escondidos por padrão. Abaixo segue um exemplo de como ele será implementado.</p>
+        <p>O Accordion permite que alguns campos sejam exibidos ou escondidos por padrão. Abaixo segue um exemplo de
+          como ele será implementado.</p>
 
         <!-- Componente Encapsulado -->
         <app-accordion [multiple]="true" [openTab]="['embalagem']">
@@ -792,10 +654,9 @@
     </div>
 
     <div class="col-12 lg:col-3">
-      
       <!-- O ASIDE agora é o contêiner principal que ficará fixo na tela -->
       <aside class="desmonte-sidebar-fixed">
-        
+
         <!-- Scrollspy componente (pode existir ou não, dependendo da tela) -->
         <app-scrollspy [items]="menuScrollspy" [activeItemId]="secaoAtiva"></app-scrollspy>
 
@@ -806,7 +667,6 @@
         </div>
 
       </aside>
-
     </div>
 
   </div>

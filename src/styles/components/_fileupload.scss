@@ -26,7 +26,7 @@
 
   &__icon {
     /* Tipografia IconXL */
-    font-size: 4rem;
+    font-size: var(--icon-size-xl);
     color: var(--fundo-600);
     padding-top: var(--spacing-l);
   }
@@ -65,9 +65,22 @@
   }
 
   &__spinner {
-    width: 4rem;
-    height: 4rem;
-    margin-top: var(--spacing-l);
+    // 1. FORÇA O COMPONENTE A OCUPAR ESPAÇO NO LAYOUT
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;//var(--spacing-s); 
+    height: 100%;//var(--spacing-s); 
+    
+    // 2. Adiciona um espaçamento na parte inferior para empurrar o texto
+    //margin-bottom: var(--spacing-s); 
+
+    /* 3. Garante que o SVG do PrimeNG obedeça ao container de 2.5rem */
+    svg {
+      width: 100% !important;
+      height: 100% !important;
+    }
 
     /* Força o spinner a usar o azul da marca */
     .p-progress-spinner-circle {

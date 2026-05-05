@@ -11,6 +11,8 @@
   border: 1px solid var(--azul-300); 
   border-radius: var(--size-s); 
 
+  min-height: 212px;
+
   &__item {
     position: relative;
     width: var(--size-3xl);
