@@ -1,4 +1,7 @@
 .image-gallery {
+
+  position: relative;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -12,6 +15,24 @@
   border-radius: var(--size-s); 
 
   min-height: 212px;
+
+  &__counter {
+    position: absolute;
+    
+    /* Encaixa o texto dentro do padding-top da galeria */
+    top: var(--spacing-s); 
+    right: var(--spacing-m); 
+    
+    font-family: var(--font-family-base);
+    font-size: var(--text-size-h5);
+    color: var(--fundo-600);
+    transition: color 0.2s ease;
+
+    &--full {
+      color: var(--laranja-500); 
+      font-weight: var(--font-weight-semibold);
+    }
+  }
 
   &__item {
     position: relative;
