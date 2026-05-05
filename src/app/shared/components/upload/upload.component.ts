@@ -102,4 +102,55 @@ export class UploadComponent {
         this.primeUpload.clear();
         this.cdr.detectChanges(); // Garante que a tela volte ao modo vazio
     }
+
+    // ==========================================
+    // CONTROLES DE REORDENAÇÃO (DRAG AND DROP)
+    // ==========================================
+
+    draggedIndex: number | null = null;
+    dragOverIndex: number | null = null;
+
+    onItemDragStart(event: DragEvent, index: number) {
+        event.stopPropagation(); // Bloqueia o PrimeNG de interceptar o início
+        this.draggedIndex = index;
+
+        // Diz ao navegador que isso é um movimento interno, não um arquivo físico
+        if (event.dataTransfer) {
+            event.dataTransfer.effectAllowed = 'move';
+            event.dataTransfer.setData('text/plain', 'internal_drag');
+        }
+    }
+
+    onItemDragOver(event: DragEvent, index: number) {
+        event.preventDefault();
+        event.stopPropagation(); // Cria um "escudo" para o PrimeNG ignorar o hover
+        this.dragOverIndex = index;
+    }
+
+    onItemDragLeave(event: DragEvent, index: number) {
+        event.stopPropagation();
+        if (this.dragOverIndex === index) {
+            this.dragOverIndex = null;
+        }
+    }
+
+    onItemDrop(event: DragEvent, targetIndex: number) {
+        event.preventDefault();
+        event.stopPropagation(); // O pulo do gato: impede o PrimeNG de "processar" o drop e duplicar o arquivo
+
+        if (this.draggedIndex !== null && this.draggedIndex !== targetIndex) {
+            const files = this.primeUpload.files;
+            const itemToMove = files.splice(this.draggedIndex, 1)[0];
+            files.splice(targetIndex, 0, itemToMove);
+            this.cdr.detectChanges();
+        }
+
+        this.draggedIndex = null;
+        this.dragOverIndex = null;
+    }
+
+    onItemDragEnd() {
+        this.draggedIndex = null;
+        this.dragOverIndex = null;
+    }
 }

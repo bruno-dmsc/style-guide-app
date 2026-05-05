@@ -41,7 +41,12 @@
             </span>
 
             <!-- A Galeria de itens -->
-            <div *ngFor="let file of files; let i = index" class="image-gallery__item">
+            <div *ngFor="let file of files; let i = index" class="image-gallery__item" draggable="true"
+                (dragstart)="onItemDragStart($event, i)" (dragover)="onItemDragOver($event, i)"
+                (dragleave)="onItemDragLeave($event, i)" (drop)="onItemDrop($event, i)" (dragend)="onItemDragEnd()"
+                [class.image-gallery__item--dragged]="draggedIndex === i"
+                [class.image-gallery__item--drag-target]="dragOverIndex === i">
+
                 <i class="image-gallery__action pi pi-trash" (click)="handleRemove($event, i)"></i>
 
                 <div class="image-gallery__placeholder">

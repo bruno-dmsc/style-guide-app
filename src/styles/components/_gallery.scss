@@ -39,13 +39,36 @@
     width: var(--size-3xl);
     height: var(--size-3xl);
     flex: 0 0 var(--size-3xl);
-    /* Fundo escuro para simular a imagem vazia */
-    background-color: var(--fundo-0); 
-    border-radius: var(--size-s); 
+    background-color: var(--fundo-0);
+    border-radius: var(--size-s);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--fundo-0); 
+    color: var(--fundo-0);
+    
+    /* ADIÇÕES DE DRAG AND DROP DAQUI PARA BAIXO: */
+    
+    cursor: grab; // Muda o cursor indicando que pode ser "agarrado"
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border: 2px solid transparent; // Borda invisível para evitar pulos de layout ao dar highlight
+
+    &:active {
+      cursor: grabbing; // O cursor "fecha a mão" quando clica e segura
+    }
+
+    /* Estilo aplicado na imagem que o usuário está segurando/arrastando */
+    &--dragged {
+      opacity: 0.4; // Fica translúcido
+      transform: scale(0.95); // Dá uma leve encolhida
+      z-index: 10;
+    }
+
+    /* Estilo aplicado na imagem que vai ceder o lugar (o "alvo") */
+    &--drag-target {
+      border: 2px dashed var(--azul-500); // Borda tracejada azul
+      transform: scale(1.05); // Dá uma leve aumentada para dar foco
+      opacity: 0.8;
+    }
   }
 
   /* Os três pontinhos de ação */
