@@ -1,12 +1,12 @@
 import { Component, Input, ContentChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccordionModule } from 'primeng/accordion';
+import { Accordion, AccordionPanel, AccordionHeader, AccordionContent } from 'primeng/accordion';
 import { AccordionPanelComponent } from './accordion-panel.component';
 
 @Component({
   selector: 'app-accordion',
   standalone: true,
-  imports: [CommonModule, AccordionModule],
+  imports: [CommonModule, Accordion, AccordionPanel, AccordionHeader, AccordionContent],
   templateUrl: './accordion.component.html'
 })
 export class AccordionComponent {

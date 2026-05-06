@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DropdownModule, DropdownChangeEvent } from 'primeng/dropdown';
+import { SelectModule, SelectChangeEvent } from 'primeng/select';
 import { BaseFieldComponent } from '../base-field.component';
 
 export interface DropdownOption {
@@ -12,7 +12,7 @@ export interface DropdownOption {
 @Component({
   selector: 'app-field-dropdown',
   standalone: true,
-  imports: [CommonModule, FormsModule, DropdownModule],
+  imports: [CommonModule, FormsModule, SelectModule],
   templateUrl: './field-dropdown.component.html'
 })
 export class FieldDropdownComponent extends BaseFieldComponent {
@@ -27,7 +27,7 @@ export class FieldDropdownComponent extends BaseFieldComponent {
   
   @Output() valueChange = new EventEmitter<any>();
 
-  onChange(event: DropdownChangeEvent) {
+  onChange(event: SelectChangeEvent) {
     this.valueChange.emit(event.value);
   }
 }

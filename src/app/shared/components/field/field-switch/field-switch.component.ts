@@ -1,13 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InputSwitchModule } from 'primeng/inputswitch';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { BaseFieldComponent } from '../base-field.component';
 
 @Component({
   selector: 'app-field-switch',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputSwitchModule],
+  imports: [CommonModule, FormsModule, ToggleSwitchModule],
   templateUrl: './field-switch.component.html'
 })
 export class FieldSwitchComponent extends BaseFieldComponent {

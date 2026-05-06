@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, OnDestroy, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrimeNGConfig } from 'primeng/api';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -77,23 +76,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private el: ElementRef,
-    private cdr: ChangeDetectorRef,
-    private config: PrimeNGConfig
+    private cdr: ChangeDetectorRef
   ) { }
-
-  ngOnInit(): void {
-    // Configuração global de idioma do PrimeNG
-    this.config.setTranslation({
-      firstDayOfWeek: 0,
-      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-      dayNamesMin: ['Do', 'Se', 'Te', 'Qu', 'Qu', 'Se', 'Sá'],
-      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-      today: 'Hoje',
-      clear: 'Limpar'
-    });
-  }
 
   menuScrollspy: ScrollspyItem[] = [
     { id: 'tokens-cores', label: 'Tokens de Cores' },

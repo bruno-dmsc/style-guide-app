@@ -1,26 +1,22 @@
 <div class="desmonte-accordion-wrapper">
-      <p-accordion [multiple]="multiple">
-        
-        <!-- Usando *ngFor e p-accordionTab compatíveis com o PrimeNG 17 -->
-        <ng-container *ngFor="let panel of panels">
-          
-          <p-accordionTab [selected]="openTab.includes(panel.id)">
-            
-            <!-- Cabeçalho usando o pTemplate nativo do v17 -->
-            <ng-template pTemplate="header">
-              <span class="desmonte-accordion-title">{{ panel.title }}</span>
-              
-              <div *ngIf="panel.statusIcon" class="desmonte-accordion-status" style="margin-left: var(--spacing-m);">
-                <i [class]="'pi ' + panel.statusIcon" [style.color]="panel.statusColor"></i>
-              </div>
-            </ng-template>
-            
-            <!-- Injeção do Conteúdo HTML capturado do desenvolvedor -->
-            <ng-container *ngTemplateOutlet="panel.contentTemplate"></ng-container>
-            
-          </p-accordionTab>
+  <p-accordion [value]="openTab" [multiple]="multiple">
+    <p-accordion-panel *ngFor="let panel of panels" [value]="panel.id">
 
-        </ng-container>
+      <p-accordion-header>
+        <!-- NOVO WRAPPER: Agrupa o título e o ícone de status -->
+        <div class="desmonte-accordion-header-content">
+          <span class="desmonte-accordion-title">{{ panel.title }}</span>
 
-      </p-accordion>
-    </div>
+          <div *ngIf="panel.statusIcon" class="desmonte-accordion-status">
+            <i [class]="'pi ' + panel.statusIcon" [style.color]="panel.statusColor"></i>
+          </div>
+        </div>
+      </p-accordion-header>
+
+      <p-accordion-content>
+        <ng-container *ngTemplateOutlet="panel.contentTemplate"></ng-container>
+      </p-accordion-content>
+
+    </p-accordion-panel>
+  </p-accordion>
+</div>

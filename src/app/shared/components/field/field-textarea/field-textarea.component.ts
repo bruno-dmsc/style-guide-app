@@ -2,13 +2,13 @@ import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/cor
 import { BaseFieldComponent } from '../base-field.component';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { InputTextareaModule } from 'primeng/inputtextarea'; // Módulo do PrimeNG para textarea
+import { TextareaModule } from 'primeng/textarea'; // Módulo do PrimeNG para textarea
 import { FieldComponent } from '../field-wrapper/field.component'; // Importa a casca
 
 @Component({
     selector: 'app-field-textarea',
     standalone: true,
-    imports: [CommonModule, FormsModule, InputTextareaModule, FieldComponent],
+    imports: [CommonModule, FormsModule, TextareaModule, FieldComponent],
     templateUrl: './field-textarea.component.html',
     providers: [
         {

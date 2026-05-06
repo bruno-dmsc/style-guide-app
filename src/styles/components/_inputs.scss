@@ -84,15 +84,15 @@
    ========================================================================== */
 
 /* 1. A Caixa do Dropdown */
-.p-dropdown {
+.p-select {
   border: 1px solid var(--fundo-200) !important;
   border-radius: var(--spacing-xs) !important;
   background-color: var(--fundo-0);
-  width: 100%;
+  //width: 100%;
   transition: border-color 0.2s, box-shadow 0.2s;
   box-shadow: none !important;
 
-  .p-dropdown-label {
+  .p-select-label {
     padding: var(--spacing-s) var(--spacing-m);
     color: var(--fundo-900);
     font-family: var(--font-family-base);
@@ -104,7 +104,7 @@
     }
   }
 
-  .p-dropdown-trigger {
+  .p-select-trigger {
     width: 3rem;
     color: var(--fundo-500);
   }
@@ -127,14 +127,14 @@
     border-color: var(--fundo-200) !important;
     opacity: 1;
 
-    .p-dropdown-label {
+    .p-select-label {
       color: var(--fundo-400);
     }
   }
 }
 
 /* 2. O Painel Flutuante (A lista de opções) */
-.p-dropdown-panel {
+.p-select-panel {
   background-color: var(--fundo-0);
   border: 1px solid var(--fundo-200);
   border-radius: var(--spacing-xs);
@@ -142,7 +142,7 @@
   margin-top: 2px;
 
   /* NOVO: Estilização do cabeçalho de filtro */
-  .p-dropdown-header {
+  .p-select-header {
     padding: var(--spacing-s) var(--spacing-m);
     background-color: var(--fundo-50);
     /* Fundo levemente destacado para a área de busca */
@@ -151,11 +151,11 @@
     border-top-right-radius: var(--spacing-xs);
     margin: 0;
 
-    .p-dropdown-filter-container {
+    .p-select-filter-container {
       position: relative;
 
       /* O campo de input interno do filtro */
-      .p-dropdown-filter {
+      .p-select-filter {
         width: 100%;
         padding: var(--spacing-s) var(--spacing-m);
         border: 1px solid var(--fundo-200);
@@ -177,16 +177,16 @@
       }
 
       /* Ícone da lupa */
-      .p-dropdown-filter-icon {
+      .p-select-filter-icon {
         color: var(--fundo-500);
       }
     }
   }
 
-  .p-dropdown-items {
+  .p-select-items {
     padding: var(--spacing-xs) 0;
 
-    .p-dropdown-item {
+    .p-select-item {
       padding: var(--spacing-s) var(--spacing-m);
       color: var(--fundo-900);
       font-family: var(--font-family-base);
@@ -354,11 +354,11 @@
 /* ==========================================================================
    Toggle / Switch (PrimeNG <p-inputSwitch>)
    ========================================================================== */
-.p-inputswitch {
-  width: var(--size-xl);
-  height: var(--size-l);
+.p-toggleswitch {
+  //width: var(--size-xl);
+  //height: var(--size-l);
 
-  .p-inputswitch-slider {
+  .p-toggleswitch-slider {
     background-color: var(--fundo-300);
     /* Cor do fundo inativo */
     border-radius: 30px;
@@ -378,32 +378,32 @@
   }
 
   /* Estado: Ligado (Ativo) */
-  &.p-inputswitch-checked .p-inputswitch-slider {
+  &.p-toggleswitch-checked .p-toggleswitch-slider {
     background-color: var(--azul-500);
 
     &:before {
-      transform: translateX(1.5rem);
+      //transform: translateX(1.5rem);
       /* Move a bolinha para a direita */
     }
   }
 
   /* Estados: Hover */
-  &:not(.p-disabled):hover .p-inputswitch-slider {
+  &:not(.p-disabled):hover .p-toggleswitch-slider {
     background-color: var(--fundo-600);
     /* Hover inativo fica um pouco mais escuro */
   }
 
-  &.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
-    background-color: var(--azul-600);
+  &.p-toggleswitch-checked:not(.p-disabled):hover .p-toggleswitch-slider {
+    background-color: var(--azul-100);
     /* Hover ativo */
   }
 
   /* Estado: Desabilitado */
   &.p-disabled {
-    opacity: 0.6;
+    opacity: 0.3;
     cursor: not-allowed;
 
-    .p-inputswitch-slider {
+    .p-toggleswitch-slider {
       cursor: not-allowed;
     }
   }
@@ -412,7 +412,7 @@
 /* ==========================================================================
    Textarea (PrimeNG <textarea pInputTextarea>)
    ========================================================================== */
-.p-inputtextarea.p-component {
+.p-textarea.p-component {
   border: 1px solid var(--fundo-200) !important;
   border-radius: var(--spacing-xs) !important;
   background-color: var(--fundo-0);
@@ -538,7 +538,7 @@
   }
 
   &.has-unit-left .p-inputnumber-input {
-    padding-left: 3rem !important; 
+    padding-left: 3rem !important;
   }
 
   &.has-unit-right .p-inputnumber-input {
@@ -755,7 +755,7 @@
   }
 }
 
-/* Customização da Bolinha Nativa do PrimeNG */
+/* Customização da Bolinha Nativa do PrimeNG v18 */
 .p-radiobutton {
   width: 1.25rem;
   height: 1.25rem;
@@ -772,7 +772,7 @@
     transition: border-color 0.2s, background-color 0.2s;
 
     /* Hover na bolinha vazia */
-    &:not(.p-disabled):not(.p-highlight):hover {
+    &:not(.p-disabled):not(.p-radiobutton-checked):hover {
       border-color: var(--fundo-300) !important;
     }
 
@@ -781,24 +781,27 @@
       border-color: var(--azul-400) !important;
       box-shadow: none !important;
     }
+  }
 
-    /* Bolinha Selecionada */
-    &.p-highlight {
-      border-color: var(--azul-500) !important;
-      background-color: var(--azul-500) !important;
+  /* Bolinha Selecionada (Novo padrão v18) */
+  &.p-radiobutton-checked .p-radiobutton-box {
+    border-color: var(--azul-500) !important;
+    background-color: var(--azul-500) !important;
 
-      /* O ponto central branco */
-      .p-radiobutton-icon {
-        background-color: var(--fundo-0) !important;
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 50%;
-        transition: transform 0.2s;
-        /* Centraliza o ponto */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    /* O ponto central branco */
+    .p-radiobutton-icon {
+      background-color: var(--fundo-0) !important;
+      width: 0.5rem !important;
+      height: 0.5rem !important;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      /* Oculta o SVG nativo do PrimeNG para prevalecer nosso ponto branco */
+      svg {
+        display: none !important;
       }
     }
   }
@@ -811,11 +814,12 @@
       background-color: var(--fundo-50) !important;
       border-color: var(--fundo-200) !important;
     }
+  }
 
-    .p-radiobutton-box.p-highlight {
-      background-color: var(--fundo-300) !important;
-      border-color: var(--fundo-300) !important;
-    }
+  /* Estado desabilitado E selecionado */
+  &.p-disabled.p-radiobutton-checked .p-radiobutton-box {
+    background-color: var(--fundo-300) !important;
+    border-color: var(--fundo-300) !important;
   }
 }
 
@@ -860,10 +864,10 @@
   }
 }
 
-/* Customização da Caixa Nativa do PrimeNG */
+/* Customização da Caixa Nativa do PrimeNG v18 */
 .p-checkbox {
-  width: --icon-size-s;
-  height: --icon-size-s;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -871,14 +875,13 @@
   .p-checkbox-box {
     border: 1px solid var(--fundo-200) !important;
     background-color: var(--fundo-0) !important;
-    width: --icon-size-s;
-    height: --icon-size-s;
+    width: 1.25rem;
+    height: 1.25rem;
     border-radius: var(--spacing-xs) !important;
-    /* Cantos levemente arredondados */
     transition: border-color 0.2s, background-color 0.2s;
 
     /* Hover na caixa vazia */
-    &:not(.p-disabled):not(.p-highlight):hover {
+    &:not(.p-disabled):not(.p-checkbox-checked):hover {
       border-color: var(--fundo-300) !important;
     }
 
@@ -887,17 +890,26 @@
       border-color: var(--azul-400) !important;
       box-shadow: none !important;
     }
+  }
 
-    /* Caixa Selecionada */
-    &.p-highlight {
-      border-color: var(--azul-500) !important;
-      background-color: var(--azul-500) !important;
+  /* Caixa Selecionada (Novo padrão v18) */
+  &.p-checkbox-checked .p-checkbox-box {
+    border-color: var(--azul-500) !important;
+    background-color: var(--azul-500) !important;
 
-      /* O ícone de check interno */
-      .p-checkbox-icon {
-        color: var(--fundo-0) !important;
-        font-size: var(--icon-size-s);
-        font-weight: bold;
+    /* O ícone de check interno */
+    .p-checkbox-icon {
+      color: var(--fundo-0) !important; /* A cor branca que o SVG herdará */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 0.875rem !important; /* Tamanho do ícone interno */
+      height: 0.875rem !important;
+
+      /* Garante que o SVG preencha o espaço sem explodir o layout */
+      svg {
+        width: 100%;
+        height: 100%;
       }
     }
   }
@@ -910,10 +922,15 @@
       background-color: var(--fundo-50) !important;
       border-color: var(--fundo-200) !important;
     }
+  }
 
-    .p-checkbox-box.p-highlight {
-      background-color: var(--fundo-300) !important;
-      border-color: var(--fundo-300) !important;
+  /* Estado desabilitado E selecionado */
+  &.p-disabled.p-checkbox-checked .p-checkbox-box {
+    background-color: var(--fundo-300) !important;
+    border-color: var(--fundo-300) !important;
+    
+    .p-checkbox-icon {
+        color: var(--fundo-500) !important; /* Ícone cinza quando desabilitado */
     }
   }
 }

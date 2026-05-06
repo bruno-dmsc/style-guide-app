@@ -52,3 +52,17 @@
     font-size: 1.25rem; // Ajuste para o tamanho do ícone circular
   }
 }
+
+.p-accordion-header-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Evita que o espaço seja distribuído ao extremo */
+    gap: 1rem; /* Usa o gap do flexbox para espaçar o texto do ícone */
+}
+
+/* Agrupa o título e o ícone de status lado a lado */
+.desmonte-accordion-header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s); /* Altere para --spacing-xs se quiser mais colado */
+}

@@ -2,13 +2,12 @@
     [styleClass]="styleClass" [customStyle]="customStyle">
 
     <div class="desmonte-datepicker-wrapper">
-        <p-calendar 
+        <p-datepicker 
             [(ngModel)]="value" 
             [inputId]="id"
             [placeholder]="placeholder" 
             [disabled]="disabled"
             dateFormat="dd/mm/yy"
-            [locale]="ptBR"
             [showTime]="showTime"
             [selectionMode]="selectionMode"
             [minDate]="minDate"
@@ -22,7 +21,7 @@
             (onClear)="handleClear()"
             (onBlur)="handleBlur($event)"
             (onFocus)="handleFocus($event)">
-        </p-calendar>
+        </p-datepicker>
         
         <!-- Ícone some quando há valor, abrindo espaço para o "X" do PrimeNG -->
         <i class="pi pi-calendar desmonte-datepicker-icon" *ngIf="!value"></i>

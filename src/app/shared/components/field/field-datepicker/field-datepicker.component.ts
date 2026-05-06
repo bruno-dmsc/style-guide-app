@@ -2,13 +2,13 @@ import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/cor
 import { BaseFieldComponent } from '../base-field.component';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/calendar'; 
+import { DatePickerModule } from 'primeng/datepicker'; 
 import { FieldComponent } from '../field-wrapper/field.component';
 
 @Component({
     selector: 'app-field-datepicker',
     standalone: true,
-    imports: [CommonModule, FormsModule, CalendarModule, FieldComponent],
+    imports: [CommonModule, FormsModule, DatePickerModule, FieldComponent],
     templateUrl: './field-datepicker.component.html',
     providers: [
         {

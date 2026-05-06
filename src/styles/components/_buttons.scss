@@ -91,7 +91,7 @@
   }
 
   // Laranja (Warning)
-  &.p-button-warning:not(.p-button-outlined):not(.p-button-text) {
+  &.p-button-warn:not(.p-button-outlined):not(.p-button-text) {
     background: var(--laranja-500);
     border-color: var(--laranja-500);
     color: var(--fundo-0);
@@ -187,7 +187,7 @@
       }
     }
 
-    &.p-button-warning {
+    &.p-button-warn {
       color: var(--laranja-500) !important;
       border-color: var(--laranja-500);
 
@@ -272,7 +272,7 @@
       }
     }
 
-    &.p-button-warning {
+    &.p-button-warn {
       color: var(--laranja-500) !important;
 
       &:enabled:hover {
@@ -338,7 +338,7 @@
     box-shadow: 0 0 0 var(--spacing-xs) var(--verde-100) !important;
   }
 
-  &.p-button-warning:focus {
+  &.p-button-warn:focus {
     box-shadow: 0 0 0 var(--spacing-xs) var(--laranja-100) !important;
   }
 

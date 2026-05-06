@@ -19,7 +19,8 @@
   --text-size-h3: 16px;
   --text-size-h4: 14px;
   --text-size-h5: 12px;
-  --text-size-h6: 12px; /* Ajustado provisoriamente (você enviou 24px) */
+  --text-size-h6: 12px;
+  /* Ajustado provisoriamente (você enviou 24px) */
   --text-size-p: 14px;
 
   /* Tamanhos de Ícones */
@@ -47,7 +48,8 @@ body {
   font-size: var(--text-size-p);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-p);
-  color: var(--text-color); /* Esta variável vem do nosso arquivo do PrimeNG */
+  color: var(--text-color);
+  /* Esta variável vem do nosso arquivo do PrimeNG */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -57,7 +59,8 @@ body {
   mas sem quebrar a semântica do SEO/Acessibilidade com tags de cabeçalho incorretas.
 */
 
-h1, .h1 {
+h1,
+.h1 {
   font-size: var(--text-size-h1);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-h1);
@@ -66,7 +69,8 @@ h1, .h1 {
   margin-bottom: var(--spacing-m);
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: var(--text-size-h2);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-h2);
@@ -75,7 +79,8 @@ h2, .h2 {
   margin-bottom: var(--spacing-m);
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: var(--text-size-h3);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-h3);
@@ -84,7 +89,8 @@ h3, .h3 {
   margin-bottom: var(--spacing-m);
 }
 
-h4, .h4 {
+h4,
+.h4 {
   font-size: var(--text-size-h4);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-h4);
@@ -93,7 +99,8 @@ h4, .h4 {
   margin-bottom: var(--spacing-m);
 }
 
-h5, .h5 {
+h5,
+.h5 {
   font-size: var(--text-size-h5);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-h5);
@@ -102,7 +109,8 @@ h5, .h5 {
   margin-bottom: var(--spacing-m);
 }
 
-h6, .h6 {
+h6,
+.h6 {
   font-size: var(--text-size-h6);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-h6);
@@ -112,7 +120,8 @@ h6, .h6 {
   margin-bottom: var(--spacing-m);
 }
 
-p, .text-p {
+p,
+.text-p {
   font-size: var(--text-size-p);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-p);
@@ -137,7 +146,8 @@ p, .text-p {
   font-size: var(--icon-size-md);
   width: var(--icon-size-md);
   height: var(--icon-size-md);
-  line-height: 1; /* Garante que o ícone não empurre o texto ao redor */
+  line-height: 1;
+  /* Garante que o ícone não empurre o texto ao redor */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -152,4 +162,11 @@ p, .text-p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Devolve a borda e o padding ao textarea caso tenha conflito de box-sizing */
+.p-textarea {
+  border: 1px solid var(--p-content-border-color, #cbd5e1);
+  border-radius: var(--p-border-radius, 6px);
+  padding: 0.5rem 0.75rem;
 }

@@ -6,7 +6,7 @@ import { ButtonModule } from 'primeng/button';
 // Restringimos as opções para blindar o Design System do Desmonte
 type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
 type ButtonColor = 'default' | 'success' | 'warning' | 'danger' | 'help';
-type PrimeButtonSeverity = 'success' | 'info' | 'warning' | 'danger' | 'help' | 'primary' | 'secondary' | 'contrast' | undefined;
+type PrimeButtonSeverity = 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary' | 'contrast' | undefined;
 
 @Component({
     selector: 'app-button',
@@ -42,6 +42,11 @@ export class ButtonComponent extends BaseUIComponent {
         // Se for default (para os primários ou terciários), retorna undefined para usar o azul base
         if (this.color === 'default') {
             return undefined;
+        }
+
+        // Se for default (para os primários ou terciários), retorna undefined para usar o azul base
+        if (this.color === 'warning') {
+            return 'warn';
         }
 
         // Como as nossas cores batem exatamente com as do PrimeNG, só fazemos um "cast" (as)

@@ -1,10 +1,10 @@
 <div class="desmonte-field desmonte-field--inline">
-    <p-inputSwitch 
+    <p-toggleswitch 
       [inputId]="switchId"
       [(ngModel)]="value" 
       [disabled]="disabled"
       (onChange)="onChange($event)">
-    </p-inputSwitch>
+    </p-toggleswitch>
   
     <label *ngIf="label" 
            [for]="switchId" 

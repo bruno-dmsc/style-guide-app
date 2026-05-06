@@ -5,7 +5,7 @@
       {{ label }}
     </label>
     
-    <p-dropdown 
+    <p-select 
       [options]="options" 
       [(ngModel)]="value" 
       (onChange)="onChange($event)"
@@ -18,7 +18,7 @@
       [filter]="filter"
       filterBy="label"
       [filterPlaceholder]="filterPlaceholder">
-    </p-dropdown>
+    </p-select>
   
     <p *ngIf="hasError" class="desmonte-field__error-message">
       Campo obrigatório
