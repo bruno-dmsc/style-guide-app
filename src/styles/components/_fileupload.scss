@@ -11,7 +11,7 @@
   text-align: center;
 
   /* Fundos e Bordas Base */
-  background-color: var(--azul-50);
+  background-color: color-mix(in srgb, var(--azul-500), transparent 96%);
   border: 1px dashed var(--azul-300);
   border-radius: var(--spacing-s);
 
@@ -27,7 +27,7 @@
   &__icon {
     /* Tipografia IconXL */
     font-size: var(--icon-size-xl);
-    color: var(--fundo-600);
+    color: var(--fundo-100);
     padding-top: var(--spacing-l);
   }
 
@@ -94,7 +94,7 @@
   /* Drag Hover: Quando o usuário está arrastando um arquivo por cima (Fallback) */
   &.desmonte-upload-zone--dragover,
   &:hover {
-    background-color: var(--azul-100);
+    background-color: var(--azul-50);
     border-color: var(--azul-500);
   }
 
@@ -177,4 +177,5 @@
 .p-fileupload svg.p-icon {
     max-width: var(--icon-size-xl) !important;
     max-height: var(--icon-size-xl) !important;
+    
 }
