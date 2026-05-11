@@ -1,0 +1,50 @@
+<div class="sg-editor-wrapper">
+  <p-editor [(ngModel)]="content" [style]="{ height: '250px' }" (onInit)="onEditorInit($event)" [modules]="editorModules">
+    <ng-template pTemplate="header">
+      <div id="custom-toolbar" class="flex align-items-center justify-content-between w-full">
+        
+        <div class="flex align-items-center gap-1">
+          <app-button variant="tertiary" icon="pi-pencil" (onClick)="executarComando('bold')" [customStyle]="{'margin-bottom': '0'}"></app-button>
+          <app-button variant="tertiary" icon="pi-file-word" (onClick)="executarComando('italic')" [customStyle]="{'margin-bottom': '0'}"></app-button>
+          <app-button variant="tertiary" icon="pi-list" (onClick)="executarComando('list', 'bullet')" [customStyle]="{'margin-bottom': '0'}"></app-button>
+        </div>
+        
+        <div class="flex align-items-center">
+          <div #target>
+            <app-button 
+              label="Variáveis" 
+              variant="secondary" 
+              icon="pi-code" 
+              [customStyle]="{'margin-bottom': '0'}"
+              [fullWidth]="true"
+              (onClick)="opVariaveis.toggle($event, target)">
+            </app-button>
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+  </p-editor>
+
+  <p-popover #opVariaveis [style]="{ width: '350px' }" appendTo="body">
+    <div class="sg-variaveis-panel">
+      <div class="panel-header">
+        <span class="font-semibold text-sm">Selecione uma variável</span>
+      </div>
+
+      <app-accordion [multiple]="true" [openTab]="activeAccordions">
+        <app-accordion-panel *ngFor="let grupo of configVariaveis" [id]="grupo.id" [title]="grupo.tema">
+          <div class="flex flex-column gap-1">
+            <app-button 
+              *ngFor="let item of grupo.itens" 
+              [label]="item.label" 
+              variant="tertiary" 
+              [fullWidth]="true"
+              (onClick)="inserirVariavel(item.valor); opVariaveis.hide()">
+            </app-button>
+          </div>
+        </app-accordion-panel>
+      </app-accordion>
+    </div>
+  </p-popover>
+</div>

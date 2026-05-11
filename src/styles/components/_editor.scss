@@ -1,0 +1,183 @@
+.sg-editor-wrapper {
+    position: relative;
+
+    // A classe oficial que o PrimeNG envelopa no header
+    .p-editor-toolbar.ql-toolbar {
+        background-color: var(--fundo-0);
+        border-color: var(--fundo-100);
+        border-radius: var(--spacing-xs) var(--spacing-xs) 0 0;
+        padding: 0.5rem 1rem;
+        // Removido o display: flex daqui! O PrimeFlex já está resolvendo no HTML.
+    }
+
+    .ql-container {
+        border-color: var(--fundo-100);
+        border-radius: 0 0 var(--spacing-xs) var(--spacing-xs);
+        font-family: inherit;
+    }
+
+    // Lapidação do botão para casar com a altura do Quill
+    .sg-btn-variaveis {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--azul-0);
+        color: var(--azul-900);
+        border: 1px solid var(--azul-200);
+
+        // Ajuste fino para equiparar à altura dos ícones nativos
+        padding: 0.25rem 0.75rem;
+        height: 32px;
+
+        border-radius: var(--spacing-xs);
+        font-size: 0.875rem;
+        font-weight: var(--font-weight-semibold);
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background: var(--azul-100);
+        }
+
+        i {
+            font-size: 0.875rem;
+        }
+    }
+
+    .ql-editor {
+        .sg-variavel-tag {
+            color: var(--azul-500);
+            font-weight: var(--font-weight-bold);
+            background-color: var(--azul-50);
+            padding: 0.1rem 0.25rem;
+            border-radius: var(--spacing-xs);
+
+            display: inline-block;
+            line-height: 1.2;
+            user-select: none;
+            cursor: default;
+        }
+    }
+
+}
+
+// Estilos do painel de variáveis (Overlay)
+.sg-variaveis-panel {
+    .panel-header {
+        padding: 0 0 0.75rem 0;
+        border-bottom: 1px solid var(--azul-200);
+        margin-bottom: 0.5rem;
+        color: var(--fundo-900);
+    }
+
+    .variaveis-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .variavel-item-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: transparent;
+            border: none;
+            padding: 0.5rem;
+            border-radius: var(--spacing-xs);
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: var(--azul-200);
+            }
+
+            .var-label {
+                font-size: 0.875rem;
+                color: var(--fundo-900);
+                font-weight: var(--font-weight-medium);
+            }
+
+            .var-value {
+                font-size: 0.75rem;
+                color: var(--vermelho-500);
+                font-family: monospace;
+                margin-top: 0.15rem;
+            }
+        }
+    }
+}
+
+// Painel flutuante do Autocomplete (Quill Mention)
+.ql-mention-list-container {
+    background-color: var(--fundo-0, #ffffff);
+    border: 1px solid var(--fundo-100, #dee2e6);
+    border-radius: var(--spacing-xs, 4px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.ql-mention-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    .ql-mention-list-item {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid var(--fundo-100);
+        transition: background-color 0.2s;
+
+        &:last-child {
+            border-bottom: none; // Remove a borda do último item
+        }
+
+        // NOSSO LAYOUT CUSTOMIZADO:
+        .sg-mention-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            .sg-mention-tema {
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: var(--texto-500, #6c757d);
+                font-weight: var(--font-weight-bold);
+            }
+
+            .sg-mention-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+
+                .sg-mention-label {
+                    font-size: 0.875rem;
+                    color: var(--texto-900, #212529);
+                    font-weight: var(--font-weight-medium);
+                }
+
+                .sg-mention-id {
+                    font-size: 0.75rem;
+                    color: var(--vermelho-500, #ef4444); // Usando o vermelho igual ao seu accordion
+                    font-family: monospace;
+                }
+            }
+        }
+        
+        // Estilo de foco (quando o usuário navega com as setas)
+        &.selected {
+            background-color: var(--azul-50);
+            
+            .sg-mention-item {
+                .sg-mention-tema { color: var(--azul-500); }
+                .sg-mention-content .sg-mention-label { color: var(--azul-900); }
+            }
+        }
+        
+        &:hover:not(.selected) {
+            background-color: var(--fundo-50);
+        }
+    }
+}

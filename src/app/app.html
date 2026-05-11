@@ -646,6 +646,17 @@
 
       </app-card>
 
+      <app-card id="componente-editor" title="Editor" subtitle="Edição de texto em rich text e com variáveis">
+
+        <h2>Editor de Publicações</h2>
+        <p>Componente de rich text configurado para aceitar injeção de variáveis dinâmicas
+          de publicação (ex: Mercado Livre, Tray).</p>
+
+        <app-editor [configVariaveis]="listagemVariaveis">
+        </app-editor>
+
+      </app-card>
+
     </div>
 
     <div class="col-12 lg:col-3">

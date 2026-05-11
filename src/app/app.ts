@@ -30,7 +30,7 @@ import { AccordionPanelComponent } from './shared/components/accordion/accordion
 import { ScrollspyComponent } from './shared/components/scrollspy/scrollspy.component';
 import { ScrollspyItem } from './shared/components/scrollspy/scrollspy-item.interface';
 import { UploadComponent } from './shared/components/upload/upload.component';
-
+import { EditorComponent } from './shared/components/editor/editor.component';
 
 
 @Component({
@@ -63,7 +63,8 @@ import { UploadComponent } from './shared/components/upload/upload.component';
     AccordionComponent,
     AccordionPanelComponent,
     ScrollspyComponent,
-    UploadComponent
+    UploadComponent,
+    EditorComponent
   ],
   templateUrl: './app.html'
 })
@@ -404,5 +405,23 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     { label: 'Suporte', value: 'suporte' },
     { label: 'Chicote Elétrico', value: 'chicote' }
   ];
+
+  listagemVariaveis = [
+    {
+        id: 'peca',
+        tema: 'Dados da Peça',
+        itens: [
+            { label: 'SKU', valor: '{{peca.sku}}' },
+            { label: 'Nome da Peça', valor: '{{peca.nome}}' }
+        ]
+    },
+    {
+        id: 'loja',
+        tema: 'Dados da Loja',
+        itens: [
+            { label: 'Nome Fantasia', valor: '{{empresa.nome}}' }
+        ]
+    }
+];
 
 }
