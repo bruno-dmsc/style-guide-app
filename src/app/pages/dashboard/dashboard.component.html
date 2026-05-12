@@ -1,0 +1,77 @@
+<main class="layout-main-content">
+    <div class="flex justify-content-between align-items-center mb-5">
+        <div class="flex align-items-center gap-3">
+            <app-button icon="pi-arrow-left" variant="tertiary" [routerLink]="['/']"></app-button>
+            <div>
+                <h1 class="text-3xl font-bold m-0 text-900">Gestão de Sprints</h1>
+                <p class="text-600 m-0">Acompanhamento e notas do Desmonte</p>
+            </div>
+        </div>
+
+        <div style="width: 250px;">
+            <app-field-dropdown label="Sprint" [options]="sprints" [value]="sprintSelecionada"
+                (valueChange)="sprintSelecionada = $event; onSprintChange()">
+            </app-field-dropdown>
+        </div>
+        <div class="flex align-items-center gap-3">
+            <app-button label="Sincronizar JIRA" icon="pi pi-sync" [disabled]="atualizando" (onClick)="sincronizarDados()">
+            </app-button>
+        </div>
+    </div>
+
+    <div class="grid mb-2">
+        <app-card title="Total de Entregas" class="col-3">
+            <h1 style="color: var(--azul-500); text-align: center;">{{ totalEntregas }}</h1>
+        </app-card>
+        <app-card title="Melhorias" class="col-3">
+            <h1 style="color: var(--verde-700); text-align: center;">{{ totalMelhorias }}</h1>
+        </app-card>
+        <app-card title="Correções" class="col-3">
+            <h1 style="color: var(--laranja-500); text-align: center;">{{ totalCorrecoes }}</h1>
+        </app-card>
+        <app-card title="Tarefas" class="col-3">
+            <h1 style="color: var(--fundo-500); text-align: center;">{{ totalTarefas }}</h1>
+        </app-card>
+    </div>
+
+    <div class="grid mb-2">
+        <app-card title="Métricas da Sprint" subtitle="Performance e Eficiência" class="col-7">
+            <div class="grid pt-4">
+
+                <div class="col-4 flex flex-column align-items-center">
+                    <app-knob [value]="percNoPrazo" label="% No Prazo" [readonly]="true"></app-knob>
+                    <span class="text-sm text-600 mt-2 font-medium">Entregas no Prazo</span>
+                </div>
+
+                <div class="col-4 flex flex-column align-items-center">
+                    <app-knob [value]="percSemRetrabalho" label="% Sem Retrabalho" [readonly]="true"></app-knob>
+                    <span class="text-sm text-600 mt-2 font-medium">Qualidade (0 Retornos)</span>
+                </div>
+
+                <div class="col-4 flex flex-column align-items-center">
+                    <app-knob [value]="percSlaBugs" label="% SLA Bugs" [readonly]="true"></app-knob>
+                    <span class="text-sm text-600 mt-2 font-medium">SLA Correções</span>
+                </div>
+
+            </div>
+        </app-card>
+
+        <app-card title="Release Notes" subtitle="Texto pronto para publicação" class="col-5">
+            <div class="bg-gray-50 p-3 border-round border-1 border-200 mb-3"
+                style="white-space: pre-wrap; font-family: monospace; font-size: 13px; min-height: 200px; max-height: 400px; overflow-y: auto;">
+                {{ textoReleaseNotes }}
+            </div>
+            <div footer>
+                <app-button label="Copiar Release Notes" icon="pi-copy" [fullWidth]="true"></app-button>
+            </div>
+        </app-card>
+    </div>
+
+    <div class="grid">
+        <app-card title="Listagem de Demandas" subtitle="Detalhes da sprint selecionada" class="col-12">
+            <app-table [items]="demandasDaSprint" [columns]="colunasTabela" [paginator]="true" [rows]="10"
+                [compact]="true">
+            </app-table>
+        </app-card>
+    </div>
+</main>
