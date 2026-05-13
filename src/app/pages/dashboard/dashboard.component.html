@@ -14,7 +14,8 @@
             </app-field-dropdown>
         </div>
         <div class="flex align-items-center gap-3">
-            <app-button label="Sincronizar JIRA" icon="pi pi-sync" [disabled]="atualizando" (onClick)="sincronizarDados()">
+            <app-button label="Sincronizar JIRA" icon="pi pi-sync" [disabled]="atualizando"
+                (onClick)="sincronizarDados()">
             </app-button>
         </div>
     </div>
@@ -37,22 +38,23 @@
     <div class="grid mb-2">
         <app-card title="Métricas da Sprint" subtitle="Performance e Eficiência" class="col-7">
             <div class="grid pt-4">
-
                 <div class="col-4 flex flex-column align-items-center">
-                    <app-knob [value]="percNoPrazo" label="% No Prazo" [readonly]="true"></app-knob>
+                    <app-knob [value]="percNoPrazo" label="% No Prazo" [readonly]="true"
+                        [valueColor]="getKnobColor(percNoPrazo)"></app-knob>
                     <span class="text-sm text-600 mt-2 font-medium">Entregas no Prazo</span>
                 </div>
 
                 <div class="col-4 flex flex-column align-items-center">
-                    <app-knob [value]="percSemRetrabalho" label="% Sem Retrabalho" [readonly]="true"></app-knob>
+                    <app-knob [value]="percSemRetrabalho" label="% Sem Retrabalho" [readonly]="true"
+                        [valueColor]="getKnobColor(percSemRetrabalho)"></app-knob>
                     <span class="text-sm text-600 mt-2 font-medium">Qualidade (0 Retornos)</span>
                 </div>
 
                 <div class="col-4 flex flex-column align-items-center">
-                    <app-knob [value]="percSlaBugs" label="% SLA Bugs" [readonly]="true"></app-knob>
+                    <app-knob [value]="percSlaBugs" label="% SLA Bugs" [readonly]="true"
+                        [valueColor]="getKnobColor(percSlaBugs)"></app-knob>
                     <span class="text-sm text-600 mt-2 font-medium">SLA Correções</span>
                 </div>
-
             </div>
         </app-card>
 

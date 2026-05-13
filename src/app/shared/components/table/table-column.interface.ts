@@ -3,6 +3,8 @@ export interface TableColumn {
   header: string;      // Texto do cabeçalho (ex: 'CÓDIGO')
   align?: 'left' | 'center' | 'right'; // Alinhamento do texto
   minWidth?: string;
+  type?: 'text' | 'tag';
+  tagSeverity?: (value: any) => string | any;
 }
 
 // NOVA INTERFACE PARA AÇÕES

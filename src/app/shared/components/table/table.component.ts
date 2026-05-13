@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonComponent } from '../button/button.component'; // Reutilizando nosso botão!
 import { TableColumn, TableAction } from './table-column.interface';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, TableModule, ButtonComponent],
+  imports: [CommonModule, TableModule, ButtonComponent, TagModule],
   templateUrl: './table.component.html'
 })
 export class TableComponent {
@@ -55,5 +56,12 @@ export class TableComponent {
 
   // Emissor que avisa a tela pai que o usuário trocou de página, filtrou ou ordenou
   @Output() onLoadData = new EventEmitter<any>();
+
+  getSeverity(col: TableColumn, value: any): string | any {
+    if (col.tagSeverity) {
+      return col.tagSeverity(value);
+    }
+    return 'info'; // Cor padrão de fallback
+  }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TagModule } from 'primeng/tag';
 
 
 import { CardComponent } from '../../shared/components/card/card.component';
@@ -20,6 +21,7 @@ import { SprintDashboardService, Demanda, SprintDataPayload } from './sprint-das
         CommonModule,
         FormsModule,
         RouterLink,
+        TagModule,
         CardComponent,
         ButtonComponent,
         FieldDropdownComponent,
@@ -35,19 +37,35 @@ export class DashboardComponent implements OnInit {
     sprints: DropdownOption[] = [];
     todasDemandas: Demanda[] = [];
     sprintSelecionada: any = null;
-    demandasDaSprint: any[] = []; // Usamos any para incluir os campos calculados
+    demandasDaSprint: any[] = [];
 
     // Configuração das colunas conforme solicitado
     colunasTabela: TableColumn[] = [
-        { field: 'chave', header: 'NÚMERO', minWidth: '110px' },
-        { field: 'resumo', header: 'RESUMO/TÍTULO', minWidth: '250px' },
-        { field: 'rn_texto', header: 'RELEASE NOTES', minWidth: '250px' },
-        { field: 'tipo', header: 'TIPO', minWidth: '100px' },
-        { field: 'dias_resolver', header: 'DIAS P/ RESOLVER', align: 'center', minWidth: '140px' },
-        { field: 'no_prazo', header: 'NO PRAZO', align: 'center', minWidth: '100px' },
-        { field: 'resolucao', header: 'CONCLUSÃO', minWidth: '130px' },
-        { field: 'responsavel', header: 'RESPONSÁVEL', minWidth: '150px' },
-        { field: 'projeto', header: 'PROJETO', minWidth: '100px' }
+        { field: 'chave', header: 'Número', minWidth: '100px' },
+        { field: 'resumo', header: 'Título', minWidth: '250px' },
+        { field: 'rn_texto', header: 'Release Notes', minWidth: '250px' },
+        { field: 'tipo', header: 'Tipo', minWidth: '100px', type: 'tag', tagSeverity: (valor: any) => {
+                if (valor === 'Tarefa') return 'info';
+                if (valor === 'Bug') return 'danger';
+                if (valor === 'Melhoria') return 'success';
+                return 'info';
+            } },
+        { field: 'prioridade', header: 'Prioridade', align: 'center', minWidth: '140px', type: 'tag', tagSeverity: (valor: any) => {
+                if (valor === 'Altíssima') return 'danger';
+                if (valor === 'Alta') return 'warn';
+                if (valor === 'Media') return 'info';
+                if (valor === 'Baixa') return 'success';
+                if (valor === 'Baixíssima') return 'success';
+                return 'info';
+            } },
+        { field: 'no_prazo', header: 'No prazo?', align: 'center', minWidth: '110px', type: 'tag', tagSeverity: (valor: any) => {
+                if (valor === 'Sim') return 'success';
+                if (valor === 'Não') return 'danger';
+                return 'info';
+            }},
+        { field: 'resolucao', header: 'Conclusão', minWidth: '130px' },
+        { field: 'responsavel', header: 'Responsável', minWidth: '150px' },
+        { field: 'projeto', header: 'Projeto?', minWidth: '100px' }
     ];
 
     totalEntregas = 0;
@@ -60,6 +78,13 @@ export class DashboardComponent implements OnInit {
     percNoPrazo: number = 0;
     percSemRetrabalho: number = 0;
     percSlaBugs: number = 0;
+
+    getKnobColor(value: number): string {
+        if (value < 25) return 'var(--vermelho-500)';
+        if (value <= 50) return 'var(--laranja-500)';
+        if (value <= 75) return 'var(--amarelo-600)';
+        return 'var(--verde-700)';
+    }
 
     ngOnInit(): void {
         this.carregarDados();
@@ -111,12 +136,12 @@ export class DashboardComponent implements OnInit {
                 return {
                     ...d,
                     dias_resolver: d.resolvido ? dias : '-',
-                    no_prazo: d.resolvido ? 'Sim' : 'Não', // Lógica provisória
+                    // O Angular não calcula mais nada, só consome a string enviada pelo Python!
+                    no_prazo: d.no_prazo ? d.no_prazo : '-', 
                     projeto: d.tipo.toLowerCase() === 'tarefa' ? 'Não' : 'Sim'
                 };
             });
 
-        // 1. Cálculo de KPIs Quantitativos
         this.totalEntregas = this.demandasDaSprint.length;
         const bugs = this.demandasDaSprint.filter(d =>
             ['correção', 'bug', 'correcao'].includes(d.tipo.toLowerCase())
@@ -125,21 +150,27 @@ export class DashboardComponent implements OnInit {
         this.totalMelhorias = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'melhoria').length;
         this.totalTarefas = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'tarefa').length;
 
-        // 2. Cálculo das Percentagens (Métricas da Sprint)
-        if (this.totalEntregas > 0) {
-            // % No Prazo
-            const noPrazoCount = this.demandasDaSprint.filter(d => d.no_prazo === 'Sim').length;
-            this.percNoPrazo = Math.round((noPrazoCount / this.totalEntregas) * 100);
-
-            // % Sem Retrabalho (retornos_teste === 0)
-            const semRetrabalhoCount = this.demandasDaSprint.filter(d => d.retornos_teste === 0).length;
-            this.percSemRetrabalho = Math.round((semRetrabalhoCount / this.totalEntregas) * 100);
+        // % No Prazo (considera apenas demandas que possuem SLA avaliado)
+        const demandasComSla = this.demandasDaSprint.filter(d => d.no_prazo !== '-');
+        if (demandasComSla.length > 0) {
+            const noPrazoCount = demandasComSla.filter(d => d.no_prazo === 'Sim').length;
+            this.percNoPrazo = Math.round((noPrazoCount / demandasComSla.length) * 100);
+        } else {
+            this.percNoPrazo = 0;
         }
 
-        // % SLA Bugs em Produção (Apenas para o tipo Bug)
-        if (this.totalCorrecoes > 0) {
-            const bugsNoPrazo = bugs.filter(b => b.no_prazo === 'Sim').length;
-            this.percSlaBugs = Math.round((bugsNoPrazo / this.totalCorrecoes) * 100);
+        if (this.totalEntregas > 0) {
+            const semRetrabalhoCount = this.demandasDaSprint.filter(d => d.retornos_teste === 0).length;
+            this.percSemRetrabalho = Math.round((semRetrabalhoCount / this.totalEntregas) * 100);
+        } else {
+            this.percSemRetrabalho = 0;
+        }
+
+        // % SLA Bugs (considera apenas bugs que possuem data limite estabelecida)
+        const bugsComSla = bugs.filter(b => b.no_prazo !== '-');
+        if (bugsComSla.length > 0) {
+            const bugsNoPrazo = bugsComSla.filter(b => b.no_prazo === 'Sim').length;
+            this.percSlaBugs = Math.round((bugsNoPrazo / bugsComSla.length) * 100);
         } else {
             this.percSlaBugs = 0;
         }

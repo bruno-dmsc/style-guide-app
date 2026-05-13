@@ -22,9 +22,11 @@ export interface Demanda {
   cliente: string;
   criado: string;
   resolvido: string;
+  data_limite?: string;
   retornos_teste: number;
   rn_texto: string;
   sprint_id: number;
+  no_prazo?: string;
 }
 
 export interface SprintDataPayload {
