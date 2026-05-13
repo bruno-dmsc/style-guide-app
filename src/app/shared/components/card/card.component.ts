@@ -14,5 +14,5 @@ export class CardComponent extends BaseUIComponent {
   @Input() icon: string = ''; // Nova propriedade para o ícone do PrimeNG
   @Input() showDivider: boolean = true;
 
-  @Input() override customStyle: { [klass: string]: any } | null = {'margin-bottom': 'var(--spacing-l)'};
+  @Input() override customStyle: { [klass: string]: any } | null = {'margin-bottom': 'var(--spacing-m)'};
 }

@@ -1,79 +1,143 @@
 <main class="layout-main-content">
-    <div class="flex justify-content-between align-items-center mb-5">
+    <div class="flex justify-content-between align-items-center mb-3">
         <div class="flex align-items-center gap-3">
             <app-button icon="pi-arrow-left" variant="tertiary" [routerLink]="['/']"></app-button>
             <div>
                 <h1 class="text-3xl font-bold m-0 text-900">Gestão de Sprints</h1>
-                <p class="text-600 m-0">Acompanhamento e notas do Desmonte</p>
+                <p class="text-600 m-0">Performance e Indicadores do Desmonte</p>
             </div>
         </div>
-
-        <div style="width: 250px;">
-            <app-field-dropdown label="Sprint" [options]="sprints" [value]="sprintSelecionada"
-                (valueChange)="sprintSelecionada = $event; onSprintChange()">
-            </app-field-dropdown>
-        </div>
         <div class="flex align-items-center gap-3">
+            <div>
+                <app-field-dropdown label="Sprint" [options]="sprints" [value]="sprintSelecionada"
+                    (valueChange)="sprintSelecionada = $event; onSprintChange()">
+                </app-field-dropdown>
+            </div>
             <app-button label="Sincronizar JIRA" icon="pi pi-sync" [disabled]="atualizando"
                 (onClick)="sincronizarDados()">
             </app-button>
         </div>
     </div>
 
-    <div class="grid mb-2">
-        <app-card title="Total de Entregas" class="col-3">
-            <h1 style="color: var(--azul-500); text-align: center;">{{ totalEntregas }}</h1>
-        </app-card>
-        <app-card title="Melhorias" class="col-3">
-            <h1 style="color: var(--verde-700); text-align: center;">{{ totalMelhorias }}</h1>
-        </app-card>
-        <app-card title="Correções" class="col-3">
-            <h1 style="color: var(--laranja-500); text-align: center;">{{ totalCorrecoes }}</h1>
-        </app-card>
-        <app-card title="Tarefas" class="col-3">
-            <h1 style="color: var(--fundo-500); text-align: center;">{{ totalTarefas }}</h1>
-        </app-card>
-    </div>
-
-    <div class="grid mb-2">
-        <app-card title="Métricas da Sprint" subtitle="Performance e Eficiência" class="col-7">
-            <div class="grid pt-4">
-                <div class="col-4 flex flex-column align-items-center">
-                    <app-knob [value]="percNoPrazo" label="% No Prazo" [readonly]="true"
-                        [valueColor]="getKnobColor(percNoPrazo)"></app-knob>
-                    <span class="text-sm text-600 mt-2 font-medium">Entregas no Prazo</span>
+    <div class="grid">
+        <app-card title="Resumo da Sprint" class="col-12">
+            <div class="grid align-items-center">
+                <div class="col-2 text-center border-right-1 border-200">
+                    <h1 class="text-5xl font-bold">{{ totalEntregas }}</h1>
+                    <p>Total de Entregas</p>
+                </div>
+                <div class="col-4 px-5 border-right-1 border-200">
+                    <p-meterGroup [value]="meterGroupData" labelPosition="start"></p-meterGroup>
+                </div>
+                <div class="col-2 text-center border-right-1 border-200">
+                    <h1 class="text-5xl font-bold">{{ leadTimeGeral }} dias</h1>
+                    <p class="font-medium block">Lead Time Geral</p>
+                </div>
+                <div class="col-2 text-center">
+                    <app-knob [value]="percSlaGeral" label="SLA Geral" [valueColor]="getKnobColor(percSlaGeral)"
+                        [readonly]="true"></app-knob>
                 </div>
 
-                <div class="col-4 flex flex-column align-items-center">
-                    <app-knob [value]="percSemRetrabalho" label="% Sem Retrabalho" [readonly]="true"
-                        [valueColor]="getKnobColor(percSemRetrabalho)"></app-knob>
-                    <span class="text-sm text-600 mt-2 font-medium">Qualidade (0 Retornos)</span>
+                <div class="col-2 text-center">
+                    <app-knob [value]="percQualidade" label="Índice de retrabalho"
+                        [valueColor]="getKnobColor(percQualidade)" [readonly]="true"></app-knob>
                 </div>
-
-                <div class="col-4 flex flex-column align-items-center">
-                    <app-knob [value]="percSlaBugs" label="% SLA Bugs" [readonly]="true"
-                        [valueColor]="getKnobColor(percSlaBugs)"></app-knob>
-                    <span class="text-sm text-600 mt-2 font-medium">SLA Correções</span>
-                </div>
-            </div>
-        </app-card>
-
-        <app-card title="Release Notes" subtitle="Texto pronto para publicação" class="col-5">
-            <div class="bg-gray-50 p-3 border-round border-1 border-200 mb-3"
-                style="white-space: pre-wrap; font-family: monospace; font-size: 13px; min-height: 200px; max-height: 400px; overflow-y: auto;">
-                {{ textoReleaseNotes }}
-            </div>
-            <div footer>
-                <app-button label="Copiar Release Notes" icon="pi-copy" [fullWidth]="true"></app-button>
             </div>
         </app-card>
     </div>
 
     <div class="grid">
-        <app-card title="Listagem de Demandas" subtitle="Detalhes da sprint selecionada" class="col-12">
+        <app-card title="Melhorias" class="col-4">
+            <div class="flex flex-column align-items-center">
+                
+                <div class="grid w-full">
+                    <div class="col-4 border-right-1 border-100 text-center">
+                        <h1 class="text-4xl font-bold" style="color: var(--verde-700);">{{ metricasMelhorias.total }}</h1>
+                        <p>Demandas</p>
+                    </div>
+                    <div class="col-4 border-right-1 border-100 text-center">
+                        <h2 class="font-bold">{{ metricasMelhorias.leadTime }} dias</h2>
+                        <p>Lead Time</p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <h1 class="text-4xl font-bold" [style.color]="getKnobColor(metricasMelhorias.sla)">{{
+                            metricasMelhorias.sla }}%</h1>
+                        <p >SLA</p>
+                    </div>
+                </div>
+            </div>
+        </app-card>
+
+        <app-card title="Correções" class="col-4">
+            <div class="flex flex-column align-items-center">
+                <div class="grid w-full">
+                    <div class="col-4 border-right-1 border-100 text-center">
+                        <h1 class="text-4xl font-bold" style="color: var(--laranja-500);">{{ metricasCorrecoes.total }}</h1>
+                        <p>Demandas</p>
+                    </div>
+                    <div class="col-4 border-right-1 border-100 text-center">
+                        <h2 class="font-bold">{{ metricasCorrecoes.leadTime }} dias</h2>
+                        <p>Lead Time</p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <h1 class="text-4xl font-bold" [style.color]="getKnobColor(metricasCorrecoes.sla)">{{
+                            metricasCorrecoes.sla }}%</h1>
+                        <p >SLA</p>
+                    </div>
+                </div>
+            </div>
+        </app-card>
+
+        <app-card title="Tarefas" class="col-4">
+            <div class="flex flex-column align-items-center">
+                <div class="grid w-full">
+                    <div class="col-4 border-right-1 border-100 text-center">
+                        <h1 class="text-4xl font-bold" style="color: var(--azul-500);">{{ metricasTarefas.total }}</h1>
+                        <p>Demandas</p>
+                    </div>
+                    <div class="col-4 border-right-1 border-100 text-center">
+                        <h2 class="font-bold">{{ metricasTarefas.leadTime }} dias</h2>
+                        <p>Lead Time</p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <h1 class="text-4xl font-bold" [style.color]="getKnobColor(metricasTarefas.sla)">{{
+                            metricasTarefas.sla }}%</h1>
+                        <p >SLA</p>
+                    </div>
+                </div>
+            </div>
+        </app-card>
+        <app-card title="Release Notes" class="col-12">
+            <div class="bg-gray-50 p-3 border-round border-1 border-200 mb-3 font-monospace text-xs"
+                style="white-space: pre-wrap; overflow-y: auto; max-height: 200px;">
+                {{ textoReleaseNotes }}
+            </div>
+            <div>
+                <app-button label="Copiar Release Notes" icon="pi-copy" [fullWidth]="true"></app-button>
+            </div>
+        </app-card>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col-5">
+            <app-card title="Ranking de Clientes">
+                <div style="overflow-y: auto; max-height: 370px;">
+                    <app-table [items]="clientesSprint" [columns]="colunasClientes" [compact]="true"></app-table>
+                </div>
+            </app-card>
+        </div>
+        <div class="col-7">
+            <app-card title="Matriz de Performance">
+                <app-table [items]="performanceColaboradores" [columns]="colunasPerformance"
+                    [compact]="true"></app-table>
+            </app-card>
+        </div>
+    </div>
+
+    <div class="grid">
+        <app-card title="Listagem Detalhada de Demandas" class="col-12">
             <app-table [items]="demandasDaSprint" [columns]="colunasTabela" [paginator]="true" [rows]="10"
-                [compact]="true">
-            </app-table>
+                [compact]="true"></app-table>
         </app-card>
     </div>
 </main>

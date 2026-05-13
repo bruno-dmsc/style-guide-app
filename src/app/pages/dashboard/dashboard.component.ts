@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TagModule } from 'primeng/tag';
+import { MeterGroupModule } from 'primeng/metergroup';
 
 
 import { CardComponent } from '../../shared/components/card/card.component';
@@ -22,6 +23,7 @@ import { SprintDashboardService, Demanda, SprintDataPayload } from './sprint-das
         FormsModule,
         RouterLink,
         TagModule,
+        MeterGroupModule,
         CardComponent,
         ButtonComponent,
         FieldDropdownComponent,
@@ -39,26 +41,20 @@ export class DashboardComponent implements OnInit {
     sprintSelecionada: any = null;
     demandasDaSprint: any[] = [];
 
-    // Configuração das colunas conforme solicitado
+    // Colunas da listagem principal
     colunasTabela: TableColumn[] = [
-        { field: 'chave', header: 'Número', minWidth: '100px' },
-        { field: 'resumo', header: 'Título', minWidth: '250px' },
-        { field: 'rn_texto', header: 'Release Notes', minWidth: '250px' },
-        { field: 'tipo', header: 'Tipo', minWidth: '100px', type: 'tag', tagSeverity: (valor: any) => {
-                if (valor === 'Tarefa') return 'info';
-                if (valor === 'Bug') return 'danger';
-                if (valor === 'Melhoria') return 'success';
-                return 'info';
-            } },
-        { field: 'prioridade', header: 'Prioridade', align: 'center', minWidth: '140px', type: 'tag', tagSeverity: (valor: any) => {
-                if (valor === 'Altíssima') return 'danger';
-                if (valor === 'Alta') return 'warn';
-                if (valor === 'Media') return 'info';
-                if (valor === 'Baixa') return 'success';
-                if (valor === 'Baixíssima') return 'success';
-                return 'info';
-            } },
-        { field: 'no_prazo', header: 'No prazo?', align: 'center', minWidth: '110px', type: 'tag', tagSeverity: (valor: any) => {
+        { field: 'chave', header: 'NÚMERO', minWidth: '110px' },
+        { field: 'resumo', header: 'RESUMO/TÍTULO', minWidth: '250px' },
+        { field: 'rn_texto', header: 'RELEASE NOTES', minWidth: '250px' },
+        { field: 'tipo', header: 'TIPO', minWidth: '100px' },
+        { field: 'dias_resolver', header: 'DIAS P/ RESOLVER', align: 'center', minWidth: '140px' },
+        {
+            field: 'no_prazo',
+            header: 'NO PRAZO',
+            align: 'center',
+            minWidth: '100px',
+            type: 'tag',
+            tagSeverity: (valor: any) => {
                 if (valor === 'Sim') return 'success';
                 if (valor === 'Não') return 'danger';
                 return 'info';
@@ -68,23 +64,50 @@ export class DashboardComponent implements OnInit {
         { field: 'projeto', header: 'Projeto?', minWidth: '100px' }
     ];
 
+    // Colunas para Performance e Clientes
+    colunasPerformance: TableColumn[] = [
+        { field: 'responsavel', header: 'COLABORADOR', minWidth: '200px' },
+        { field: 'melhorias', header: 'MELHORIAS', align: 'center' },
+        { field: 'bugs', header: 'CORREÇÕES', align: 'center' },
+        { field: 'tarefas', header: 'TAREFAS', align: 'center' },
+        { field: 'total', header: 'TOTAL', align: 'center' }
+    ];
+
+    colunasClientes: TableColumn[] = [
+        { field: 'nome', header: 'CLIENTE', minWidth: '350px' },
+        { field: 'total', header: 'DEMANDAS', align: 'center', minWidth: '100px' }
+    ];
+
+    // Variáveis Totais
     totalEntregas = 0;
     totalCorrecoes = 0;
     totalMelhorias = 0;
     totalTarefas = 0;
     textoReleaseNotes = '';
 
-    // Novas métricas de percentagem
-    percNoPrazo: number = 0;
-    percSemRetrabalho: number = 0;
+    // Métricas Globais
+    percSlaGeral: number = 0;
+    percQualidade: number = 0;
     percSlaBugs: number = 0;
+    leadTimeGeral: number | string = '-';
+    meterGroupData: any[] = [];
 
-    getKnobColor(value: number): string {
-        if (value < 25) return 'var(--vermelho-500)';
-        if (value <= 50) return 'var(--laranja-500)';
-        if (value <= 75) return 'var(--amarelo-600)';
+    getKnobColor(value: number | string): string {
+        let num = typeof value === 'string' ? parseFloat(value.replace('%', '')) : value;
+        if (isNaN(num)) return 'var(--fundo-500)';
+        if (num < 25) return 'var(--vermelho-500)';
+        if (num <= 50) return 'var(--laranja-500)';
+        if (num <= 75) return 'var(--amarelo-600)';
         return 'var(--verde-700)';
     }
+
+    // Métricas Específicas e Listas Auxiliares
+    metricasMelhorias = { total: 0, leadTime: '-' as string | number, sla: '-' as string | number };
+    metricasCorrecoes = { total: 0, leadTime: '-' as string | number, sla: '-' as string | number };
+    metricasTarefas = { total: 0, leadTime: '-' as string | number, sla: '-' as string | number };
+
+    performanceColaboradores: any[] = [];
+    clientesSprint: any[] = [];
 
     ngOnInit(): void {
         this.carregarDados();
@@ -106,12 +129,10 @@ export class DashboardComponent implements OnInit {
                     this.sprintSelecionada = this.sprints[0].value;
                 }
 
-                // Chama a função diretamente, sem o setTimeout
                 if (this.sprintSelecionada) {
                     this.onSprintChange();
                 }
 
-                // Avisa o Angular para desenhar a tela com todos os cálculos já feitos!
                 this.cdr.detectChanges();
             },
             error: (err) => console.error('Erro ao carregar dados', err)
@@ -121,6 +142,7 @@ export class DashboardComponent implements OnInit {
     onSprintChange(): void {
         if (!this.sprintSelecionada) return;
 
+        // 1. Mapeamento base das demandas
         this.demandasDaSprint = this.todasDemandas
             .filter(d => d.sprint_id === this.sprintSelecionada)
             .map(d => {
@@ -136,37 +158,61 @@ export class DashboardComponent implements OnInit {
                 return {
                     ...d,
                     dias_resolver: d.resolvido ? dias : '-',
-                    // O Angular não calcula mais nada, só consome a string enviada pelo Python!
-                    no_prazo: d.no_prazo ? d.no_prazo : '-', 
-                    projeto: d.tipo.toLowerCase() === 'tarefa' ? 'Não' : 'Sim'
+                    no_prazo: d.no_prazo ? d.no_prazo : '-',
+                    projeto: d.tipo.toLowerCase() === 'tarefa' ? 'Não' : 'Sim',
                 };
             });
 
+        // 2. Divisão por tipos
         this.totalEntregas = this.demandasDaSprint.length;
-        const bugs = this.demandasDaSprint.filter(d =>
-            ['correção', 'bug', 'correcao'].includes(d.tipo.toLowerCase())
-        );
-        this.totalCorrecoes = bugs.length;
-        this.totalMelhorias = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'melhoria').length;
-        this.totalTarefas = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'tarefa').length;
+        const bugs = this.demandasDaSprint.filter(d => ['correção', 'bug', 'correcao'].includes(d.tipo.toLowerCase()));
+        const melhorias = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'melhoria');
+        const tarefas = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'tarefa');
 
-        // % No Prazo (considera apenas demandas que possuem SLA avaliado)
+        this.totalCorrecoes = bugs.length;
+        this.totalMelhorias = melhorias.length;
+        this.totalTarefas = tarefas.length;
+
+        // 3. Cálculos de SLA e Lead Time Específicos
+        this.metricasCorrecoes = this.calcularMetricas(bugs);
+        this.metricasMelhorias = this.calcularMetricas(melhorias);
+        this.metricasTarefas = this.calcularMetricas(tarefas);
+
+        // Preenche o MeterGroup
+        this.meterGroupData = [
+            { label: 'Melhorias', value: this.totalMelhorias, color: 'var(--verde-700)' },
+            { label: 'Correções', value: this.totalCorrecoes, color: 'var(--laranja-500)' },
+            { label: 'Tarefas', value: this.totalTarefas, color: 'var(--azul-500)' }
+        ];
+
+        // 4. Cálculos Globais
+        // Lead Time Geral
+        const resolvidasGlobais = this.demandasDaSprint.filter(d => typeof d.dias_resolver === 'number');
+        if (resolvidasGlobais.length > 0) {
+            const soma = resolvidasGlobais.reduce((acc, d) => acc + (d.dias_resolver as number), 0);
+            this.leadTimeGeral = Math.round((soma / resolvidasGlobais.length) * 10) / 10;
+        } else {
+            this.leadTimeGeral = '-';
+        }
+
+        // % No Prazo (SLA Geral)
         const demandasComSla = this.demandasDaSprint.filter(d => d.no_prazo !== '-');
         if (demandasComSla.length > 0) {
             const noPrazoCount = demandasComSla.filter(d => d.no_prazo === 'Sim').length;
-            this.percNoPrazo = Math.round((noPrazoCount / demandasComSla.length) * 100);
+            this.percSlaGeral = Math.round((noPrazoCount / demandasComSla.length) * 100);
         } else {
-            this.percNoPrazo = 0;
+            this.percSlaGeral = 0;
         }
 
+        // % Sem Retrabalho (Qualidade)
         if (this.totalEntregas > 0) {
             const semRetrabalhoCount = this.demandasDaSprint.filter(d => d.retornos_teste === 0).length;
-            this.percSemRetrabalho = Math.round((semRetrabalhoCount / this.totalEntregas) * 100);
+            this.percQualidade = Math.round((semRetrabalhoCount / this.totalEntregas) * 100);
         } else {
-            this.percSemRetrabalho = 0;
+            this.percQualidade = 0;
         }
 
-        // % SLA Bugs (considera apenas bugs que possuem data limite estabelecida)
+        // % SLA de Bugs Histórico
         const bugsComSla = bugs.filter(b => b.no_prazo !== '-');
         if (bugsComSla.length > 0) {
             const bugsNoPrazo = bugsComSla.filter(b => b.no_prazo === 'Sim').length;
@@ -175,7 +221,55 @@ export class DashboardComponent implements OnInit {
             this.percSlaBugs = 0;
         }
 
+        // 5. Matriz de Performance
+        const colabsMap: any = {};
+        this.demandasDaSprint.forEach(d => {
+            const resp = d.responsavel || 'Não Atribuído';
+            if (!colabsMap[resp]) {
+                colabsMap[resp] = { responsavel: resp, bugs: 0, melhorias: 0, tarefas: 0, total: 0 };
+            }
+            colabsMap[resp].total++;
+            const t = d.tipo.toLowerCase();
+            if (['correção', 'bug', 'correcao'].includes(t)) colabsMap[resp].bugs++;
+            else if (t === 'melhoria') colabsMap[resp].melhorias++;
+            else if (t === 'tarefa') colabsMap[resp].tarefas++;
+        });
+        this.performanceColaboradores = Object.values(colabsMap).sort((a: any, b: any) => b.total - a.total);
+
+        // 6. Ranking de Clientes (Agrupa e exibe todos, ordenados)
+        const clientesMap: any = {};
+        this.demandasDaSprint.forEach(d => {
+            if (d.cliente && d.cliente.trim() !== '') {
+                // Preservado o nome original completo (com CNPJ) conforme sua requisição
+                clientesMap[d.cliente] = (clientesMap[d.cliente] || 0) + 1;
+            }
+        });
+        this.clientesSprint = Object.keys(clientesMap)
+            .map(k => ({ nome: k, total: clientesMap[k] }))
+            .sort((a, b) => b.total - a.total);
+
         this.gerarTextoRN();
+    }
+
+    // Função auxiliar para os cards por tipo
+    calcularMetricas(demandas: any[]) {
+        const total = demandas.length;
+
+        const resolvidas = demandas.filter(d => typeof d.dias_resolver === 'number');
+        let leadTime: string | number = '-';
+        if (resolvidas.length > 0) {
+            const soma = resolvidas.reduce((acc, d) => acc + d.dias_resolver, 0);
+            leadTime = Math.round((soma / resolvidas.length) * 10) / 10;
+        }
+
+        const comSla = demandas.filter(d => d.no_prazo === 'Sim' || d.no_prazo === 'Não');
+        let sla: string | number = '-';
+        if (comSla.length > 0) {
+            const noPrazo = comSla.filter(d => d.no_prazo === 'Sim').length;
+            sla = Math.round((noPrazo / comSla.length) * 100);
+        }
+
+        return { total, leadTime, sla };
     }
 
     gerarTextoRN(): void {
@@ -206,14 +300,13 @@ export class DashboardComponent implements OnInit {
     sincronizarDados(): void {
         this.atualizando = true;
 
-        // Agora usamos o service que já tem o HttpClient embutido
         this.dashboardService.sincronizarJira().subscribe({
             next: () => {
                 this.carregarDados();
                 this.atualizando = false;
                 alert('Painel atualizado com os dados mais recentes do JIRA!');
             },
-            error: (err: any) => { // <-- O ": any" resolve o erro TS7006
+            error: (err: any) => {
                 console.error(err);
                 alert('Erro ao sincronizar. Verifique se o servidor Python está rodando na porta 5000.');
                 this.atualizando = false;

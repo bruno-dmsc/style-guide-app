@@ -4,18 +4,11 @@
 // ==========================================================================
 
 .desmonte-card {
-  /* Fundo */
   background-color: var(--fundo-0);
-  
-  /* Sombra: Deslocamento Y = S (8px), Blur = M (16px), Cor Preta com 10% de opacidade */
   box-shadow: 0 var(--spacing-s) var(--spacing-m) rgba(0, 0, 0, 0.1);
-  
-  /* Adicionei um border-radius padrão baseado na imagem de exemplo */
   border-radius: var(--spacing-s); 
-  
   display: flex;
   flex-direction: column;
-
   margin-bottom: var(--spacing-l);
 
   /* Evita margem dupla se for o último item de um container */
