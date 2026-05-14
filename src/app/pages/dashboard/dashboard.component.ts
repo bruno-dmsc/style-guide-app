@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
 import { TagModule } from 'primeng/tag';
 import { MeterGroupModule } from 'primeng/metergroup';
 
-
 import { CardComponent } from '../../shared/components/card/card.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { FieldDropdownComponent, DropdownOption } from '../../shared/components/field/field-dropdown/field-dropdown.component';
@@ -43,14 +42,22 @@ export class DashboardComponent implements OnInit {
 
     // Colunas da listagem principal
     colunasTabela: TableColumn[] = [
-        { field: 'chave', header: 'NÚMERO', minWidth: '110px' },
-        { field: 'resumo', header: 'RESUMO/TÍTULO', minWidth: '250px' },
-        { field: 'rn_texto', header: 'RELEASE NOTES', minWidth: '250px' },
-        { field: 'tipo', header: 'TIPO', minWidth: '100px' },
-        { field: 'dias_resolver', header: 'DIAS P/ RESOLVER', align: 'center', minWidth: '140px' },
+        { field: 'chave', header: 'Número', minWidth: '100px' },
+        { field: 'resumo', header: 'Título', minWidth: '200px' },
+        { field: 'rn_texto', header: 'Release Notes', minWidth: '200px' },
+        { field: 'tipo', header: 'Tipo',
+            type: 'tag',
+            tagSeverity: (valor: any) => {
+                if (valor === 'Melhoria') return 'success';
+                if (valor === 'Tarefa') return 'info';
+                if (valor === 'Bug') return 'danger';
+                if (valor === 'Automação') return 'warn';
+                return 'info';
+            } },
+        { field: 'dias_resolver', header: 'Dias p/ resolver', align: 'center', minWidth: '140px' },
         {
             field: 'no_prazo',
-            header: 'NO PRAZO',
+            header: 'No prazo',
             align: 'center',
             minWidth: '100px',
             type: 'tag',
@@ -59,23 +66,31 @@ export class DashboardComponent implements OnInit {
                 if (valor === 'Não') return 'danger';
                 return 'info';
             }},
-        { field: 'resolucao', header: 'Conclusão', minWidth: '130px' },
+        { field: 'resolucao', header: 'Conclusão', minWidth: '130px',
+            type: 'tag',
+            tagSeverity: (valor: any) => {
+                if (valor === 'Concluído') return 'success';
+                return 'info';
+            }},
         { field: 'responsavel', header: 'Responsável', minWidth: '150px' },
-        { field: 'projeto', header: 'Projeto?', minWidth: '100px' }
+        { field: 'projeto', header: 'Épico?' }
     ];
 
     // Colunas para Performance e Clientes
     colunasPerformance: TableColumn[] = [
-        { field: 'responsavel', header: 'COLABORADOR', minWidth: '200px' },
-        { field: 'melhorias', header: 'MELHORIAS', align: 'center' },
-        { field: 'bugs', header: 'CORREÇÕES', align: 'center' },
-        { field: 'tarefas', header: 'TAREFAS', align: 'center' },
-        { field: 'total', header: 'TOTAL', align: 'center' }
+        { field: 'responsavel', header: 'Colaborador', minWidth: '200px' },
+        { field: 'total', header: 'Demandas', align: 'center' },
+        { field: 'melhorias', header: 'Melhorias', align: 'center' },
+        { field: 'bugs', header: 'Correções', align: 'center' },
+        { field: 'tarefas', header: 'Tarefas', align: 'center' },
+        { field: 'automacoes', header: 'Automações', align: 'center' },
+        { field: 'retornosTeste', header: 'Ret.Teste', align: 'center' },
+        { field: 'sla', header: 'SLA', align: 'center' }
     ];
 
     colunasClientes: TableColumn[] = [
-        { field: 'nome', header: 'CLIENTE', minWidth: '350px' },
-        { field: 'total', header: 'DEMANDAS', align: 'center', minWidth: '100px' }
+        { field: 'nome', header: 'Cliente', minWidth: '350px' },
+        { field: 'total', header: 'Demandas', align: 'center', minWidth: '100px' }
     ];
 
     // Variáveis Totais
@@ -83,6 +98,7 @@ export class DashboardComponent implements OnInit {
     totalCorrecoes = 0;
     totalMelhorias = 0;
     totalTarefas = 0;
+    totalAutomacoes = 0;
     textoReleaseNotes = '';
 
     // Métricas Globais
@@ -105,6 +121,7 @@ export class DashboardComponent implements OnInit {
     metricasMelhorias = { total: 0, leadTime: '-' as string | number, sla: '-' as string | number };
     metricasCorrecoes = { total: 0, leadTime: '-' as string | number, sla: '-' as string | number };
     metricasTarefas = { total: 0, leadTime: '-' as string | number, sla: '-' as string | number };
+    metricasAutomacoes = { total: 0, leadTime: '-' as string | number, sla: '-' as string | number };
 
     performanceColaboradores: any[] = [];
     clientesSprint: any[] = [];
@@ -117,6 +134,7 @@ export class DashboardComponent implements OnInit {
         this.dashboardService.getSprintData().subscribe({
             next: (dados: SprintDataPayload) => {
                 this.sprints = dados.sprints
+                    .filter(a => a.state !== 'future')
                     .sort((a, b) => b.id - a.id)
                     .map(s => ({ label: s.name, value: s.id }));
 
@@ -168,21 +186,25 @@ export class DashboardComponent implements OnInit {
         const bugs = this.demandasDaSprint.filter(d => ['correção', 'bug', 'correcao'].includes(d.tipo.toLowerCase()));
         const melhorias = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'melhoria');
         const tarefas = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'tarefa');
+        const automacoes = this.demandasDaSprint.filter(d => d.tipo.toLowerCase() === 'automação');
 
         this.totalCorrecoes = bugs.length;
         this.totalMelhorias = melhorias.length;
         this.totalTarefas = tarefas.length;
+        this.totalAutomacoes = automacoes.length;
 
         // 3. Cálculos de SLA e Lead Time Específicos
         this.metricasCorrecoes = this.calcularMetricas(bugs);
         this.metricasMelhorias = this.calcularMetricas(melhorias);
         this.metricasTarefas = this.calcularMetricas(tarefas);
+        this.metricasAutomacoes = this.calcularMetricas(automacoes);
 
         // Preenche o MeterGroup
         this.meterGroupData = [
-            { label: 'Melhorias', value: this.totalMelhorias, color: 'var(--verde-700)' },
-            { label: 'Correções', value: this.totalCorrecoes, color: 'var(--laranja-500)' },
-            { label: 'Tarefas', value: this.totalTarefas, color: 'var(--azul-500)' }
+            { label: 'Melhorias', value: this.totalMelhorias, color: 'var(--verde-700)', icon: 'pi pi-plus-circle' },
+            { label: 'Correções', value: this.totalCorrecoes, color: 'var(--laranja-500)', icon: 'pi pi-times-circle' },
+            { label: 'Tarefas', value: this.totalTarefas, color: 'var(--azul-500)', icon: 'pi pi-bolt' },
+            { label: 'Automações', value: this.totalAutomacoes, color: 'var(--amarelo-600)', icon: 'pi pi-lightbulb' }
         ];
 
         // 4. Cálculos Globais
@@ -221,20 +243,55 @@ export class DashboardComponent implements OnInit {
             this.percSlaBugs = 0;
         }
 
-        // 5. Matriz de Performance
+        // 5. Matriz de Performance (Modificada com Retornos de Teste e SLA)
         const colabsMap: any = {};
         this.demandasDaSprint.forEach(d => {
             const resp = d.responsavel || 'Não Atribuído';
             if (!colabsMap[resp]) {
-                colabsMap[resp] = { responsavel: resp, bugs: 0, melhorias: 0, tarefas: 0, total: 0 };
+                colabsMap[resp] = { 
+                    responsavel: resp, 
+                    bugs: 0, 
+                    melhorias: 0, 
+                    tarefas: 0, 
+                    automacoes: 0,
+                    total: 0,
+                    retornosTeste: 0,
+                    entregasNoPrazo: 0,
+                    totalComSla: 0
+                };
             }
+            
+            // Incrementa total e retornos de teste
             colabsMap[resp].total++;
+            colabsMap[resp].retornosTeste += (d.retornos_teste || 0);
+
+            // Incrementa as contagens por tipo
             const t = d.tipo.toLowerCase();
             if (['correção', 'bug', 'correcao'].includes(t)) colabsMap[resp].bugs++;
             else if (t === 'melhoria') colabsMap[resp].melhorias++;
             else if (t === 'tarefa') colabsMap[resp].tarefas++;
+            else if (t === 'automação') colabsMap[resp].automacoes++;
+
+            // Lógica para cálculo do SLA individual
+            if (d.no_prazo === 'Sim') {
+                colabsMap[resp].entregasNoPrazo++;
+            }
+            if (d.no_prazo === 'Sim' || d.no_prazo === 'Não') {
+                colabsMap[resp].totalComSla++;
+            }
         });
-        this.performanceColaboradores = Object.values(colabsMap).sort((a: any, b: any) => b.total - a.total);
+
+        // Transforma o map em array, calcula o SLA e ordena
+        this.performanceColaboradores = Object.values(colabsMap).map((colab: any) => {
+            const percentualSla = colab.totalComSla > 0
+                ? Math.round((colab.entregasNoPrazo / colab.totalComSla) * 100)
+                : null;
+
+            return {
+                ...colab,
+                sla: percentualSla !== null ? `${percentualSla}%` : '-'
+            };
+        }).sort((a: any, b: any) => b.total - a.total);
 
         // 6. Ranking de Clientes (Agrupa e exibe todos, ordenados)
         const clientesMap: any = {};
@@ -282,7 +339,7 @@ export class DashboardComponent implements OnInit {
             return;
         }
 
-        let texto = "🚀 *Release Notes*\n\n";
+        let texto = "";
         let destaques = 0;
         itensValidos.forEach(item => {
             if (destaques < 2) {
