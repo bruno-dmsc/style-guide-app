@@ -352,6 +352,20 @@ export class DashboardComponent implements OnInit {
         this.textoReleaseNotes = texto;
     }
 
+    copiarReleaseNotes(): void {
+        if (!this.textoReleaseNotes || this.textoReleaseNotes === 'Nenhuma demanda elegível para Release Notes nesta Sprint.') {
+            alert('Não há Release Notes válidos para copiar.');
+            return;
+        }
+
+        navigator.clipboard.writeText(this.textoReleaseNotes).then(() => {
+            alert('Release Notes copiados para a área de transferência!');
+        }).catch(err => {
+            console.error('Erro ao copiar para a área de transferência:', err);
+            alert('Falha ao copiar os Release Notes. Verifique as permissões do navegador.');
+        });
+    }
+
     atualizando: boolean = false;
 
     sincronizarDados(): void {
