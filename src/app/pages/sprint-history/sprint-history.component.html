@@ -1,0 +1,53 @@
+<div class="sprint-history-container">
+  <header class="mb-4">
+    <app-button icon="pi-arrow-left" variant="tertiary" [routerLink]="['/']"></app-button>
+    <h2 class="text-2xl font-bold">Histórico Geral da Operação</h2>
+    <p class="text-gray-600">Acompanhamento do histórico de entregas, tempo de resolução e SLA.</p>
+  </header>
+
+  <app-card class="mb-4 block">
+    <div class="flex gap-4 align-items-end flex-wrap">
+      <div style="min-width: 200px;">
+        <app-field-dropdown 
+          label="Agrupar por" 
+          [options]="viewTypeOptions" 
+          [value]="viewType"
+          (valueChange)="onViewTypeChange($event)">
+        </app-field-dropdown>
+      </div>
+      <div style="min-width: 200px;">
+        <app-field-dropdown 
+          label="Período Inicial" 
+          [options]="availablePeriods" 
+          [value]="startPeriod"
+          (valueChange)="startPeriod = $event; applyFilters()">
+        </app-field-dropdown>
+      </div>
+      <div style="min-width: 200px;">
+        <app-field-dropdown 
+          label="Período Final" 
+          [options]="availablePeriods" 
+          [value]="endPeriod"
+          (valueChange)="endPeriod = $event; applyFilters()">
+        </app-field-dropdown>
+      </div>
+    </div>
+  </app-card>
+
+  <div class="charts-container flex flex-column gap-4">
+    <app-card class="chart-card w-full block">
+      <h3 class="text-lg font-semibold mb-3">Volume de Demandas</h3>
+      <p-chart type="bar" [data]="volumeData" [options]="stackedOptions"></p-chart>
+    </app-card>
+
+    <app-card class="chart-card w-full block">
+      <h3 class="text-lg font-semibold mb-3">Tempo Médio para Conclusão (Dias)</h3>
+      <p-chart type="line" [data]="leadTimeData" [options]="basicOptions"></p-chart>
+    </app-card>
+
+    <app-card class="chart-card w-full block">
+      <h3 class="text-lg font-semibold mb-3">Aderência ao SLA (%)</h3>
+      <p-chart type="line" [data]="slaData" [options]="slaOptions"></p-chart>
+    </app-card>
+  </div>
+</div>

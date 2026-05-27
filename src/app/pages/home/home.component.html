@@ -1,6 +1,6 @@
 <main class="layout-main-content">
     <div class="grid">
-        <app-card title="Design System" subtitle="Tokens e Componentes" class="col-6">
+        <app-card title="Design System" subtitle="Tokens e Componentes" class="col-12">
             <p class="text-secondary mb-4">
                 Acesse a documentação visual, paleta de cores e os componentes core do nosso guia de estilos.
             </p>
@@ -10,13 +10,24 @@
             </div>
         </app-card>
 
-        <app-card title="Gestão de Sprints" subtitle="Indicadores e Release Notes" class="col-6">
+        <app-card title="Gestão de Sprints" subtitle="Indicadores e Release Notes" class="col-12">
             <p class="text-secondary mb-4">
                 Acompanhe a performance da equipe, métricas de SLA e gere as notas de lançamento para o Desmonte.
             </p>
             <div footer>
                 <app-button label="Ver Dashboard" icon="pi pi-chart-bar" severity="success"
                     [routerLink]="['/dashboard']">
+                </app-button>
+            </div>
+        </app-card>
+
+        <app-card title="Histórico geral" subtitle="Dados agrupados das demandas concluídas" class="col-12">
+            <p class="text-secondary mb-4">
+                Consulte o histórico das entregas desde o início, agrupados por mês ou por sprint.
+            </p>
+            <div footer>
+                <app-button label="Acessar histórico" icon="pi pi-history" severity="success"
+                    [routerLink]="['/history']">
                 </app-button>
             </div>
         </app-card>

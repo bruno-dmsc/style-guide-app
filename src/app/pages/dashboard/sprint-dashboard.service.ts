@@ -42,7 +42,7 @@ export class SprintDashboardService {
 
   getSprintData(): Observable<SprintDataPayload> {
     // Caminho para o arquivo estático na pasta public/assets
-    return this.http.get<SprintDataPayload>('assets/sprint-data.json');
+    return this.http.get<SprintDataPayload>('/assets/sprint-data.json');
   }
 
   sincronizarJira(): Observable<any> {
