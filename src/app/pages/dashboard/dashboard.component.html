@@ -1,4 +1,6 @@
 <main class="layout-main-content">
+    <p-toast position="bottom-right"></p-toast>
+
     <div class="flex justify-content-between align-items-center mb-3">
         <div class="flex align-items-center gap-3">
             <app-button icon="pi-arrow-left" variant="tertiary" [routerLink]="['/']"></app-button>
@@ -13,7 +15,7 @@
                     (valueChange)="sprintSelecionada = $event; onSprintChange()">
                 </app-field-dropdown>
             </div>
-            <app-button label="Sincronizar JIRA" icon="pi pi-sync" [disabled]="atualizando"
+            <app-button [label]="atualizando ? 'Sincronizando...' : 'Sincronizar JIRA'" [icon]="atualizando ? 'pi pi-spinner pi-spin' : 'pi pi-sync'" [disabled]="atualizando"
                 (onClick)="sincronizarDados()">
             </app-button>
         </div>

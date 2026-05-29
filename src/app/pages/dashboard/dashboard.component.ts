@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TagModule } from 'primeng/tag';
 import { MeterGroupModule } from 'primeng/metergroup';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 import { CardComponent } from '../../shared/components/card/card.component';
 import { ButtonComponent } from '../../shared/components/button/button.component';
@@ -27,13 +29,17 @@ import { SprintDashboardService, Demanda, SprintDataPayload } from './sprint-das
         ButtonComponent,
         FieldDropdownComponent,
         TableComponent,
-        KnobComponent
+        KnobComponent,
+        ToastModule
     ],
+    providers: [MessageService],
     templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
     private dashboardService = inject(SprintDashboardService);
     private cdr = inject(ChangeDetectorRef);
+
+    private messageService = inject(MessageService);
 
     sprints: DropdownOption[] = [];
     todasDemandas: Demanda[] = [];
@@ -128,6 +134,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.carregarDados();
+        this.verificarToastPendente();
     }
 
     carregarDados(): void {
@@ -156,6 +163,24 @@ export class DashboardComponent implements OnInit {
             error: (err) => console.error('Erro ao carregar dados', err)
         });
     }
+
+    verificarToastPendente(): void {
+        const estavaSincronizando = sessionStorage.getItem('sincronizacao_pendente');
+        if (estavaSincronizando === 'true') {
+        setTimeout(() => {
+            this.messageService.add({
+                severity: 'success',
+                summary: 'Sincronização Concluída',
+                detail: 'Painel do Desmonte atualizado com os dados mais recentes do JIRA!',
+                sticky: true
+            });
+            
+            // Limpa a flag para não repetir no próximo F5
+            sessionStorage.removeItem('sincronizacao_pendente');
+            this.cdr.detectChanges(); 
+        }, 500); 
+    }
+}
 
     onSprintChange(): void {
         if (!this.sprintSelecionada) return;
@@ -371,16 +396,24 @@ export class DashboardComponent implements OnInit {
     sincronizarDados(): void {
         this.atualizando = true;
 
+        sessionStorage.setItem('sincronizacao_pendente', 'true');
+
         this.dashboardService.sincronizarJira().subscribe({
             next: () => {
                 this.carregarDados();
                 this.atualizando = false;
-                alert('Painel atualizado com os dados mais recentes do JIRA!');
+                this.verificarToastPendente();
             },
             error: (err: any) => {
                 console.error(err);
-                alert('Erro ao sincronizar. Verifique se o servidor Python está rodando na porta 5000.');
                 this.atualizando = false;
+                sessionStorage.removeItem('sincronizacao_pendente');
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Falha na Sincronização',
+                    detail: 'Verifique se o servidor Python está rodando na porta 5000.',
+                    sticky: true
+                });
             }
         });
     }
