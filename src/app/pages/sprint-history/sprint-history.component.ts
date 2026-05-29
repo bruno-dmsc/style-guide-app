@@ -38,7 +38,7 @@ interface GrupoEstatistico {
   styleUrls: ['./sprint-history.component.scss']
 })
 export class SprintHistoryComponent implements OnInit {
-  
+
   // Controle de Estado dos Dados
   private rawDemandas: Demanda[] = [];
   private rawSprints: Sprint[] = [];
@@ -69,7 +69,7 @@ export class SprintHistoryComponent implements OnInit {
   constructor(
     private dashboardService: SprintDashboardService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initChartOptions();
@@ -117,15 +117,15 @@ export class SprintHistoryComponent implements OnInit {
       plugins: { legend: { labels: { color: textColor } } },
       scales: {
         x: { ticks: { color: textColorSecondary }, grid: { color: surfaceBorder, drawBorder: false } },
-        y: { 
+        y: {
           beginAtZero: true,
           suggestedMin: 0,
           suggestedMax: 100, // Força a escala a considerar o 100% como teto
-          ticks: { 
+          ticks: {
             color: textColorSecondary,
             callback: (value: number) => value + '%' // Adiciona o símbolo de % nos labels
-          }, 
-          grid: { color: surfaceBorder, drawBorder: false } 
+          },
+          grid: { color: surfaceBorder, drawBorder: false }
         }
       }
     };
@@ -156,7 +156,7 @@ export class SprintHistoryComponent implements OnInit {
     this.dashboardService.getSprintData().subscribe(payload => {
       if (!payload || !payload.demandas) return;
       this.rawDemandas = payload.demandas.filter(d => d.resolvido);
-      this.rawSprints = payload.sprints || [];
+      this.rawSprints = (payload.sprints || []).filter(s => s.state === 'closed');
 
       this.updatePeriodOptions();
       this.applyFilters();
@@ -181,13 +181,40 @@ export class SprintHistoryComponent implements OnInit {
       if (info) uniquePeriods.set(info.key, info.label);
     });
 
-    // Ordenação cronológica garantida pela chave
     const sortedKeys = Array.from(uniquePeriods.keys()).sort();
-    
-    this.availablePeriods = sortedKeys.map(key => ({
-      value: key,
-      label: uniquePeriods.get(key)!
-    }));
+
+    this.availablePeriods = sortedKeys.map(key => {
+      const cleanLabel = uniquePeriods.get(key)!; // Nome limpo (ex: "Sprint 10")
+      let dropdownLabel = cleanLabel;
+
+      // Se for agrupamento por Sprint, tenta anexar as datas apenas para o Dropdown
+      if (this.viewType === 'sprint') {
+        const sprint = this.rawSprints.find(s => s.name === cleanLabel);
+
+        if (sprint && sprint.startDate && sprint.endDate) {
+          const formatarData = (dateStr: string): string => {
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return '';
+            const dia = String(d.getDate()).padStart(2, '0');
+            const mes = String(d.getMonth() + 1).padStart(2, '0');
+            const ano = d.getFullYear();
+            return `${dia}/${mes}/${ano}`;
+          };
+
+          const inicio = formatarData(sprint.startDate);
+          const fim = formatarData(sprint.endDate);
+
+          if (inicio && fim) {
+            dropdownLabel = `${cleanLabel} (${inicio} - ${fim})`;
+          }
+        }
+      }
+
+      return {
+        value: key,
+        label: dropdownLabel
+      };
+    });
 
     if (this.availablePeriods.length > 0) {
       this.startPeriod = this.availablePeriods[0].value;
@@ -202,25 +229,24 @@ export class SprintHistoryComponent implements OnInit {
   applyFilters(): void {
     if (!this.availablePeriods.length || !this.startPeriod || !this.endPeriod) return;
 
-    // Localizar index e proteger contra inversão de datas pelo usuário
     let startIdx = this.availablePeriods.findIndex(p => p.value === this.startPeriod);
     let endIdx = this.availablePeriods.findIndex(p => p.value === this.endPeriod);
-    
+
     if (startIdx > endIdx) {
       [startIdx, endIdx] = [endIdx, startIdx];
     }
 
     const validPeriods = this.availablePeriods.slice(startIdx, endIdx + 1);
     const validKeys = validPeriods.map(p => p.value);
-    
+
     const gruposMap = new Map<string, GrupoEstatistico>();
 
-    // Inicializa o mapa base garantindo que períodos com "0 entregas" no meio da linha do tempo também renderizem
+    // MODIFICAÇÃO AQUI: Garante o label limpo no mapa estatístico
     validPeriods.forEach(p => {
-      gruposMap.set(p.value, this.inicializarNovoGrupo(p.label));
+      const cleanLabel = this.viewType === 'sprint' ? p.label.split(' (')[0] : p.label;
+      gruposMap.set(p.value, this.inicializarNovoGrupo(cleanLabel));
     });
 
-    // Computar métricas apenas para as chaves filtradas
     this.rawDemandas.forEach(d => {
       const info = this.getGroupInfo(d);
       if (!info || !validKeys.includes(info.key)) return;
@@ -234,7 +260,7 @@ export class SprintHistoryComponent implements OnInit {
 
         const dataCriado = new Date(d.criado);
         const dataResolvido = new Date(d.resolvido);
-        
+
         if (!isNaN(dataCriado.getTime()) && !isNaN(dataResolvido.getTime())) {
           const dias = (dataResolvido.getTime() - dataCriado.getTime()) / (1000 * 60 * 60 * 24);
           const diasValidos = dias > 0 ? dias : 0;
@@ -249,7 +275,8 @@ export class SprintHistoryComponent implements OnInit {
       }
     });
 
-    const labelsEixoX = validPeriods.map(p => p.label);
+    // MODIFICAÇÃO AQUI: Limpa o eixo X removendo as datas (ex: "Sprint 10 (17/06...)" vira "Sprint 10")
+    const labelsEixoX = validPeriods.map(p => this.viewType === 'sprint' ? p.label.split(' (')[0] : p.label);
     this.buildChartDatasets(validKeys, gruposMap, labelsEixoX);
   }
 
@@ -308,6 +335,7 @@ export class SprintHistoryComponent implements OnInit {
   // Gera a chave interna de agrupamento dependendo da visão escolhida
   private getGroupInfo(d: Demanda): { key: string, label: string } | null {
     if (this.viewType === 'month') {
+      // ... (código existente da visão por mês mantido intacto)
       const date = new Date(d.resolvido);
       if (isNaN(date.getTime())) return null;
       const ano = date.getFullYear();
@@ -320,8 +348,28 @@ export class SprintHistoryComponent implements OnInit {
     } else {
       const sprint = this.rawSprints.find(s => s.id === d.sprint_id);
       if (!sprint) return null;
+
+      let sortKey = '';
+
+      // Verifica se a sprint possui uma data de início válida configurada
+      if (sprint.startDate) {
+        const dataInicio = new Date(sprint.startDate);
+
+        // Monta a chave no formato YYYY-MM-DD para garantir a ordenação cronológica
+        const ano = dataInicio.getFullYear();
+        const mes = String(dataInicio.getMonth() + 1).padStart(2, '0');
+        const dia = String(dataInicio.getDate()).padStart(2, '0');
+
+        sortKey = `${ano}-${mes}-${dia}-${String(sprint.id).padStart(6, '0')}`;
+      } else {
+        // Fallback para sprints avulsas que possam estar sem data definida.
+        // Adicionamos '9999-12-31' para que elas sempre apareçam no FINAL do gráfico,
+        // seguidas pelo ID para evitar conflito de chaves idênticas.
+        sortKey = `0000-01-01-${String(sprint.id).padStart(6, '0')}`;
+      }
+
       return {
-        key: String(sprint.id).padStart(6, '0'), // Preenche com zeros para garantir a ordem (000001 < 000010)
+        key: sortKey,
         label: sprint.name
       };
     }
