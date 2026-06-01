@@ -1,0 +1,107 @@
+<main class="layout-main-content">
+  <div class="flex justify-content-between align-items-center mb-3">
+    <div class="flex align-items-center gap-3">
+      <div>
+        <h1 class="text-3xl font-bold m-0 text-900">Métricas Individuais</h1>
+        <p class="text-600 m-0">Histórico de entregas e indicadores para reuniões de 1:1</p>
+      </div>
+    </div>
+    
+    <div class="flex align-items-center gap-3">
+      <div>
+        <app-field-dropdown 
+          label="Desenvolvedor" 
+          [options]="developers" 
+          [value]="selectedDeveloper"
+          placeholder="Selecione..."
+          (valueChange)="selectedDeveloper = $event; onDeveloperChange()">
+        </app-field-dropdown>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" *ngIf="!selectedDeveloper">
+    <div class="col-12 text-center py-6">
+      <i class="pi pi-users text-400" style="font-size: 3rem;"></i>
+      <h2 class="text-600 mt-3">Nenhum desenvolvedor selecionado</h2>
+      <p class="text-500">Selecione um profissional no menu acima para visualizar seus indicadores detalhados.</p>
+    </div>
+  </div>
+
+  <div *ngIf="selectedDeveloper">
+    
+    <div class="grid mb-4">
+      <app-card title="Visão Geral Consolidada" class="col-12">
+        <div *ngFor="let visao of visoesMetricas; let i = index">
+          <h5 class="text-xl font-bold m-0 mb-3 text-800">{{ visao.titulo }}</h5>
+          <div class="grid text-center mb-3">
+            <div class="col-12 md:col-3">
+              <h1 class="text-5xl font-bold text-primary m-0">{{ visao.dados.volume }}</h1>
+              <p class="text-600 mt-2">Total de Entregas</p>
+            </div>
+            <div class="col-12 md:col-3">
+              <h1 class="text-5xl font-bold text-primary m-0">{{ visao.dados.cycleTime }}</h1>
+              <p class="text-600 mt-2">Cycle Time (Dias)</p>
+            </div>
+            <div class="col-12 md:col-3">
+              <h1 class="text-5xl font-bold text-primary m-0">{{ visao.dados.sla }}%</h1>
+              <p class="text-600 mt-2">SLA Médio</p>
+            </div>
+            <div class="col-12 md:col-3">
+              <h1 class="text-5xl font-bold text-primary m-0">{{ visao.dados.reopenRate }}</h1>
+              <p class="text-600 mt-2">Retornos pelo QA</p>
+            </div>
+          </div>
+          <hr class="border-200 my-4 border-top-1 border-none" *ngIf="i < visoesMetricas.length - 1" />
+        </div>
+      </app-card>
+    </div>
+
+    <app-card title="Evolução Histórica do Desenvolvedor" class="block mb-4">
+      <div class="flex gap-4 align-items-end flex-wrap mb-4">
+        <div style="min-width: 200px;">
+          <app-field-dropdown 
+            label="Agrupar por" 
+            [options]="viewTypeOptions" 
+            [value]="viewType"
+            (valueChange)="onViewTypeChange($event)">
+          </app-field-dropdown>
+        </div>
+        <div style="min-width: 200px;">
+          <app-field-dropdown 
+            label="Período Inicial" 
+            [options]="availablePeriods" 
+            [value]="startPeriod"
+            (valueChange)="startPeriod = $event; processarGraficos()">
+          </app-field-dropdown>
+        </div>
+        <div style="min-width: 200px;">
+          <app-field-dropdown 
+            label="Período Final" 
+            [options]="availablePeriods" 
+            [value]="endPeriod"
+            (valueChange)="endPeriod = $event; processarGraficos()">
+          </app-field-dropdown>
+        </div>
+      </div>
+
+      <div class="charts-container flex flex-column gap-4">
+        <div class="w-full">
+          <h3 class="text-lg font-semibold mb-3 text-700">Volume de Entregas e Tipos de Item</h3>
+          <p-chart type="bar" [data]="volumeData" [options]="stackedOptions" height="300px"></p-chart>
+        </div>
+
+        <div class="w-full mt-4">
+          <h3 class="text-lg font-semibold mb-3 text-700">Evolução do Cycle Time (Dias)</h3>
+          <p-chart type="line" [data]="leadTimeData" [options]="basicOptions" height="300px"></p-chart>
+        </div>
+
+        <div class="w-full mt-4">
+          <h3 class="text-lg font-semibold mb-3 text-700">Estabilidade do SLA (%)</h3>
+          <p-chart type="line" [data]="slaData" [options]="basicOptions" height="300px"></p-chart>
+        </div>
+      </div>
+    </app-card>
+
+  </div>
+</main>

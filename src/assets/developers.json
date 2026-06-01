@@ -1,0 +1,18 @@
+[
+    { "nome": "André Boniatti", "ativo": true },
+    { "nome": "Christoffer Kauã Gallina", "ativo": true },
+    { "nome": "Douglas Fernandes", "ativo": false },
+    { "nome": "Eric Araújo", "ativo": true },
+    { "nome": "Gabriel dos Reis", "ativo": true },
+    { "nome": "Kleber Lung", "ativo": true },
+    { "nome": "Luiz Barbosa", "ativo": false },
+    { "nome": "Matheus Arend", "ativo": false },
+    { "nome": "Não atribuído", "ativo": false },
+    { "nome": "Patrik Dalla Nora", "ativo": false },
+    { "nome": "Reserva Devops", "ativo": false },
+    { "nome": "Tamar Luiz Borges", "ativo": true },
+    { "nome": "Tobias de Vargas", "ativo": false },
+    { "nome": "Vinicius Rolim barbosa", "ativo": true },
+    { "nome": "iagobertolettiribeiro", "ativo": false },
+    { "nome": "miguel henrique", "ativo": false }
+]

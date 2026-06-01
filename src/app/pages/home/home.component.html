@@ -31,5 +31,17 @@
                 </app-button>
             </div>
         </app-card>
+
+        <app-card title="Indicadores por Dev" subtitle="Dados sobre cada tarefa executada pelo desenvolvimento" class="col-12">
+            <p class="text-secondary mb-4">
+                Verifique a evolução de cada desenvolvedor, de acordo com as suas demandas entregues.
+            </p>
+            <div footer>
+                <app-button label="Indicadores Dev" icon="pi pi-history" severity="success"
+                    [routerLink]="['/dev-kpis']">
+                </app-button>
+            </div>
+        </app-card>
+
     </div>
 </main>

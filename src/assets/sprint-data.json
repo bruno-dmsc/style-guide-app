@@ -435,6 +435,23 @@
   ],
   "demandas": [
     {
+      "chave": "IBR-3445",
+      "tipo": "Tarefa",
+      "prioridade": "Media",
+      "resumo": "Corrigir duplicados da importação inicial Shopee - AP SEG",
+      "status": "Concluído",
+      "resolucao": "Concluído",
+      "responsavel": "Gabriel Dos Reis",
+      "cliente": "",
+      "criado": "2026-05-29T15:15:04.384-0300",
+      "resolvido": "2026-05-29T15:23:34.069-0300",
+      "retornos_teste": 0,
+      "rn_texto": "",
+      "sprint_id": 466,
+      "data_limite": "2026-06-03T11:15:04",
+      "no_prazo": "Sim"
+    },
+    {
       "chave": "IBR-3432",
       "tipo": "Bug",
       "prioridade": "Media",
@@ -459,7 +476,7 @@
       "status": "Concluído",
       "resolucao": "Concluído",
       "responsavel": "Christoffer Kauã Gallina",
-      "cliente": "",
+      "cliente": "14166993000180 - CAPEL AUTOPECAS NOVAS E SEMINOVAS LTDA",
       "criado": "2026-05-28T13:46:12.473-0300",
       "resolvido": "2026-05-28T15:26:58.162-0300",
       "retornos_teste": 0,
@@ -510,7 +527,7 @@
       "status": "Concluído",
       "resolucao": "Concluído",
       "responsavel": "Christoffer Kauã Gallina",
-      "cliente": "",
+      "cliente": "08998712000153 - CDV - CLEDERSON VELASKI - ME",
       "criado": "2026-05-28T10:13:21.857-0300",
       "resolvido": "2026-05-29T08:18:36.325-0300",
       "retornos_teste": 0,
@@ -3450,7 +3467,7 @@
       "resumo": "[E-commerce] Ajustar maiúscula do título",
       "status": "Concluído",
       "resolucao": "Concluído",
-      "responsavel": "Eric Araújo",
+      "responsavel": "Luiz Barbosa",
       "cliente": "",
       "criado": "2026-05-05T11:04:39.051-0300",
       "resolvido": "2026-05-05T11:05:14.231-0300",
@@ -3467,7 +3484,7 @@
       "resumo": "[E-COMMERCE] LIMITAR CARACTERES NO TÍTULO DO SITE",
       "status": "Concluído",
       "resolucao": "Concluído",
-      "responsavel": "Eric Araújo",
+      "responsavel": "Luiz Barbosa",
       "cliente": "",
       "criado": "2026-05-05T10:04:27.397-0300",
       "resolvido": "2026-05-05T10:05:27.084-0300",
@@ -4482,7 +4499,7 @@
     },
     {
       "chave": "IBR-2938",
-      "tipo": "Bug",
+      "tipo": "Automação",
       "prioridade": "Media",
       "resumo": "[AUTOMAÇÃO] Conversão do antigo projeto Cypress para o Playwright",
       "status": "Concluído",
@@ -4494,8 +4511,8 @@
       "retornos_teste": 0,
       "rn_texto": "N/A",
       "sprint_id": 432,
-      "data_limite": "2026-04-28T15:59:16",
-      "no_prazo": "Não"
+      "data_limite": "",
+      "no_prazo": "-"
     },
     {
       "chave": "IBR-2937",
@@ -4907,7 +4924,7 @@
     },
     {
       "chave": "IBR-2893",
-      "tipo": "Bug",
+      "tipo": "Automação",
       "prioridade": "Media",
       "resumo": "[AUTOMAÇÃO] Analise de tranferencia de projeto para Playwright e utilização de IA",
       "status": "Concluído",
@@ -4919,8 +4936,8 @@
       "retornos_teste": 0,
       "rn_texto": "",
       "sprint_id": null,
-      "data_limite": "2026-04-24T15:31:27",
-      "no_prazo": "Sim"
+      "data_limite": "",
+      "no_prazo": "-"
     },
     {
       "chave": "IBR-2891",
@@ -6127,6 +6144,23 @@
       "rn_texto": "N/A",
       "sprint_id": 465,
       "data_limite": "2026-04-16T09:07:28",
+      "no_prazo": "Não"
+    },
+    {
+      "chave": "IBR-2800",
+      "tipo": "Tarefa",
+      "prioridade": "Media",
+      "resumo": "Fase 14: Subtotal do item não é atualizado no update (Tray → OsWeb)",
+      "status": "Concluído",
+      "resolucao": "Concluído",
+      "responsavel": "Kleber Lung",
+      "cliente": "",
+      "criado": "2026-04-13T13:06:31.968-0300",
+      "resolvido": "2026-05-29T16:17:55.940-0300",
+      "retornos_teste": 0,
+      "rn_texto": "",
+      "sprint_id": 466,
+      "data_limite": "2026-04-16T09:06:31",
       "no_prazo": "Não"
     },
     {
@@ -7615,7 +7649,7 @@
       "resumo": "E-commerce Testes ",
       "status": "Concluído",
       "resolucao": "Concluído",
-      "responsavel": "Eric Araújo",
+      "responsavel": "Luiz Barbosa",
       "cliente": "",
       "criado": "2026-03-31T13:36:40.661-0300",
       "resolvido": "2026-05-05T09:25:17.711-0300",
@@ -7997,6 +8031,23 @@
       "rn_texto": "",
       "sprint_id": 430,
       "data_limite": "2026-04-02T16:59:08",
+      "no_prazo": "Não"
+    },
+    {
+      "chave": "IBR-2640",
+      "tipo": "Bug",
+      "prioridade": "Alta",
+      "resumo": "ERRO NO SEFAZ",
+      "status": "Concluído",
+      "resolucao": "Duplicado",
+      "responsavel": "Christoffer Kauã Gallina",
+      "cliente": "46157867000156 - E S AMORIM COMERCIO E SERVICO LTDA",
+      "criado": "2026-03-27T12:15:48.214-0300",
+      "resolvido": "2026-05-29T16:27:26.290-0300",
+      "retornos_teste": 0,
+      "rn_texto": "",
+      "sprint_id": 466,
+      "data_limite": "2026-03-30T10:59:48",
       "no_prazo": "Não"
     },
     {
@@ -17418,6 +17469,23 @@
       "no_prazo": "-"
     },
     {
+      "chave": "IBR-1665",
+      "tipo": "Melhoria",
+      "prioridade": "Media",
+      "resumo": "Permissão para acesso ao painel admin do E-commerce",
+      "status": "Concluído",
+      "resolucao": "Concluído",
+      "responsavel": "Christoffer Kauã Gallina",
+      "cliente": "",
+      "criado": "2026-01-22T14:45:04.783-0300",
+      "resolvido": "2026-04-23T09:08:42.002-0300",
+      "retornos_teste": 0,
+      "rn_texto": "",
+      "sprint_id": 466,
+      "data_limite": "",
+      "no_prazo": "-"
+    },
+    {
       "chave": "IBR-1663",
       "tipo": "Tarefa",
       "prioridade": "Media",
@@ -20204,6 +20272,23 @@
       "sprint_id": 186,
       "data_limite": "2025-01-31T13:40:52",
       "no_prazo": "Não"
+    },
+    {
+      "chave": "IBR-1490",
+      "tipo": "Melhoria",
+      "prioridade": "Baixa",
+      "resumo": "Ajuste na emissão de NFC-e para CNPJ",
+      "status": "Concluído",
+      "resolucao": "Duplicado",
+      "responsavel": "Christoffer Kauã Gallina",
+      "cliente": "14860059000164 - AUTO PEÇAS PAPALÉGUAS LTDA",
+      "criado": "2026-02-23T17:46:42.658-0300",
+      "resolvido": "2026-05-29T16:38:29.081-0300",
+      "retornos_teste": 0,
+      "rn_texto": "",
+      "sprint_id": 466,
+      "data_limite": "",
+      "no_prazo": "-"
     },
     {
       "chave": "IBR-1489",
