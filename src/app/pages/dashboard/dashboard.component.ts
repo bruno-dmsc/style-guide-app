@@ -48,10 +48,11 @@ export class DashboardComponent implements OnInit {
 
     // Colunas da listagem principal
     colunasTabela: TableColumn[] = [
-        { field: 'chave', header: 'Número', minWidth: '100px' },
+        { field: 'chave', header: 'Número', minWidth: '95px' },
         { field: 'resumo', header: 'Título', minWidth: '200px' },
         { field: 'rn_texto', header: 'Release Notes', minWidth: '200px' },
-        { field: 'tipo', header: 'Tipo',
+        {
+            field: 'tipo', header: 'Tipo',
             type: 'tag',
             tagSeverity: (valor: any) => {
                 if (valor === 'Melhoria') return 'success';
@@ -59,8 +60,9 @@ export class DashboardComponent implements OnInit {
                 if (valor === 'Bug') return 'danger';
                 if (valor === 'Automação') return 'warn';
                 return 'info';
-            } },
-        { field: 'dias_resolver', header: 'Dias p/ resolver', align: 'center', minWidth: '140px' },
+            }
+        },
+        { field: 'dias_resolver', header: 'Dias p/ resolver', align: 'center' },
         {
             field: 'no_prazo',
             header: 'No prazo',
@@ -71,15 +73,19 @@ export class DashboardComponent implements OnInit {
                 if (valor === 'Sim') return 'success';
                 if (valor === 'Não') return 'danger';
                 return 'info';
-            }},
-        { field: 'resolucao', header: 'Conclusão', minWidth: '130px',
+            }
+        },
+        {
+            field: 'resolucao', header: 'Conclusão', minWidth: '130px',
             type: 'tag',
             tagSeverity: (valor: any) => {
                 if (valor === 'Concluído') return 'success';
                 return 'info';
-            }},
+            }
+        },
         { field: 'responsavel', header: 'Responsável', minWidth: '150px' },
-        { field: 'projeto', header: 'Épico?' }
+        { field: 'projeto', header: 'Épico?' },
+        { field: 'retornos_teste', header: 'Retornos QA' }
     ];
 
     // Colunas para Performance e Clientes
@@ -135,6 +141,7 @@ export class DashboardComponent implements OnInit {
     ngOnInit(): void {
         this.carregarDados();
         this.verificarToastPendente();
+        this.verificarToastPendenteRN();
     }
 
     carregarDados(): void {
@@ -167,20 +174,38 @@ export class DashboardComponent implements OnInit {
     verificarToastPendente(): void {
         const estavaSincronizando = sessionStorage.getItem('sincronizacao_pendente');
         if (estavaSincronizando === 'true') {
-        setTimeout(() => {
-            this.messageService.add({
-                severity: 'success',
-                summary: 'Sincronização Concluída',
-                detail: 'Painel do Desmonte atualizado com os dados mais recentes do JIRA!',
-                sticky: true
-            });
-            
-            // Limpa a flag para não repetir no próximo F5
-            sessionStorage.removeItem('sincronizacao_pendente');
-            this.cdr.detectChanges(); 
-        }, 500); 
+            setTimeout(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Sincronização Concluída',
+                    detail: 'Painel do Desmonte atualizado com os dados mais recentes do JIRA!',
+                    sticky: true
+                });
+
+                // Limpa a flag para não repetir no próximo F5
+                sessionStorage.removeItem('sincronizacao_pendente');
+                this.cdr.detectChanges();
+            }, 500);
+        }
     }
-}
+
+    verificarToastPendenteRN(): void {
+            const estavaSincronizandoRN = sessionStorage.getItem('sincronizacaoRN_pendente');
+            if(estavaSincronizandoRN === 'true') {
+            setTimeout(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Sincronização Concluída',
+                    detail: 'Release notes preenchidas com sucesso!',
+                    sticky: true
+                });
+
+                // Limpa a flag para não repetir no próximo F5
+                sessionStorage.removeItem('sincronizacaoRN_pendente');
+                this.cdr.detectChanges();
+            }, 500);
+        }
+    }
 
     onSprintChange(): void {
         if (!this.sprintSelecionada) return;
@@ -273,11 +298,11 @@ export class DashboardComponent implements OnInit {
         this.demandasDaSprint.forEach(d => {
             const resp = d.responsavel || 'Não Atribuído';
             if (!colabsMap[resp]) {
-                colabsMap[resp] = { 
-                    responsavel: resp, 
-                    bugs: 0, 
-                    melhorias: 0, 
-                    tarefas: 0, 
+                colabsMap[resp] = {
+                    responsavel: resp,
+                    bugs: 0,
+                    melhorias: 0,
+                    tarefas: 0,
                     automacoes: 0,
                     total: 0,
                     retornosTeste: 0,
@@ -285,10 +310,12 @@ export class DashboardComponent implements OnInit {
                     totalComSla: 0
                 };
             }
-            
+
             // Incrementa total e retornos de teste
             colabsMap[resp].total++;
-            colabsMap[resp].retornosTeste += (d.retornos_teste || 0);
+            if (d.retornos_teste > 0) {
+                colabsMap[resp].retornosTeste++;
+            }
 
             // Incrementa as contagens por tipo
             const t = d.tipo.toLowerCase();
@@ -314,7 +341,8 @@ export class DashboardComponent implements OnInit {
 
             return {
                 ...colab,
-                sla: percentualSla !== null ? `${percentualSla}%` : '-'
+                sla: percentualSla !== null ? `${percentualSla}%` : '-',
+                retornosTeste: colab.retornosTeste > 0 ? colab.retornosTeste : '0'
             };
         }).sort((a: any, b: any) => b.total - a.total);
 
@@ -379,15 +407,30 @@ export class DashboardComponent implements OnInit {
 
     copiarReleaseNotes(): void {
         if (!this.textoReleaseNotes || this.textoReleaseNotes === 'Nenhuma demanda elegível para Release Notes nesta Sprint.') {
-            alert('Não há Release Notes válidos para copiar.');
+            this.messageService.add({
+                    severity: 'error',
+                    summary: 'Erro',
+                    detail: 'Não há Release Notes válidos para copiar.',
+                    sticky: true
+                });
             return;
         }
 
         navigator.clipboard.writeText(this.textoReleaseNotes).then(() => {
-            alert('Release Notes copiados para a área de transferência!');
+            this.messageService.add({
+                    severity: 'success',
+                    summary: 'Sucesso',
+                    detail: 'Release Notes copiados para a área de transferência!',
+                    sticky: true
+                });
         }).catch(err => {
             console.error('Erro ao copiar para a área de transferência:', err);
-            alert('Falha ao copiar os Release Notes. Verifique as permissões do navegador.');
+            this.messageService.add({
+                severity: 'error',
+                summary: 'Erro',
+                detail: 'Falha ao copiar os Release Notes. Verifique as permissões do navegador.',
+                sticky: true
+            });
         });
     }
 
@@ -408,6 +451,33 @@ export class DashboardComponent implements OnInit {
                 console.error(err);
                 this.atualizando = false;
                 sessionStorage.removeItem('sincronizacao_pendente');
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Falha na Sincronização',
+                    detail: 'Verifique se o servidor Python está rodando na porta 5000.',
+                    sticky: true
+                });
+            }
+        });
+    }
+
+    atualizandoRN: boolean = false;
+
+    atualizarReleaseNotes(sprintId: number): void {
+        this.atualizandoRN = true;
+
+        sessionStorage.setItem('sincronizacaoRN_pendente', 'true');
+
+        this.dashboardService.preencherReleaseNotes(sprintId).subscribe({
+            next: () => {
+                this.carregarDados();
+                this.atualizandoRN = false;
+                this.verificarToastPendenteRN();
+            },
+            error: (err: any) => {
+                console.error(err);
+                this.atualizandoRN = false;
+                sessionStorage.removeItem('sincronizacaoRN_pendente');
                 this.messageService.add({
                     severity: 'error',
                     summary: 'Falha na Sincronização',

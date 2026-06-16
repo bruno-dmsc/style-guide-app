@@ -48,4 +48,8 @@ export class SprintDashboardService {
   sincronizarJira(): Observable<any> {
     return this.http.post('http://localhost:5000/api/atualizar', {});
   }
+
+  preencherReleaseNotes(sprintId: number): Observable<any> {
+    return this.http.post(`http://localhost:5000/api/preencher-rn/${sprintId}`, {});
+  }
 }

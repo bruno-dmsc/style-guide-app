@@ -15,7 +15,8 @@
                     (valueChange)="sprintSelecionada = $event; onSprintChange()">
                 </app-field-dropdown>
             </div>
-            <app-button [label]="atualizando ? 'Sincronizando...' : 'Sincronizar JIRA'" [icon]="atualizando ? 'pi pi-spinner pi-spin' : 'pi pi-sync'" [disabled]="atualizando"
+            <app-button [label]="atualizando ? 'Sincronizando...' : 'Sincronizar JIRA'"
+                [icon]="atualizando ? 'pi pi-spinner pi-spin' : 'pi pi-sync'" [disabled]="atualizando"
                 (onClick)="sincronizarDados()">
             </app-button>
         </div>
@@ -147,7 +148,11 @@
                 {{ textoReleaseNotes }}
             </div>
             <div>
-                <app-button label="Copiar Release Notes" icon="pi-copy" (onClick)="copiarReleaseNotes()"></app-button>
+                <app-button label="Copiar Release Notes" icon="pi-copy" (onClick)="copiarReleaseNotes()" variant="tertiary"
+                    style="margin-right: 1rem;"></app-button>
+                <app-button [label]="atualizandoRN ? 'Sincronizando...' : 'Preencher \'N/A\' nos Release Notes'"
+                    [icon]="atualizandoRN ? 'pi pi-spinner pi-spin' : 'pi pi-sync'" [disabled]="atualizandoRN"
+                    variant="tertiary" (onClick)="atualizarReleaseNotes(sprintSelecionada)"></app-button>
             </div>
         </app-card>
     </div>
