@@ -169,7 +169,7 @@ export class DevMetricsComponent implements OnInit {
 
     this.currentDevIssues.forEach(demanda => {
       const { key, label } = this.getSortKeyAndLabel(demanda);
-      if (!periodosMap.has(key)) {
+      if (key && !periodosMap.has(key)) {
         periodosMap.set(key, { label, key });
       }
     });
@@ -302,14 +302,15 @@ export class DevMetricsComponent implements OnInit {
       return { key: `${ano}-${mes}`, label: labelMes.charAt(0).toUpperCase() + labelMes.slice(1) };
     } else {
       const sprint = this.allSprints.find(s => s.id === demanda.sprint_id);
-      if (sprint) {
+      
+      if (sprint && sprint.startDate) {
         const dataInicio = sprint.startDate ? new Date(sprint.startDate) : new Date();
         const ano = dataInicio.getFullYear();
         const mes = String(dataInicio.getMonth() + 1).padStart(2, '0');
         const dia = String(dataInicio.getDate()).padStart(2, '0');
         return { key: `${ano}-${mes}-${dia}-${String(sprint.id).padStart(6, '0')}`, label: sprint.name };
       }
-      return { key: `0000-00-00-${demanda.sprint_id}`, label: `Sprint ID ${demanda.sprint_id}` };
+      return { key: '', label: `Sprint ID ${demanda.sprint_id}` };
     }
   }
 
