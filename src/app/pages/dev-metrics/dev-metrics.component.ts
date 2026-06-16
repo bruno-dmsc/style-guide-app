@@ -26,8 +26,8 @@ interface MetricasAgrupadas {
   selector: 'app-dev-metrics',
   standalone: true,
   imports: [
-    CommonModule, 
-    CardComponent, 
+    CommonModule,
+    CardComponent,
     FieldDropdownComponent,
     ChartModule // Importação necessária para os gráficos
   ],
@@ -42,7 +42,7 @@ export class DevMetricsComponent implements OnInit {
   selectedDeveloper: string = '';
   allIssues: Demanda[] = [];
   allSprints: Sprint[] = [];
-  
+
   // Dados do Dev Selecionado
   currentDevIssues: Demanda[] = [];
   visoesMetricas: MetricasAgrupadas[] = [];
@@ -90,13 +90,13 @@ export class DevMetricsComponent implements OnInit {
     devStatus.forEach(d => statusMap.set(d.nome.trim().toLowerCase(), d.ativo));
 
     const uniqueDevs = new Set<string>();
-    
+
     this.allIssues.forEach(issue => {
       if (issue.responsavel) {
         const nomeDev = issue.responsavel.trim();
         const nomeLower = nomeDev.toLowerCase();
         const estaAtivo = statusMap.has(nomeLower) ? statusMap.get(nomeLower) : true;
-        
+
         if (estaAtivo) uniqueDevs.add(nomeDev);
       }
     });
@@ -108,7 +108,7 @@ export class DevMetricsComponent implements OnInit {
 
   onDeveloperChange(): void {
     if (!this.selectedDeveloper) return;
-    
+
     // Separa apenas as demandas do dev selecionado
     this.currentDevIssues = this.allIssues.filter(
       issue => issue.responsavel && issue.responsavel.trim() === this.selectedDeveloper
@@ -157,7 +157,7 @@ export class DevMetricsComponent implements OnInit {
   }
 
   // --- LÓGICA DE GRÁFICOS EVOLUTIVOS (Importada do Sprint History) ---
-  
+
   onViewTypeChange(newType: string): void {
     this.viewType = newType;
     this.popularPeriodos();
@@ -165,23 +165,58 @@ export class DevMetricsComponent implements OnInit {
   }
 
   private popularPeriodos(): void {
-    const periodosMap = new Map<string, { label: string, key: string }>();
+    const uniquePeriods = new Map<string, string>();
 
+    // 1. Mapeia as chaves únicas e os nomes limpos (labels) do desenvolvedor atual
     this.currentDevIssues.forEach(demanda => {
       const { key, label } = this.getSortKeyAndLabel(demanda);
-      if (key && !periodosMap.has(key)) {
-        periodosMap.set(key, { label, key });
+      if (key) {
+        uniquePeriods.set(key, label);
       }
     });
 
-    const periodosOrdenados = Array.from(periodosMap.values())
-      .sort((a, b) => a.key.localeCompare(b.key));
+    // 2. Ordena cronologicamente pela chave
+    const sortedKeys = Array.from(uniquePeriods.keys()).sort();
 
-    this.availablePeriods = periodosOrdenados.map(p => ({ label: p.label, value: p.key }));
+    // 3. Constrói o array do dropdown com as datas formatadas
+    this.availablePeriods = sortedKeys.map(key => {
+      const cleanLabel = uniquePeriods.get(key)!; // Ex: "Sprint 10"
+      let dropdownLabel = cleanLabel;
 
+      // Busca a sprint correspondente em this.sprints para extrair o startDate e endDate
+      const sprint = this.allSprints.find(s => s.name === cleanLabel);
+
+      if (sprint && sprint.startDate && sprint.endDate) {
+        const formatarData = (dateStr: string): string => {
+          const d = new Date(dateStr);
+          if (isNaN(d.getTime())) return '';
+          const dia = String(d.getDate()).padStart(2, '0');
+          const mes = String(d.getMonth() + 1).padStart(2, '0');
+          const ano = d.getFullYear();
+          return `${dia}/${mes}/${ano}`;
+        };
+
+        const inicio = formatarData(sprint.startDate);
+        const fim = formatarData(sprint.endDate);
+
+        if (inicio && fim) {
+          dropdownLabel = `${cleanLabel} (${inicio} - ${fim})`;
+        }
+      }
+
+      return {
+        value: key,
+        label: dropdownLabel
+      };
+    });
+
+    // 4. Define os períodos default (Start e End)
     if (this.availablePeriods.length > 0) {
       this.startPeriod = this.availablePeriods[0].value;
       this.endPeriod = this.availablePeriods[this.availablePeriods.length - 1].value;
+    } else {
+      this.startPeriod = '';
+      this.endPeriod = '';
     }
   }
 
@@ -193,7 +228,7 @@ export class DevMetricsComponent implements OnInit {
     // 1. Agrupar e filtrar demandas do dev
     this.currentDevIssues.forEach(demanda => {
       const { key, label } = this.getSortKeyAndLabel(demanda);
-      
+
       // Filtro de período
       if (key >= this.startPeriod && key <= this.endPeriod) {
         if (!gruposMap.has(key)) {
@@ -212,7 +247,7 @@ export class DevMetricsComponent implements OnInit {
 
         const grupo = gruposMap.get(key);
         const tipoNormalizado = ['Tarefa', 'Bug', 'Melhoria', 'Automação'].includes(demanda.tipo) ? demanda.tipo : 'Tarefa';
-        
+
         let dias = 0;
         if (demanda.criado && demanda.resolvido) {
           dias = Math.abs(new Date(demanda.resolvido).getTime() - new Date(demanda.criado).getTime()) / (1000 * 60 * 60 * 24);
@@ -302,7 +337,7 @@ export class DevMetricsComponent implements OnInit {
       return { key: `${ano}-${mes}`, label: labelMes.charAt(0).toUpperCase() + labelMes.slice(1) };
     } else {
       const sprint = this.allSprints.find(s => s.id === demanda.sprint_id);
-      
+
       if (sprint && sprint.startDate) {
         const dataInicio = sprint.startDate ? new Date(sprint.startDate) : new Date();
         const ano = dataInicio.getFullYear();
