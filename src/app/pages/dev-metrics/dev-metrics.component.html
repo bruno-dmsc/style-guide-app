@@ -97,8 +97,13 @@
         </div>
 
         <div class="w-full mt-4">
-          <h3 class="text-lg font-semibold mb-3 text-700">Estabilidade do SLA (%)</h3>
+          <h3 class="text-lg font-semibold mb-3 text-700">SLA (%)</h3>
           <p-chart type="line" [data]="slaData" [options]="basicOptions" height="300px"></p-chart>
+        </div>
+
+        <div class="w-full mt-4">
+          <h3 class="text-lg font-semibold mb-3 text-700">Assertividade (%)</h3>
+          <p-chart type="line" [data]="qaReturnData" [options]="basicOptions" height="300px"></p-chart>
         </div>
       </div>
     </app-card>

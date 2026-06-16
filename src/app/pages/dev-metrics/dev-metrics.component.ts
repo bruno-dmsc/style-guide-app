@@ -60,6 +60,7 @@ export class DevMetricsComponent implements OnInit {
   volumeData: any;
   leadTimeData: any;
   slaData: any;
+  qaReturnData: any;
   basicOptions: any;
   stackedOptions: any;
 
@@ -136,6 +137,8 @@ export class DevMetricsComponent implements OnInit {
     const comSla = issues.filter(d => d.no_prazo === 'Sim' || d.no_prazo === 'Não');
     const noPrazo = comSla.filter(d => d.no_prazo === 'Sim').length;
     const sla = comSla.length > 0 ? Math.round((noPrazo / comSla.length) * 100) : (volume > 0 ? 100 : 0);
+    const demandasComRetorno = issues.filter(d => d.retornos_teste > 0).length;
+    const reopenRate = volume > 0 ? Math.round((demandasComRetorno / volume) * 100) : 0;
 
     issues.forEach(issue => {
       if (issue.criado && issue.resolvido) {
@@ -150,7 +153,7 @@ export class DevMetricsComponent implements OnInit {
     });
 
     const avgCycleTime = countWithDates > 0 ? (totalDays / countWithDates).toFixed(1) : '0.0';
-    return { volume, cycleTime: avgCycleTime, sla, reopenRate: totalRetornos };
+    return { volume, cycleTime: avgCycleTime, sla, reopenRate };
   }
 
   // --- LÓGICA DE GRÁFICOS EVOLUTIVOS (Importada do Sprint History) ---
@@ -198,12 +201,12 @@ export class DevMetricsComponent implements OnInit {
             labelExibicao: label,
             key: key,
             tipos: {
-              Tarefa: { qtd: 0, totalDias: 0, noPrazo: 0 },
-              Bug: { qtd: 0, totalDias: 0, noPrazo: 0 },
-              Melhoria: { qtd: 0, totalDias: 0, noPrazo: 0 },
-              Automação: { qtd: 0, totalDias: 0, noPrazo: 0 }
+              Tarefa: { qtd: 0, totalDias: 0, noPrazo: 0, retornosTeste: 0 },
+              Bug: { qtd: 0, totalDias: 0, noPrazo: 0, retornosTeste: 0 },
+              Melhoria: { qtd: 0, totalDias: 0, noPrazo: 0, retornosTeste: 0 },
+              Automação: { qtd: 0, totalDias: 0, noPrazo: 0, retornosTeste: 0 }
             },
-            geral: { qtd: 0, totalDias: 0, noPrazo: 0, totalComSla: 0 }
+            geral: { qtd: 0, totalDias: 0, noPrazo: 0, totalComSla: 0, retornosTeste: 0 }
           });
         }
 
@@ -226,6 +229,10 @@ export class DevMetricsComponent implements OnInit {
         // Soma por Tipo
         grupo.tipos[tipoNormalizado].qtd++;
         grupo.tipos[tipoNormalizado].totalDias += (dias || 0);
+        if (demanda.retornos_teste > 0) {
+          grupo.tipos[tipoNormalizado].retornosTeste += 1;
+          grupo.geral.retornosTeste += 1;
+        }
       }
     });
 
@@ -266,6 +273,19 @@ export class DevMetricsComponent implements OnInit {
           label: 'SLA Cumprido (%)',
           borderColor: '#10b981',
           data: gruposOrdenados.map(g => g.geral.totalComSla > 0 ? Math.round((g.geral.noPrazo / g.geral.totalComSla) * 100) : 100),
+          fill: false,
+          tension: 0.4
+        }
+      ]
+    };
+
+    this.qaReturnData = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Assertividade (%)',
+          borderColor: '#10b981',
+          data: gruposOrdenados.map(g => g.geral.qtd > 0 ? Math.round(((g.geral.qtd - g.geral.retornosTeste) / g.geral.qtd) * 100) : 100),
           fill: false,
           tension: 0.4
         }
