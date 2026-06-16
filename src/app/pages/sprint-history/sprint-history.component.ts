@@ -13,6 +13,7 @@ interface MetricasTipo {
   qtd: number;
   totalDias: number;
   noPrazo: number;
+  retornosTeste: number;
 }
 
 interface GrupoEstatistico {
@@ -58,11 +59,13 @@ export class SprintHistoryComponent implements OnInit {
   volumeData: any;
   leadTimeData: any;
   slaData: any;
+  qaReturnData: any;
   stackedOptions: any;
   basicOptions: any;
 
   private themeColors: any = {};
   slaOptions: any;
+  qaReturnOptions: any;
 
   private tiposValidos = ['Tarefa', 'Bug', 'Melhoria', 'Automação'];
 
@@ -120,6 +123,34 @@ export class SprintHistoryComponent implements OnInit {
         y: {
           beginAtZero: true,
           suggestedMin: 0,
+          suggestedMax: 100, // Força a escala a considerar o 100% como teto
+          ticks: {
+            color: textColorSecondary,
+            callback: (value: number) => value + '%' // Adiciona o símbolo de % nos labels
+          },
+          grid: { color: surfaceBorder, drawBorder: false }
+        }
+      }
+    };
+
+    this.qaReturnOptions = {
+      maintainAspectRatio: false,
+      elements: {
+        point: {
+          radius: 5,
+          hoverRadius: 8,
+          borderWidth: 2
+        },
+        line: {
+          tension: 0.3
+        }
+      },
+      plugins: { legend: { labels: { color: textColor } } },
+      scales: {
+        x: { ticks: { color: textColorSecondary }, grid: { color: surfaceBorder, drawBorder: false } },
+        y: {
+          //beginAtZero: true,
+          //suggestedMin: 0,
           suggestedMax: 100, // Força a escala a considerar o 100% como teto
           ticks: {
             color: textColorSecondary,
@@ -272,6 +303,11 @@ export class SprintHistoryComponent implements OnInit {
           grupo.tipos[tipoTratado].noPrazo++;
           grupo.geral.noPrazo++;
         }
+
+        if (d.retornos_teste > 0) {
+          grupo.tipos[tipoTratado].retornosTeste += 1;
+          grupo.geral.retornosTeste += 1;
+        }
       }
     });
 
@@ -285,6 +321,7 @@ export class SprintHistoryComponent implements OnInit {
     const dVol: { [key: string]: number[] } = { Tarefa: [], Bug: [], Melhoria: [], Automação: [] };
     const dLead: { [key: string]: number[] } = { Tarefa: [], Bug: [], Melhoria: [], Automação: [], Geral: [] };
     const dSla: { [key: string]: number[] } = { Tarefa: [], Bug: [], Melhoria: [], Automação: [], Geral: [] };
+    const dQARet: { [key: string]: number[] } = { Tarefa: [], Bug: [], Melhoria: [], Automação: [], Geral: [] };
 
     keys.forEach(key => {
       const g = map.get(key)!;
@@ -294,10 +331,12 @@ export class SprintHistoryComponent implements OnInit {
         dVol[tipo].push(tInfo.qtd);
         dLead[tipo].push(tInfo.qtd > 0 ? Number((tInfo.totalDias / tInfo.qtd).toFixed(1)) : 0);
         dSla[tipo].push(tInfo.qtd > 0 ? Math.round((tInfo.noPrazo / tInfo.qtd) * 100) : 0);
+        dQARet[tipo].push(tInfo.qtd > 0 ? Math.round(((tInfo.qtd - tInfo.retornosTeste) / tInfo.qtd) * 100) : 100);
       });
 
       dLead['Geral'].push(g.geral.qtd > 0 ? Number((g.geral.totalDias / g.geral.qtd).toFixed(1)) : 0);
       dSla['Geral'].push(g.geral.qtd > 0 ? Math.round((g.geral.noPrazo / g.geral.qtd) * 100) : 0);
+      dQARet['Geral'].push(g.geral.qtd > 0 ? Math.round(((g.geral.qtd - g.geral.retornosTeste) / g.geral.qtd) * 100) : 100);
     });
 
     this.volumeData = {
@@ -328,6 +367,16 @@ export class SprintHistoryComponent implements OnInit {
         { label: 'Bugs', backgroundColor: this.themeColors.bug, data: dSla['Bug'] },
         { label: 'Automações', backgroundColor: this.themeColors.automacao, data: dSla['Automação'] },
         { label: 'SLA Geral', backgroundColor: this.themeColors.geral, data: dSla['Geral'] }
+      ]
+    };
+
+    this.qaReturnData = {
+      labels: labelsX,
+      datasets: [
+        { label: 'Tarefas', backgroundColor: this.themeColors.tarefa, data: dQARet['Tarefa'] },
+        { label: 'Bugs', backgroundColor: this.themeColors.bug, data: dQARet['Bug'] },
+        { label: 'Melhorias', backgroundColor: this.themeColors.melhoria, data: dQARet['Melhoria'] },
+        { label: 'Média Geral', backgroundColor: this.themeColors.geral, data: dQARet['Geral'] }
       ]
     };
   }
@@ -376,7 +425,7 @@ export class SprintHistoryComponent implements OnInit {
   }
 
   private inicializarNovoGrupo(labelDisplay: string): GrupoEstatistico {
-    const baseObj = { qtd: 0, totalDias: 0, noPrazo: 0 };
+    const baseObj = { qtd: 0, totalDias: 0, noPrazo: 0, retornosTeste: 0 };
     return {
       labelExibicao: labelDisplay,
       tipos: { Tarefa: { ...baseObj }, Bug: { ...baseObj }, Melhoria: { ...baseObj }, Automação: { ...baseObj } },
