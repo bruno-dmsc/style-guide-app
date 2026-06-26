@@ -1,20 +1,47 @@
 {
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
-      "type": "chrome",
+      "name": "Backend",
+      "type": "python",
       "request": "launch",
-      "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "program": "${workspaceFolder}/backend/jira-api/api_jira.py",
+      "cwd": "${workspaceFolder}/backend/jira-api",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/backend/jira-api",
+        "FLASK_ENV": "development"
+      },
+      "args": [],
+      "purpose": ["debug-in-terminal"]
+    },
+    {
+      "name": "Frontend",
+      "type": "pwa-node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "console": "integratedTerminal",
+      "env": {
+        "BROWSER": "none"
+      },
+      "purpose": ["debug-in-terminal"]
     },
     {
       "name": "ng test",
-      "type": "chrome",
+      "type": "pwa-chrome",
       "request": "launch",
-      "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "url": "http://localhost:9876/debug.html",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "purpose": ["debug-test"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch Full Stack",
+      "configurations": ["Backend", "Frontend"]
     }
   ]
 }

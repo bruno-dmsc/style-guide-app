@@ -40,3 +40,7 @@ The backend writes data to `frontend/src/assets/sprint-data.json`.
 - Frontend source is under `frontend/`.
 - Backend source is under `backend/jira-api/`.
 - Keep sensitive credentials local in `backend/jira-api/.env` only.
+
+## VS Code Workspace
+
+Open the project using `style-guide-app/style-guide-app.code-workspace` so VS Code loads the correct `.vscode` tasks and launch configurations.
