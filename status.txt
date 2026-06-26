@@ -1,0 +1,6 @@
+?? backend/jira-api/.env.example
+?? backend/jira-api/api_jira.py
+?? backend/jira-api/calculadora_sla.py
+?? backend/jira-api/config_sla/sla_global.json
+?? backend/jira-api/extrator_dashboard.py
+?? backend/jira-api/requirements.txt

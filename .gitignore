@@ -1,13 +1,15 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Angular frontend build output
+/frontend/dist
+/frontend/out-tsc
+/frontend/.angular/
+/frontend/.sass-cache/
+/frontend/coverage
+/frontend/typings
 
 # Node
-/node_modules
+/frontend/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -30,15 +32,15 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
 .DS_Store
 Thumbs.db
+/connect.lock
+/libpeerconnection.log
+testem.log
+__screenshots__/
+
+# Python backend files
+/backend/jira-api/__pycache__/
+/backend/jira-api/.venv/
+/backend/jira-api/.env
+/backend/jira-api/production.env
