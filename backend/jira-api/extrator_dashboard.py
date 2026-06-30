@@ -205,7 +205,7 @@ def preencher_rn_na_por_sprint(sprint_id):
                 
                 if tipo in ['tarefa', 'automação', 'automacao', 'task']:
                     aplicar_na = True
-                elif tipo == 'bug' and 'concluído' not in [resolucao, status]:
+                elif tipo == 'bug' and 'concluído' != resolucao:
                     aplicar_na = True
                     
                 # Segurança extra: garante no código que o campo de fato está vazio
