@@ -41,6 +41,15 @@ The backend writes data to `frontend/src/assets/sprint-data.json`.
 - Backend source is under `backend/jira-api/`.
 - Keep sensitive credentials local in `backend/jira-api/.env` only.
 
+## Design system
+
+The functional source of truth for the Desmonte Design System is being
+consolidated under [`design-system/`](./design-system/README.md).
+
+The existing Angular page remains an implementation and demonstration source.
+Its current examples are not automatically normative until they are reconciled
+and approved in the source of truth.
+
 ## VS Code Workspace
 
 Open the project using `style-guide-app/style-guide-app.code-workspace` so VS Code loads the correct `.vscode` tasks and launch configurations.
