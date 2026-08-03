@@ -9,7 +9,7 @@ Status: **Aprovado conceitualmente**
 - inventário do conteúdo atual deste repositório;
 - inventário do Cadastro de Peças v2;
 - inventário de Grupos de Peças;
-- inventário de Estoque e das demandas recentes;
+- inventário de Estoque e das demandas recentes do Desmonte;
 - matriz de divergências;
 - classificação das decisões;
 - lista de pendências por responsável.

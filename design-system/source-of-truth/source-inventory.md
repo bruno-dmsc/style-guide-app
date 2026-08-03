@@ -6,11 +6,32 @@ Status: **iniciado**
 
 | Fonte | Papel | Situação | Próxima ação |
 |---|---|---|---|
-| Aplicação Angular deste repositório | Protótipo fundador e galeria executável | Inventário inicial realizado | Reconciliar regras e exemplos |
-| Cadastro de Peças v2 | Referência implementada mais madura | Diagnóstico inicial realizado | Comparar foundations, componentes e padrões |
-| Grupos de Peças | Segunda aplicação do padrão | Diagnóstico inicial realizado | Identificar adoções, desvios e lacunas |
-| Estoque | Aplicação posterior | Não inventariado nesta iniciativa | Delimitar telas e levantar padrões |
-| Demandas recentes | Evoluções incrementais | Não inventariadas | Identificar itens e mudanças relevantes |
+| Aplicação Angular deste repositório | Referência fundadora e galeria executável | Base operacional autorizada; inventário inicial realizado | Reconciliar regras e exemplos por objeto |
+| Cadastro de Peças v2 | Referência implementada mais madura | Composição do cadastro em seções inventariada no frontend `c58788b` | Completar estados e validação de qualidade |
+| Grupos de Peças | Segunda aplicação do padrão | Composição do cadastro em seções inventariada no frontend `c58788b` | Resolver divergências responsivas e de acessibilidade |
+| Estoque | Aplicação posterior | Amostra pontual consultada; inventário não iniciado | Delimitar o conjunto representativo de telas e padrões |
+| Demandas recentes do Desmonte | Evoluções incrementais | Amostra pontual consultada; inventário não iniciado | Selecionar conjunto representativo de itens e mudanças relevantes |
+
+## Critério para demandas recentes
+
+- Uma demanda isolada é evidência do seu próprio contexto e não define regra transversal do Design System.
+- Demandas podem levantar hipóteses de foundation, componente ou padrão para investigação.
+- Uma hipótese somente entra na matriz de reconciliação quando houver objeto de Design System delimitado e comparação com as referências relevantes do Desmonte.
+- Bugs e regras específicas de uma tela permanecem no fluxo da demanda, salvo quando a recorrência ou uma decisão explícita justificar sua generalização.
+
+## Critério para a base operacional
+
+- Solução coerente nas três fontes constitui evidência forte de um candidato reutilizável.
+- Solução presente em apenas uma fonte continua sendo evidência local até nova comparação ou decisão.
+- Divergência entre as fontes deve permanecer como conflito, evolução, exceção ou resultado inconclusivo conforme o caso.
+- Reutilização durante a consolidação deve citar a fonte consultada e não dispensa validação de estados, responsividade, acessibilidade e conteúdo.
+
+## Fontes fora do escopo
+
+| Fonte | Classificação | Justificativa | Tratamento |
+|---|---|---|---|
+| E-commerce | Produto separado | Possui layout e comportamento próprios | Não usar como evidência por padrão; exigir decisão explícita para eventual elemento compartilhado |
+| ERP legado | Descontinuado como referência | Será migrado para o Desmonte e abandonado | Não inventariar, reconciliar ou promover seus padrões para novas demandas |
 
 ## Conteúdo atual do repositório
 
